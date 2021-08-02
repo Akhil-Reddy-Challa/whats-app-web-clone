@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Contact from "./Contact";
 import Chat from "./Chat";
+import "./Home.css";
+
 function Home(props) {
   // const { user: userEmail } = props.location;
   // console.log(userEmail);
@@ -19,12 +21,6 @@ function Home(props) {
       { id: 9, username: "test-user-8", useravatar: "I" },
       { id: 10, username: "test-user-9", useravatar: "J" },
       { id: 11, username: "test-user-10", useravatar: "K" },
-      { id: 6, username: "test-user-5", useravatar: "F" },
-      { id: 7, username: "test-user-6", useravatar: "G" },
-      { id: 8, username: "test-user-7", useravatar: "H" },
-      { id: 9, username: "test-user-8", useravatar: "I" },
-      { id: 10, username: "test-user-9", useravatar: "J" },
-      { id: 11, username: "test-user-10", useravatar: "K" },
     ];
     setPeople(fakeData);
   }, []);
@@ -33,25 +29,23 @@ function Home(props) {
     setChatHistory(person);
   };
   return (
-    <div className="container-fluid app">
-      <div className="row">
-        <div className="col-3">
-          {people.map((person) => (
-            <Contact
-              username={person.username}
-              useravatar={person.useravatar}
-              onClick={() => handleClick(person)}
-            />
-          ))}
-        </div>
-        <div className="col">
-          {chatHistory && (
-            <Chat
-              username={chatHistory.username}
-              useravatar={chatHistory.useravatar}
-            />
-          )}
-        </div>
+    <div className="home">
+      <div className="home__left">
+        {people.map((person) => (
+          <Contact
+            username={person.username}
+            useravatar={person.useravatar}
+            onClick={() => handleClick(person)}
+          />
+        ))}
+      </div>
+      <div className="home__right">
+        {chatHistory && (
+          <Chat
+            username={chatHistory.username}
+            useravatar={chatHistory.useravatar}
+          />
+        )}
       </div>
     </div>
   );
