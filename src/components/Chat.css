@@ -1,0 +1,41 @@
+.chat__header {
+  background-color: #f0f0f0;
+  height: 60px;
+}
+.chat__header_image {
+  display: flex; /* Throws every html element in a row */
+  align-items: center;
+  padding: 10px;
+}
+.chat__header_avatar {
+  margin-right: 10px;
+}
+
+.chat__footer {
+  background-color: #f0f0f0;
+  display: flex;
+  margin-top: 10px;
+}
+.chat__footer__fileupload {
+  /* font-size: 2.5rem; */
+  cursor: pointer;
+  margin-top: 22px;
+  margin-left: 10px;
+}
+.chat__footer__messageInput {
+  flex: 1;
+  /* border: none; */
+  border-radius: 50px;
+  padding: 10px;
+  border: 1px solid lightgray;
+  margin: 10px;
+}
+.chat__footer__messageSend {
+  /* font-size: 2.7rem; */
+  cursor: pointer;
+  margin-top: 22px;
+  margin-right: 10px;
+}
+input:focus {
+  outline: none;
+}

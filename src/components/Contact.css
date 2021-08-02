@@ -1,0 +1,15 @@
+.contact {
+  cursor: pointer;
+  display: flex; /* Throws every html element in a row */
+  align-items: center;
+  padding: 10px;
+  border: 1px solid lightgray;
+  margin-bottom: 1px;
+}
+.contact:hover {
+  opacity: 80%;
+  background-color: lightgray;
+}
+.contact__avatar {
+  margin-right: 10px;
+}

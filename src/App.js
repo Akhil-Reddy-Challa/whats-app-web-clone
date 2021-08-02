@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
-function App() {
+import Landing from "./components/Landing";
+import Home from "./components/Home";
+
+const App = () => {
+  const checkForAuthToken = (Component) => {
+    const user_auth_token = sessionStorage.getItem("user_auth_token");
+    return user_auth_token ? (
+      <Component user_name={user_auth_token} />
+    ) : (
+      <Redirect to="/login" />
+    );
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/home" component={Home}></Route>
+        <Route path="/" render={Landing}></Route>
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
