@@ -19,8 +19,9 @@
 .chat__ground {
   /* height: 35rem; */
   /* height: 80%; */
-  background-color: yellow;
   overflow: scroll;
+  /* background-color: rgb(174, 216, 199); */
+  background-color: rgb(122, 203, 165);
 }
 .chat__footer {
   background-color: #f0f0f0;
