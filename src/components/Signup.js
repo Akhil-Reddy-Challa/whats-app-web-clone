@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Signup.css";
-import { useHistory } from "react-router-dom";
 import { auth } from "../services/firebase";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +17,6 @@ export default function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useHistory();
 
   const handleSignup = (event) => {
     event.preventDefault();
