@@ -26,7 +26,7 @@ export default function Signup() {
         <TextField
           label="Username"
           variant="filled"
-          color="secondary"
+          color="primary"
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
@@ -34,7 +34,7 @@ export default function Signup() {
         <TextField
           label="Email"
           variant="filled"
-          color="secondary"
+          color="primary"
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
@@ -42,8 +42,9 @@ export default function Signup() {
         <TextField
           label="Password"
           variant="filled"
-          color="secondary"
+          color="primary"
           value={password}
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>

@@ -32,6 +32,7 @@ function Login() {
         <TextField
           label="Email"
           value={email}
+          autoFocus
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
