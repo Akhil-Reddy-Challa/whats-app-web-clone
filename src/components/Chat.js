@@ -45,16 +45,14 @@ function Chat(props) {
 
   return (
     <div className="chat">
-      <div className="chat__header">
-        <header className="chat__header__image">
-          <Avatar
-            className="chat__header__avatar"
-            alt={useravatar}
-            src="/static/images/avatar/1.jpg"
-          />
-          <h5>{username}</h5>
-        </header>
-      </div>
+      <header className="chat__header">
+        <Avatar
+          className="chat__header__avatar"
+          alt={useravatar}
+          src="/static/images/avatar/1.jpg"
+        />
+        <h5>{username}</h5>
+      </header>
       {/* Header with avatar & name */}
       <div className="chat__ground">
         <ChatPlayGround chatHistory={messages} />
