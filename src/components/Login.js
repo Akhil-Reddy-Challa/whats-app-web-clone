@@ -27,16 +27,26 @@ function Login() {
         const username = msg.user.displayName;
         const userId = msg.user.uid;
         // console.log(userId);
-        history.push({
-          pathname: "/home",
-          email: email,
-          username: username,
-          userId: userId,
-        });
+        // Set Auth token
+        setAuthToken({ username, userId, email });
+        history.push("/home");
+        // history.push({
+        //   pathname: "/home",
+        //   email: email,
+        //   username: username,
+        //   userId: userId,
+        // });
       })
       .catch((err) => alert(err.message));
   };
-
+  const setAuthToken = (data) => {
+    // console.log("creating token: ", data);
+    const { email, username, userId } = data;
+    sessionStorage.setItem("user_token_created_on", new Date());
+    sessionStorage.setItem("userId", userId);
+    sessionStorage.setItem("username", username);
+    sessionStorage.setItem("email", email);
+  };
   return (
     <form className={classes.root}>
       <div>

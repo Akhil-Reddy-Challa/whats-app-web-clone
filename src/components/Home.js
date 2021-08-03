@@ -4,10 +4,18 @@ import Chat from "./Chat";
 import { Avatar } from "@material-ui/core";
 import "./Home.css";
 
-function Home(props) {
-  const { email, username, userId } = props.location;
-  console.log(email, username, userId);
-
+const getUserDetails = () => {
+  // Get data from session variable
+  // console.log("Fetching from session");
+  return [
+    sessionStorage.getItem("email"),
+    sessionStorage.getItem("username"),
+    sessionStorage.getItem("userId"),
+  ];
+};
+function Home() {
+  const [email, username, userId] = getUserDetails();
+  // console.log(email, username, userId);
   const [people, setPeople] = useState([]);
   const [chatHistory, setChatHistory] = useState(null);
   useEffect(() => {
