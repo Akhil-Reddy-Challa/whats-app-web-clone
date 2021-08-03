@@ -7,30 +7,36 @@ import ChatPlayGround from "./ChatPlayGround";
 
 function Chat(props) {
   // console.log(props);
+  const fakeMessages = [
+    { person: "Hello" },
+    { you: "hi" },
+    { person: "How are you" },
+    { you: "Good" },
+    { you: "How about you?" },
+    { person: "Great!!, happy for you" },
+    { you: "Let us catch up tmrw?" },
+    { person: "Sure!" },
+    { person: "5PM NYC drive?" },
+    { you: "Sounds good" },
+    { you: "Will reach your home by 2PM" },
+    { person: "Cool!! Excited" },
+  ];
   const { username, useravatar } = props;
   const [message, setMessage] = useState();
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(fakeMessages);
 
-  const postMessage = () => {
+  const postMessage = (event) => {
+    event.preventDefault();
     console.log("Postinggg...", message);
+    const msgs = [...messages];
+    msgs.push({ you: message });
+    setMessages(msgs);
+    setMessage("");
   };
   useEffect(() => {
-    const fakeMessages = [
-      { person: "Hello" },
-      { you: "hi" },
-      { person: "How are you" },
-      { you: "Good" },
-      { you: "How about you?" },
-      { person: "Great!!, happy for you" },
-      { you: "Let us catch up tmrw?" },
-      { person: "Sure!" },
-      { person: "5PM NYC drive?" },
-      { you: "Sounds good" },
-      { you: "Will reach your home by 2PM" },
-      { person: "Cool!! Excited" },
-    ];
-    setMessages(fakeMessages);
-  }, []);
+    console.log("Invoked");
+    setMessages(messages);
+  }, [messages]);
   return (
     <div className="chat">
       <div className="chat__header">
@@ -49,8 +55,8 @@ function Chat(props) {
       </div>
       {/* Chat history block */}
       <div className="footer">
-        <footer className="">
-          <form className="chat__footer">
+        <footer>
+          <form className="chat__footer" onSubmit={(e) => postMessage(e)}>
             <AttachFileTwoToneIcon
               className="chat__footer__fileupload"
               fontSize="medium"
@@ -68,7 +74,6 @@ function Chat(props) {
               <SendIcon
                 fontSize="medium"
                 className="chat__footer__messageSend"
-                onClick={postMessage}
               />
             )}
           </form>
