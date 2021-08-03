@@ -1,16 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Chat.css";
 import { Avatar } from "@material-ui/core";
 import AttachFileTwoToneIcon from "@material-ui/icons/AttachFileTwoTone";
 import SendIcon from "@material-ui/icons/Send";
+import ChatPlayGround from "./ChatPlayGround";
 
 function Chat(props) {
   // console.log(props);
   const { username, useravatar } = props;
   const [message, setMessage] = useState();
+  const [messages, setMessages] = useState([]);
+
   const postMessage = () => {
     console.log("Postinggg...", message);
   };
+  useEffect(() => {
+    const fakeMessages = [
+      { person: "Hello" },
+      { you: "hi" },
+      { person: "How are you" },
+      { you: "Good" },
+      { you: "How about you?" },
+      { person: "Great!!, happy for you" },
+      { you: "Let us catch up tmrw?" },
+      { person: "Sure!" },
+      { person: "5PM NYC drive?" },
+      { you: "Sounds good" },
+      { you: "Will reach your home by 2PM" },
+      { person: "Cool!! Excited" },
+    ];
+    setMessages(fakeMessages);
+  }, []);
   return (
     <div className="chat">
       <div className="chat__header">
@@ -24,7 +44,9 @@ function Chat(props) {
         </header>
       </div>
       {/* Header with avatar & name */}
-      <div className="chat__ground">Chat Area</div>
+      <div className="chat__ground">
+        <ChatPlayGround chatHistory={messages} />
+      </div>
       {/* Chat history block */}
       <div className="footer">
         <footer className="">

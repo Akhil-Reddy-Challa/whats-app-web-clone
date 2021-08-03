@@ -19,6 +19,7 @@
   /* height: 35rem; */
   height: 84vh;
   background-color: yellow;
+  overflow: scroll;
 }
 .chat__footer {
   background-color: #f0f0f0;
