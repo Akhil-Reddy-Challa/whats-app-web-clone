@@ -3,10 +3,11 @@ import "./ChatPlayGround.css";
 function ChatPlayGround(props) {
   const { chatHistory } = props;
   console.log(chatHistory);
+
   return (
     <div className="chatground">
       {chatHistory.map((message) => (
-        <div className="messagebody">
+        <div key={message.id} className="messagebody">
           {message.person ? (
             <div>
               <span className="personmessage">{message.person}</span>

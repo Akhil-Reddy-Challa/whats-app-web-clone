@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Chat.css";
 import { Avatar } from "@material-ui/core";
 import AttachFileTwoToneIcon from "@material-ui/icons/AttachFileTwoTone";
@@ -8,35 +8,41 @@ import ChatPlayGround from "./ChatPlayGround";
 function Chat(props) {
   // console.log(props);
   const fakeMessages = [
-    { person: "Hello" },
-    { you: "hi" },
-    { person: "How are you" },
-    { you: "Good" },
-    { you: "How about you?" },
-    { person: "Great!!, happy for you" },
-    { you: "Let us catch up tmrw?" },
-    { person: "Sure!" },
-    { person: "5PM NYC drive?" },
-    { you: "Sounds good" },
-    { you: "Will reach your home by 2PM" },
-    { person: "Cool!! Excited" },
+    { id: "1254", person: "Hello" },
+    { id: "1255", you: "hi" },
+    { id: "1255", person: "How are you" },
+    { id: "1256", you: "Good" },
+    { id: "1257", you: "How about you?" },
+    { id: "1258", person: "Great!!, happy for you" },
+    { id: "124545", you: "Let us catch up tmrw?" },
+    { id: "1212", person: "Sure!" },
+    { id: "1241", person: "5PM NYC drive?" },
+    { id: "1242", you: "Sounds good" },
+    { id: "12543", you: "Will reach your home by 2PM" },
+    { id: "1244", person: "Cool!! Excited" },
   ];
   const { username, useravatar } = props;
+  const messagesEndRef = useRef(null);
   const [message, setMessage] = useState();
   const [messages, setMessages] = useState(fakeMessages);
 
   const postMessage = (event) => {
     event.preventDefault();
-    console.log("Postinggg...", message);
+    // console.log("Postinggg...", message);
     const msgs = [...messages];
     msgs.push({ you: message });
     setMessages(msgs);
     setMessage("");
   };
   useEffect(() => {
-    console.log("Invoked");
+    const scrollToBottom = () => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+    // console.log("Invoked");
+    scrollToBottom();
     setMessages(messages);
   }, [messages]);
+
   return (
     <div className="chat">
       <div className="chat__header">
@@ -52,6 +58,8 @@ function Chat(props) {
       {/* Header with avatar & name */}
       <div className="chat__ground">
         <ChatPlayGround chatHistory={messages} />
+        {/* Responsible for showing the recent most message */}
+        <div ref={messagesEndRef} />
       </div>
       {/* Chat history block */}
       <div className="footer">

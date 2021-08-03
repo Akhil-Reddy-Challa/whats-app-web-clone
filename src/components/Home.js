@@ -44,6 +44,7 @@ function Home(props) {
         <div className="home__left__chats">
           {people.map((person) => (
             <Contact
+              key={person.id}
               username={person.username}
               useravatar={person.useravatar}
               onClick={() => handleClick(person)}
