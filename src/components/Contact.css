@@ -3,7 +3,8 @@
   display: flex; /* Throws every html element in a row */
   align-items: center;
   padding: 10px;
-  border: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
   margin-bottom: 1px;
 }
 .contact:hover {

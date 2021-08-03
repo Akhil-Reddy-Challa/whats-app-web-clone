@@ -17,17 +17,18 @@
   flex-direction: column;
 }
 .home__left__userbio {
-  height: 8vh;
+  height: 20%;
   background-color: #ededed;
   display: flex;
   flex-direction: row;
-  /* position: fixed; */
-  width: 100%;
+  /* position: fixed;
+  top: 0px; */
 }
-/* .home__left__chats {
-  height: 80%; 
-   position: relative;
-} */
+.home__left__chats {
+  height: 80%;
+  /* position: relative; */
+  /* width: 100%; */
+}
 .home__left__avatar__username {
   margin-top: 20px;
 }
