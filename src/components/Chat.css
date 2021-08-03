@@ -5,19 +5,19 @@
 }
 .chat__header {
   background-color: #f0f0f0;
-  height: 10%;
+  height: 8vh;
 }
 .chat__header__image {
   display: flex; /* Throws every html element in a row */
   align-items: center;
-  padding: 10px;
+  margin-left: 18px;
 }
 .chat__header__avatar {
   margin-right: 10px;
 }
 .chat__ground {
   /* height: 35rem; */
-  height: 80vh;
+  height: 84vh;
   background-color: yellow;
 }
 .chat__footer {

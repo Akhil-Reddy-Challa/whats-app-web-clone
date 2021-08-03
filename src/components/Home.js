@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Contact from "./Contact";
 import Chat from "./Chat";
+import { Avatar } from "@material-ui/core";
 import "./Home.css";
 
 function Home(props) {
-  // const { user: userEmail } = props.location;
+  const { user: userEmail } = props.location;
   // console.log(userEmail);
+  const username = "Blanca";
   const [people, setPeople] = useState([]);
   const [chatHistory, setChatHistory] = useState(null);
   useEffect(() => {
@@ -31,13 +33,23 @@ function Home(props) {
   return (
     <div className="home">
       <div className="home__left">
-        {people.map((person) => (
-          <Contact
-            username={person.username}
-            useravatar={person.useravatar}
-            onClick={() => handleClick(person)}
+        <div className="home__left__userbio">
+          <Avatar
+            className="home__left__avatar"
+            alt={username}
+            src="/static/images/avatar/1.jpg"
           />
-        ))}
+          <p className="home__left__avatar__username">{username}</p>
+        </div>
+        <div className="home__left__chats">
+          {people.map((person) => (
+            <Contact
+              username={person.username}
+              useravatar={person.useravatar}
+              onClick={() => handleClick(person)}
+            />
+          ))}
+        </div>
       </div>
       <div className="home__right">
         {chatHistory && (
