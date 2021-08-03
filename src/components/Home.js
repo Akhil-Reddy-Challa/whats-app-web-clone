@@ -5,9 +5,9 @@ import { Avatar } from "@material-ui/core";
 import "./Home.css";
 
 function Home(props) {
-  const { user: userEmail } = props.location;
-  // console.log(userEmail);
-  const username = "Blanca";
+  const { email, username, userId } = props.location;
+  console.log(email, username, userId);
+
   const [people, setPeople] = useState([]);
   const [chatHistory, setChatHistory] = useState(null);
   useEffect(() => {
@@ -27,7 +27,7 @@ function Home(props) {
     setPeople(fakeData);
   }, []);
   const handleClick = (person) => {
-    console.log("Displaying chat history of", person);
+    // console.log("Displaying chat history of", person);
     setChatHistory(person);
   };
   return (

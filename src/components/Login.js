@@ -3,6 +3,7 @@ import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Login.css";
 import { useHistory } from "react-router-dom";
+import { auth } from "../services/firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,13 +18,23 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-  const handleLogin = () => {
-    console.log("Checking", email, password);
-
-    history.push({
-      pathname: "/home",
-      user: email,
-    });
+  const handleLogin = (event) => {
+    // console.log("Checking", email, password);
+    event.preventDefault();
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((msg) => {
+        const username = msg.user.displayName;
+        const userId = msg.user.uid;
+        // console.log(userId);
+        history.push({
+          pathname: "/home",
+          email: email,
+          username: username,
+          userId: userId,
+        });
+      })
+      .catch((err) => alert(err.message));
   };
 
   return (
@@ -49,7 +60,7 @@ function Login() {
         className="login__submit__button"
         color="primary"
         disabled={!email || !password}
-        onClick={handleLogin}
+        onClick={(e) => handleLogin(e)}
       >
         Sign In
       </Button>
