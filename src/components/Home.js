@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Contact from "./Contact";
 import Chat from "./Chat";
 import { Avatar } from "@material-ui/core";
+import { db } from "../services/firebase";
 import "./Home.css";
 
 const getUserDetails = () => {
@@ -15,7 +16,7 @@ const getUserDetails = () => {
 };
 function Home() {
   const [email, username, userId] = getUserDetails();
-  // console.log(email, username, userId);
+  // console.log("userId from top", userId);
   const [people, setPeople] = useState([]);
   const [chatHistory, setChatHistory] = useState(null);
   useEffect(() => {
@@ -33,6 +34,17 @@ function Home() {
       { id: 11, username: "test-user-10", useravatar: "K" },
     ];
     setPeople(fakeData);
+    // Get chat list from firebase
+    async function getChatList() {
+      // const userRef = db.collection("users");
+      // const queryRef = userRef.where("state", "==", "CA");
+      const usersRef = db.collection("users");
+
+      await usersRef.doc(userId).set({
+        personId: "6182712827",
+      });
+    }
+    // getChatList();
   }, []);
   const handleClick = (person) => {
     // console.log("Displaying chat history of", person);
@@ -61,12 +73,7 @@ function Home() {
         </div>
       </div>
       <div className="home__right">
-        {chatHistory && (
-          <Chat
-            username={chatHistory.username}
-            useravatar={chatHistory.useravatar}
-          />
-        )}
+        {chatHistory && <Chat username={chatHistory.username} />}
       </div>
     </div>
   );

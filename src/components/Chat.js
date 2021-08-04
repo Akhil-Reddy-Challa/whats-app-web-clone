@@ -3,14 +3,13 @@ import "./Chat.css";
 import { Avatar } from "@material-ui/core";
 import AttachFileTwoToneIcon from "@material-ui/icons/AttachFileTwoTone";
 import SendIcon from "@material-ui/icons/Send";
-import ChatPlayGround from "./ChatPlayGround";
 
 function Chat(props) {
   // console.log(props);
   const fakeMessages = [
     { id: "1254", person: "Hello" },
     { id: "1255", you: "hi" },
-    { id: "1255", person: "How are you" },
+    { id: "12155", person: "How are you" },
     { id: "1256", you: "Good" },
     { id: "1257", you: "How about you?" },
     { id: "1258", person: "Great!!, happy for you" },
@@ -29,10 +28,10 @@ function Chat(props) {
   const postMessage = (event) => {
     event.preventDefault();
     // console.log("Postinggg...", message);
-    const msgs = [...messages];
+    const msgs = messages.slice();
     msgs.push({ you: message });
-    setMessages(msgs);
     setMessage("");
+    setMessages(msgs);
   };
   useEffect(() => {
     const scrollToBottom = () => {
@@ -55,7 +54,15 @@ function Chat(props) {
       </header>
       {/* Header with avatar & name */}
       <div className="chat__ground">
-        <ChatPlayGround chatHistory={messages} />
+        <div className="chat__ground__wrapper">
+          {messages.map((message) => (
+            <div key={message.id} className="chat__ground__messagebox">
+              <span className={message.person ? "sender" : "you"}>
+                {"message"}
+              </span>
+            </div>
+          ))}
+        </div>
         {/* Responsible for showing the recent most message */}
         <div ref={messagesEndRef} />
       </div>
@@ -79,6 +86,7 @@ function Chat(props) {
             {message && (
               <SendIcon
                 fontSize="medium"
+                type="submit"
                 className="chat__footer__messageSend"
               />
             )}

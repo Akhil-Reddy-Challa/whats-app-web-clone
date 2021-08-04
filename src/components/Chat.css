@@ -23,6 +23,12 @@
   /* background-color: rgb(174, 216, 199); */
   background-color: rgb(122, 203, 165);
 }
+.chat__ground__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+/* background-color: #dbf8c6; */
+
 .chat__footer {
   background-color: #f0f0f0;
   height: 10%;

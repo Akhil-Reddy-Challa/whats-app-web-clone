@@ -8,15 +8,12 @@ function ChatPlayGround(props) {
   return (
     <div className="chatground">
       {chatHistory.map((message) => (
-        <div key={message.id} className="messagebody">
+        <div key={message.id} className="messagebox">
+          <span className={message.person ? "sender" : "you"}></span>
           {message.person ? (
-            <div>
-              <span className="personmessage">{message.person}</span>
-            </div>
+            <div className="sendermessage">{message.person}</div>
           ) : (
-            <div>
-              <span className="yourmessage">{message.you}</span>
-            </div>
+            <div className="yourmessage">{message.you}</div>
           )}
         </div>
       ))}
