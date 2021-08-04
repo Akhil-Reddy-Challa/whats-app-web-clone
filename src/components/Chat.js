@@ -48,7 +48,7 @@ function Chat(props) {
         <Avatar
           className="chat__header__avatar"
           alt={useravatar}
-          src="/static/images/avatar/1.jpg"
+          src={`https://avatars.dicebear.com/api/initials/${username}.svg?background=%230000ff`}
         />
         <h5>{username}</h5>
       </header>

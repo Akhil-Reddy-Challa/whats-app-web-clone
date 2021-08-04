@@ -56,8 +56,7 @@ function Home() {
         <div className="home__left__userbio">
           <Avatar
             className="home__left__avatar"
-            alt={username}
-            src="/static/images/avatar/1.jpg"
+            src={`https://avatars.dicebear.com/api/initials/${username}.svg?background=%230000ff`}
           />
           <p className="home__left__avatar__username">{username}</p>
         </div>

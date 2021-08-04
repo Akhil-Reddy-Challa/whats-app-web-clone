@@ -4,7 +4,7 @@ import { Avatar } from "@material-ui/core";
 
 function Contact(props) {
   const getRandomSeed = () => {
-    const max = 1000;
+    const max = 100;
     return Math.floor(Math.random() * max);
   };
   // console.log(props);
