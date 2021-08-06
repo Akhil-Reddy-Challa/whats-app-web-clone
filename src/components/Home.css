@@ -6,7 +6,7 @@
 }
 .home__left {
   /* flex: 0; */
-  width: 25%;
+  width: 30%;
   height: 100%;
   /* Makes the section fixed (disables scroll)*/
   position: fixed;
@@ -22,6 +22,17 @@
   align-items: center;
   min-height: 70px; /* Fallback height when the screensize is reduced */
 }
+.home__left__userbio__shortCuts {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+}
+.storyIcon,
+.newMessageIcon,
+.getUserInfoIcon {
+  margin-right: 20px;
+  cursor: pointer;
+}
 .home__left__chats {
   height: 90%;
   /* Makes only this section scrollable */
@@ -34,7 +45,7 @@
   margin: 10px;
 }
 .home__right {
-  width: 75%;
+  width: 70%;
   height: 100%;
   /* Below is to fix the position and make to unscrollable  */
   position: fixed;
