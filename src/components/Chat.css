@@ -24,11 +24,12 @@
   background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 20px;
 }
 .chat__message__body {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  margin-bottom: -20px; /* For decrreasing margin between two message boxes */
 }
 .chat__message {
   width: fit-content;

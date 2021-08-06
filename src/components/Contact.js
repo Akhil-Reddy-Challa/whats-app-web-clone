@@ -7,7 +7,6 @@ function Contact(props) {
     const max = 100;
     return Math.floor(Math.random() * max);
   };
-  // console.log(props);
   const { username, onClick } = props;
   const randomSeed = getRandomSeed();
   return (
