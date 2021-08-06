@@ -24,11 +24,9 @@ function Login() {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((msg) => {
-        const username = msg.user.displayName;
-        const userId = msg.user.uid;
-        // console.log(userId);
+        const { displayName, uid } = msg.user;
         // Set Auth token
-        setAuthToken({ username, userId, email });
+        setAuthToken({ displayName, uid });
         history.push("/home");
         // history.push({
         //   pathname: "/home",
@@ -41,10 +39,9 @@ function Login() {
   };
   const setAuthToken = (data) => {
     // console.log("creating token: ", data);
-    const { email, username, userId } = data;
     sessionStorage.setItem("user_token_created_on", new Date());
-    sessionStorage.setItem("userId", userId);
-    sessionStorage.setItem("username", username);
+    sessionStorage.setItem("userId", data.uid);
+    sessionStorage.setItem("username", data.displayName);
     sessionStorage.setItem("email", email);
   };
   return (
@@ -71,6 +68,7 @@ function Login() {
         color="primary"
         disabled={!email || !password}
         onClick={(e) => handleLogin(e)}
+        type="submit"
       >
         Sign In
       </Button>

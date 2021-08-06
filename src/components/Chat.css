@@ -17,18 +17,32 @@
   margin: 10px;
 }
 .chat__ground {
-  /* height: 35rem; */
-  /* height: 80%; */
+  flex: 1; /* Gives max space for this block */
   overflow: scroll;
   /* background-color: rgb(174, 216, 199); */
-  background-color: rgb(122, 203, 165);
+  /* background-color: rgb(122, 203, 165); */
+  background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
 }
-.chat__ground__wrapper {
+.chat__message__body {
   display: flex;
   flex-direction: column;
 }
-/* background-color: #dbf8c6; */
+.chat__message {
+  width: fit-content;
+  padding: 10px;
+  border-radius: 10px;
+}
+.chat__sender {
+  margin-left: auto;
+  background-color: #dbf8c6;
+}
 
+.chat__reciever {
+  background-color: white;
+}
 .chat__footer {
   background-color: #f0f0f0;
   height: 10%;

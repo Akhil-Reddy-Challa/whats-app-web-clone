@@ -7,18 +7,50 @@ import SendIcon from "@material-ui/icons/Send";
 function Chat(props) {
   // console.log(props);
   const fakeMessages = [
-    { id: "1254", person: "Hello" },
-    { id: "1255", you: "hi" },
-    { id: "12155", person: "How are you" },
-    { id: "1256", you: "Good" },
-    { id: "1257", you: "How about you?" },
-    { id: "1258", person: "Great!!, happy for you" },
-    { id: "124545", you: "Let us catch up tmrw?" },
-    { id: "1212", person: "Sure!" },
-    { id: "1241", person: "5PM NYC drive?" },
-    { id: "1242", you: "Sounds good" },
-    { id: "12543", you: "Will reach your home by 2PM" },
-    { id: "1244", person: "Cool!! Excited" },
+    { id: "1254", content: "Hello", sender: "M9zQgqcsPpRbwU1v5gpDeolUULs2" },
+    { id: "1255", content: "hi", sender: "ZoWnHxokGYNYf5yC4rHKk2mUrfY2" },
+    {
+      id: "12155",
+      content: "How are you",
+      sender: "M9zQgqcsPpRbwU1v5gpDeolUULs2",
+    },
+    { id: "1256", content: "Good", sender: "ZoWnHxokGYNYf5yC4rHKk2mUrfY2" },
+    {
+      id: "1257",
+      content: "How about you?",
+      sender: "M9zQgqcsPpRbwU1v5gpDeolUULs2",
+    },
+    {
+      id: "1258",
+      content: "Great!!, happy for you",
+      sender: "ZoWnHxokGYNYf5yC4rHKk2mUrfY2",
+    },
+    {
+      id: "124545",
+      content: "Let us catch up tmrw?",
+      sender: "M9zQgqcsPpRbwU1v5gpDeolUULs2",
+    },
+    { id: "1212", content: "Sure!", sender: "M9zQgqcsPpRbwU1v5gpDeolUULs2" },
+    {
+      id: "1241",
+      content: "5PM NYC drive?",
+      sender: "ZoWnHxokGYNYf5yC4rHKk2mUrfY2",
+    },
+    {
+      id: "1242",
+      content: "Sounds good",
+      sender: "M9zQgqcsPpRbwU1v5gpDeolUULs2",
+    },
+    {
+      id: "12543",
+      content: "Will reach your home by 2PM",
+      sender: "ZoWnHxokGYNYf5yC4rHKk2mUrfY2",
+    },
+    {
+      id: "1244",
+      content: "Cool!! Excited",
+      sender: "M9zQgqcsPpRbwU1v5gpDeolUULs2",
+    },
   ];
   const { username, useravatar } = props;
   const messagesEndRef = useRef(null);
@@ -54,18 +86,37 @@ function Chat(props) {
       </header>
       {/* Header with avatar & name */}
       <div className="chat__ground">
-        <div className="chat__ground__wrapper">
-          {messages.map((message) => (
-            <div key={message.id} className="chat__ground__messagebox">
-              <span className={message.person ? "sender" : "you"}>
-                {"message"}
-              </span>
-            </div>
-          ))}
-        </div>
-        {/* Responsible for showing the recent most message */}
-        <div ref={messagesEndRef} />
+        {messages.map((message) => (
+          <div className="chat__message__body">
+            <span data-testid="tail-in" data-icon="tail-in" className="_3nrYb">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 8 13"
+                width="8"
+                height="13"
+              >
+                <path
+                  opacity=".13"
+                  fill="#0000000"
+                  d="M1.533 3.568L8 12.193V1H2.812C1.042 1 .474 2.156 1.533 3.568z"
+                ></path>
+                <path
+                  fill="currentColor"
+                  d="M1.533 2.568L8 11.193V0H2.812C1.042 0 .474 1.156 1.533 2.568z"
+                ></path>
+              </svg>
+            </span>
+            <p className="chat__message chat__sender">{message.content}</p>
+          </div>
+        ))}
+
+        {/* <p className="chat__message chat__reciever">Hello</p>
+        <p className="chat__message chat__sender">How are you</p>
+        <p className="chat__message chat__reciever">Good</p> */}
       </div>
+      {/* Responsible for showing the recent most message */}
+      <div ref={messagesEndRef} />
+
       {/* Chat history block */}
       <div className="footer">
         <footer>

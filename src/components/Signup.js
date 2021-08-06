@@ -3,6 +3,7 @@ import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Signup.css";
 import { auth } from "../services/firebase";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Signup() {
   const classes = useStyles();
+  const history = useHistory();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,24 +24,26 @@ export default function Signup() {
     event.preventDefault();
     // console.log("Checking", email, password);
     // console.log("Sign up module");
+    console.log(username, email, password);
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
-        // console.log(authUser);
         authUser.user.updateProfile({
           displayName: username,
         });
-        // history.push({
-        //   pathname: "/home",
-        //   email: email,
-        //   username: username,
-        // });
-        window.location.reload();
-        return;
+        setAuthToken(authUser);
+        history.push("/home");
       })
       .catch((err) => alert(err.message));
   };
-
+  const setAuthToken = (dataToken) => {
+    // console.log("creating token: ", data);
+    const userId = dataToken.user.uid;
+    sessionStorage.setItem("user_token_created_on", new Date());
+    sessionStorage.setItem("userId", userId);
+    sessionStorage.setItem("username", username);
+    sessionStorage.setItem("email", email);
+  };
   return (
     <form className={classes.root}>
       <div>
@@ -47,6 +51,7 @@ export default function Signup() {
           label="Username"
           variant="filled"
           color="primary"
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
@@ -55,6 +60,7 @@ export default function Signup() {
           label="Email"
           variant="filled"
           color="primary"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
@@ -73,6 +79,7 @@ export default function Signup() {
         variant="contained"
         className="signup__submit__button"
         color="primary"
+        type="submit"
         disabled={!email || !password || !username}
       >
         Sign Up
