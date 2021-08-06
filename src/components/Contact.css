@@ -9,10 +9,9 @@
   /* font-size: large; */
 }
 .contact:hover {
-  opacity: 80%;
+  opacity: 90%;
   background-color: lightgray;
 }
-
 .contact__avatar {
   margin-right: 10px;
 }
