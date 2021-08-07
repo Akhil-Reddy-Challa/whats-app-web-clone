@@ -44,9 +44,9 @@ function Home() {
     const data = { friendName: friend.name, friendUID: friend.UID };
     setChatHistory(data);
   };
-  const handleNewChat = () => {
-    console.log("Creating");
-  };
+  // const handleNewChat = () => {
+  //   console.log("Creating");
+  // };
   return (
     <div className="home">
       <div className="home__left">

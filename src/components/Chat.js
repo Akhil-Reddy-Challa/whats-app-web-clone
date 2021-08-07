@@ -17,17 +17,18 @@ function Chat(props) {
   const postMessage = (event) => {
     event.preventDefault();
     // console.log("Postinggg...", message);
+    const messageObj = {
+      content: message,
+      senderID: currentUserID,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    };
     const msgRef = db
       .collection("users")
       .doc(currentUserID)
       .collection("chats")
       .doc(friendUID)
       .collection("messages");
-    msgRef.add({
-      content: message,
-      senderID: currentUserID,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    msgRef.add(messageObj);
     setMessage("");
   };
   useEffect(() => {
@@ -35,7 +36,7 @@ function Chat(props) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
     scrollToBottom();
-    setMessages(messages);
+    // setMessages(messages);
   }, [messages]);
 
   useEffect(() => {
@@ -47,7 +48,9 @@ function Chat(props) {
             hour: "2-digit",
             minute: "2-digit",
           });
-          return minifiedTime;
+          const minifiedDate = time.toDate().toLocaleDateString();
+          const final = minifiedTime.concat(" ").concat(minifiedDate);
+          return final;
         }
         return time;
       }
