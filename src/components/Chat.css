@@ -59,6 +59,10 @@
   float: right; /* Makes the time stamp respond to margin */
   margin: 10px 0 -10px 7px;
 }
+.emojiBoard {
+  /* display: none; */
+  width: fit-content;
+}
 .chat__footer {
   background-color: #f0f0f0;
   height: 10%;
@@ -66,11 +70,14 @@
   flex-direction: row;
   cursor: pointer;
   padding: 10px;
+  align-items: center;
   /* margin-top: 10px; */
 }
 .chat__footer__fileupload {
   /* font-size: 2.5rem; */
-  padding: 10px;
+  /* padding: 10px; */
+  transition: transform 1s ease-in-out;
+  transform: rotate(50deg);
   /* margin-top: 18px;
   margin-left: 10px; */
 }
@@ -84,8 +91,9 @@
   /* margin: 10px; */
 }
 .chat__footer__messageSend {
-  /* font-size: 2.7rem; */
-  padding: 10px;
+  /* font-size: x-large !important; */
+  /* margin: 8px; */
+  /* padding: 10px; */
   /* margin-top: 18px;
   margin-right: 10px; */
 }
