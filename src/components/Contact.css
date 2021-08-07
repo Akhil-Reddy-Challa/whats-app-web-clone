@@ -12,7 +12,7 @@
 .contact:hover,
 .contact:focus {
   background-color: lightgray;
-  opacity: 95%;
+  /* opacity: 50%; */
 }
 .contact__avatar {
   margin-right: 10px;
