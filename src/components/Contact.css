@@ -8,9 +8,11 @@
   margin-bottom: 1px;
   /* font-size: large; */
 }
-.contact:hover {
-  opacity: 90%;
+
+.contact:hover,
+.contact:focus {
   background-color: lightgray;
+  opacity: 95%;
 }
 .contact__avatar {
   margin-right: 10px;

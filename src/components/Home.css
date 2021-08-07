@@ -33,12 +33,6 @@
 .storyIcon:hover {
   transform: rotate(360deg);
 }
-/* .storyIcon,
-.newMessageIcon,
-.getUserInfoIcon {
-  margin-right: 15px; 
-   cursor: pointer;
-} */
 .home__left__chats {
   height: 90%;
   /* Makes only this section scrollable */

@@ -10,7 +10,7 @@ function Contact(props) {
   const { username, onClick } = props;
   const randomSeed = getRandomSeed();
   return (
-    <div className="contact" onClick={onClick}>
+    <div className="contact" onClick={onClick} tabIndex="1">
       <Avatar
         className="contact__avatar"
         src={`https://avatars.dicebear.com/api/bottts/${randomSeed}.svg`}
