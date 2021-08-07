@@ -75,7 +75,7 @@ function Chat(props) {
       });
     }
     fetchRecords();
-  }, [friendUID]);
+  }, [friendUID, currentUserID]);
 
   return (
     <div className="chat">
