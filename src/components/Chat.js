@@ -3,28 +3,34 @@ import "./Chat.css";
 import { Avatar } from "@material-ui/core";
 import AttachFileTwoToneIcon from "@material-ui/icons/AttachFileTwoTone";
 import SendIcon from "@material-ui/icons/Send";
-import { firebase } from "../services/firebase";
+import { db } from "../services/firebase";
+import firebase from "firebase";
 
 function Chat(props) {
   // console.log(props);
-  const { id: personUID, username: personName } = props.person;
-  const { currentUID } = props;
+  const { currentUserID } = props;
+  const { friendName, friendUID } = props.friendInfo;
   // console.log("Displaying chat history of ", personUID);
   const messagesEndRef = useRef(null);
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
   const postMessage = (event) => {
     event.preventDefault();
     // console.log("Postinggg...", message);
-    const msgs = messages.slice();
-    msgs.push({
-      id: Date.now(),
+    const msgRef = db
+      .collection("users")
+      .doc(currentUserID)
+      .collection("chats")
+      .doc(friendUID)
+      .collection("messages");
+    msgRef.add({
       content: message,
-      senderID: currentUID,
+      senderID: currentUserID,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setMessage("");
-    setMessages(msgs);
+    // setMessages(msgs);
   };
   useEffect(() => {
     const scrollToBottom = () => {
@@ -33,93 +39,69 @@ function Chat(props) {
     scrollToBottom();
     setMessages(messages);
   }, [messages]);
+
   useEffect(() => {
-    const fakeMessages = [
-      {
-        id: "1254",
-        content: "Hello",
-        senderID: "jOJpmz6s0xVz86npV8KrmJnYnFy2",
-      },
-      { id: "1255", content: "hi", senderID: "dAmZ6pW8CXPy4Dff2zJDxUqMy973" },
-      {
-        id: "12155",
-        content: "How are you",
-        senderID: "jOJpmz6s0xVz86npV8KrmJnYnFy2",
-      },
-      {
-        id: "1256",
-        content: "Good",
-        senderID: "dAmZ6pW8CXPy4Dff2zJDxUqMy973",
-      },
-      {
-        id: "1257",
-        content: "How about you?",
-        senderID: "dAmZ6pW8CXPy4Dff2zJDxUqMy973",
-      },
-      {
-        id: "1258",
-        content: "Great!!, happy for you",
-        senderID: "jOJpmz6s0xVz86npV8KrmJnYnFy2",
-      },
-      {
-        id: "124545",
-        content: "Let us catch up tmrw?",
-        senderID: "dAmZ6pW8CXPy4Dff2zJDxUqMy973",
-      },
-      {
-        id: "1212",
-        content: "Sure!",
-        senderID: "jOJpmz6s0xVz86npV8KrmJnYnFy2",
-      },
-      {
-        id: "1241",
-        content: "5PM NYC drive?",
-        senderID: "dAmZ6pW8CXPy4Dff2zJDxUqMy973",
-      },
-      {
-        id: "1242",
-        content: "Sounds good",
-        senderID: "jOJpmz6s0xVz86npV8KrmJnYnFy2",
-      },
-      {
-        id: "12543",
-        content: "Will reach your home by 2PM",
-        senderID: "dAmZ6pW8CXPy4Dff2zJDxUqMy973",
-      },
-      {
-        id: "1244",
-        content: "Cool!! Excited",
-        senderID: "jOJpmz6s0xVz86npV8KrmJnYnFy2",
-      },
-    ];
-    console.log("Fetched records");
     // Fetch chat history
-    setMessages(fakeMessages);
-  }, [personName]);
+    async function fetchRecords() {
+      function getMiniTime(time) {
+        if (time) {
+          const minifiedTime = time.toDate().toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+          return minifiedTime;
+        }
+        return time;
+      }
+      let msgsRef = db
+        .collection("users")
+        .doc(currentUserID)
+        .collection("chats")
+        .doc(friendUID)
+        .collection("messages")
+        .orderBy("timestamp", "asc");
+      msgsRef.onSnapshot((snapshot) => {
+        const messages = snapshot.docs.map((doc) => {
+          const data = {
+            msgID: doc.id,
+            content: doc.data().content,
+            senderID: doc.data().senderID,
+            timestamp: getMiniTime(doc.data().timestamp),
+          };
+          return data;
+        });
+        // console.log(messages);
+        setMessages(messages);
+      });
+    }
+    fetchRecords();
+  }, [friendUID]);
 
   return (
     <div className="chat">
       <header className="chat__header">
         <Avatar
           className="chat__header__avatar"
-          alt={personName}
-          src={`https://avatars.dicebear.com/api/initials/${personName}.svg?background=%230000ff`}
+          alt={friendName}
+          src={`https://avatars.dicebear.com/api/initials/${friendName}.svg?background=%230000ff`}
         />
-        <h5>{personName}</h5>
+        <h5>{friendName}</h5>
       </header>
       {/* Header with avatar & name */}
       <div className="chat__ground">
         {messages.map((message) => (
-          <div key={message.id} className="chat__message__body">
+          <div key={message.msgID} className="chat__message__body">
             <p
               className={
-                message.senderID === currentUID
+                message.senderID === currentUserID
                   ? "chat__message chat__sender "
                   : "chat__message chat__reciever"
               }
             >
               {message.content}
-              <span className="chat__message__timestamp">Time</span>
+              <span className="chat__message__timestamp">
+                {message.timestamp}
+              </span>
             </p>
           </div>
         ))}

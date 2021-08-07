@@ -2,42 +2,46 @@ import React, { useState, useEffect } from "react";
 import Contact from "./Contact";
 import Chat from "./Chat";
 import { Avatar } from "@material-ui/core";
-import { db } from "../services/firebase";
 import "./Home.css";
 
 const getUserDetails = () => {
   // Get data from session variable
   // console.log("Fetching from session");
-  return [
-    sessionStorage.getItem("email"),
-    sessionStorage.getItem("username"),
-    sessionStorage.getItem("userId"),
-  ];
+  return [sessionStorage.getItem("username"), sessionStorage.getItem("userId")];
 };
 function Home() {
-  const [email, username, userId] = getUserDetails();
+  const [currentUsername, currentUserID] = getUserDetails();
   // console.log("userId from top", userId);
-  const [people, setPeople] = useState([]);
+  const [friendsList, setFriendsList] = useState([]);
   const [chatHistory, setChatHistory] = useState(null);
   useEffect(() => {
-    const fakeData = [
-      { id: 1, username: "test-user-0" },
-      { id: 2, username: "test-user-1" },
-      { id: 3, username: "test-user-2" },
-      { id: 4, username: "test-user-3" },
-      { id: 5, username: "test-user-4" },
-      { id: 6, username: "test-user-5" },
-      { id: 7, username: "test-user-6" },
-      { id: 8, username: "test-user-7" },
-      { id: 9, username: "test-user-8" },
-      { id: 10, username: "test-user-9" },
-      { id: 11, username: "test-user-10" },
-    ];
-    setPeople(fakeData);
+    // Fetch data from db
+    // async function fetchContacts() {
+    //   let chatsRef = db.collection("users").doc(userID).collection("chats");
+    //   let allChats = await chatsRef.get();
+    //   // console.log("User:", userID);
+    //   // console.log("Chats with the following people:");
+    //   const personsList = [];
+    //   allChats.forEach((doc) => {
+    //     // console.log(doc, doc.data());
+    //     personsList.push({
+    //       personID: doc.id,
+    //       personName: doc.data().personName,
+    //     });
+    //   });
+    //   console.log(personsList);
+    //   setPeople(personsList);
+    // }
+    // fetchContacts();
+    setFriendsList([
+      { UID: "dAmZ6pW8CXPy4Dff2zJDxUqMy973", name: "TestUser-2" },
+      { UID: "nIV0431w2ZUcFLH8Qt12dfQz6eB2", name: "TestUser-3" },
+    ]);
   }, []);
-  const getChatHistory = (person) => {
-    // console.log("Displaying chat history of", person);
-    setChatHistory(person);
+  const getChatHistory = (friend) => {
+    // console.log("Fetching chat history of", friend);
+    const data = { friendName: friend.name, friendUID: friend.UID };
+    setChatHistory(data);
   };
   return (
     <div className="home">
@@ -45,9 +49,9 @@ function Home() {
         <div className="home__left__userbio">
           <Avatar
             className="home__left__avatar"
-            src={`https://avatars.dicebear.com/api/initials/${username}.svg?background=%230000ff`}
+            src={`https://avatars.dicebear.com/api/initials/${currentUsername}.svg?background=%230000ff`}
           />
-          <p className="home__left__avatar__username">{username}</p>
+          <p className="home__left__avatar__username">{currentUsername}</p>
           <div className="home__left__userbio__shortCuts">
             <span className="storyIcon">
               <svg
@@ -92,17 +96,19 @@ function Home() {
           </div>
         </div>
         <div className="home__left__chats">
-          {people.map((person) => (
+          {friendsList.map((friend) => (
             <Contact
-              key={person.id}
-              username={person.username}
-              onClick={() => getChatHistory(person)}
+              key={friend.UID}
+              username={friend.name}
+              onClick={() => getChatHistory(friend)}
             />
           ))}
         </div>
       </div>
       <div className="home__right">
-        {chatHistory && <Chat person={chatHistory} currentUID={userId} />}
+        {chatHistory && (
+          <Chat friendInfo={chatHistory} currentUserID={currentUserID} />
+        )}
       </div>
     </div>
   );
