@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Home.css";
 import Contact from "./Contact";
 import Chat from "./Chat";
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar, IconButton, Tooltip } from "@material-ui/core";
 import { DonutLarge, MoreVert, Add } from "@material-ui/icons";
 
 const getUserDetails = () => {
@@ -58,19 +58,25 @@ function Home() {
           <p className="home__left__avatar__username">{currentUsername}</p>
           <div className="home__left__userbio__shortCuts">
             <div className="storyIcon">
-              <IconButton aria-label="storyIcon">
-                <DonutLarge color="action" />
-              </IconButton>
+              <Tooltip title="Displays Status">
+                <IconButton aria-label="storyIcon">
+                  <DonutLarge color="action" />
+                </IconButton>
+              </Tooltip>
             </div>
             <div className="newChatIcon">
-              <IconButton aria-label="newChatIcon">
-                <Add color="action" className="newChatIcon" />
-              </IconButton>
+              <Tooltip title="Add New Chat">
+                <IconButton aria-label="newChatIcon">
+                  <Add color="action" className="newChatIcon" />
+                </IconButton>
+              </Tooltip>
             </div>
             <div className="userInfoIcon">
-              <IconButton aria-label="userInfoIcon">
-                <MoreVert color="action" className="userInfoIcon" />
-              </IconButton>
+              <Tooltip title="Get Your Info">
+                <IconButton aria-label="userInfoIcon">
+                  <MoreVert color="action" className="userInfoIcon" />
+                </IconButton>
+              </Tooltip>
             </div>
           </div>
         </div>
