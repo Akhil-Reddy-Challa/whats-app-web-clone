@@ -28,10 +28,8 @@
   flex-direction: row;
 }
 .storyIcon {
-  transition: transform 10s ease-in-out;
-}
-.storyIcon:hover {
-  transform: rotate(360deg);
+  transition: transform 1s ease-in-out;
+  transform: rotate(-90deg);
 }
 .home__left__chats {
   height: 90%;

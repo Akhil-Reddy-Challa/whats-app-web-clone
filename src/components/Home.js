@@ -62,12 +62,16 @@ function Home() {
                 <DonutLarge color="action" />
               </IconButton>
             </div>
-            <IconButton aria-label="newChatIcon">
-              <Add color="action" className="newChatIcon" />
-            </IconButton>
-            <IconButton aria-label="userInfoIcon">
-              <MoreVert color="action" className="userInfoIcon" />
-            </IconButton>
+            <div className="newChatIcon">
+              <IconButton aria-label="newChatIcon">
+                <Add color="action" className="newChatIcon" />
+              </IconButton>
+            </div>
+            <div className="userInfoIcon">
+              <IconButton aria-label="userInfoIcon">
+                <MoreVert color="action" className="userInfoIcon" />
+              </IconButton>
+            </div>
           </div>
         </div>
         <div className="home__left__chats">

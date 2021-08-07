@@ -3,6 +3,7 @@ import "./Chat.css";
 import { Avatar } from "@material-ui/core";
 import AttachFileTwoToneIcon from "@material-ui/icons/AttachFileTwoTone";
 import SendIcon from "@material-ui/icons/Send";
+import SearchIcon from "@material-ui/icons/Search";
 import { db } from "../services/firebase";
 import firebase from "firebase";
 
@@ -84,6 +85,7 @@ function Chat(props) {
           src={`https://avatars.dicebear.com/api/initials/${friendName}.svg?background=%230000ff`}
         />
         <h5>{friendName}</h5>
+        <SearchIcon />
       </header>
       {/* Header with avatar & name */}
       <div className="chat__ground">
