@@ -30,7 +30,6 @@ function Chat(props) {
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setMessage("");
-    // setMessages(msgs);
   };
   useEffect(() => {
     const scrollToBottom = () => {
@@ -70,7 +69,6 @@ function Chat(props) {
           };
           return data;
         });
-        // console.log(messages);
         setMessages(messages);
       });
     }
