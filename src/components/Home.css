@@ -27,12 +27,18 @@
   display: flex;
   flex-direction: row;
 }
-.storyIcon,
+.storyIcon {
+  transition: transform 10s ease-in-out;
+}
+.storyIcon:hover {
+  transform: rotate(360deg);
+}
+/* .storyIcon,
 .newMessageIcon,
 .getUserInfoIcon {
-  margin-right: 20px;
-  cursor: pointer;
-}
+  margin-right: 15px; 
+   cursor: pointer;
+} */
 .home__left__chats {
   height: 90%;
   /* Makes only this section scrollable */
