@@ -6,10 +6,8 @@ import { db } from "../services/firebase";
 import firebase from "firebase";
 
 function Chat(props) {
-  // console.log(props);
   const { currentUserID } = props;
   const { friendName, friendUID } = props.friendInfo;
-  // console.log("Displaying chat history of ", personUID);
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);

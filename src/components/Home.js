@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Home.css";
 import Contact from "./Contact";
 import Chat from "./Chat";
+import BasePage from "./BasePage";
 import { Avatar, IconButton, Tooltip } from "@material-ui/core";
 import { DonutLarge, MoreVert, Add } from "@material-ui/icons";
 
@@ -91,8 +92,10 @@ function Home() {
         </div>
       </div>
       <div className="home__right">
-        {chatHistory && (
+        {chatHistory ? (
           <Chat friendInfo={chatHistory} currentUserID={currentUserID} />
+        ) : (
+          <BasePage username={currentUsername} />
         )}
       </div>
     </div>

@@ -1,0 +1,28 @@
+.basepage {
+  background-color: #f8f9fa;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.basepage__introImg {
+  width: 250px;
+  height: 250px;
+  margin-top: 150px;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/whatsapp-clone-85060.appspot.com/o/IntroImage.jpeg?alt=media&token=52ee65e4-c8c6-456f-a9a2-f7b32b602165");
+  background-size: cover;
+}
+.basepage__text {
+  font-weight: unset;
+}
+.line__seperator {
+  height: 1px;
+  width: 50%;
+  background-color: lightslategrey;
+}
+.bottomLine {
+  background-color: #4adf83;
+  height: 5px;
+  width: 100%;
+  margin-top: auto;
+}
