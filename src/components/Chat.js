@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Chat.css";
-import { Avatar } from "@material-ui/core";
-import AttachFileTwoToneIcon from "@material-ui/icons/AttachFileTwoTone";
-import SendIcon from "@material-ui/icons/Send";
-import SearchIcon from "@material-ui/icons/Search";
+import { Avatar, IconButton, Tooltip } from "@material-ui/core";
+import { Send, Search, AttachFileTwoTone, MoreVert } from "@material-ui/icons";
 import { db } from "../services/firebase";
 import firebase from "firebase";
 
@@ -85,7 +83,18 @@ function Chat(props) {
           src={`https://avatars.dicebear.com/api/initials/${friendName}.svg?background=%230000ff`}
         />
         <h5>{friendName}</h5>
-        <SearchIcon />
+        <div className="chat__header__chatInfo">
+          <Tooltip title="Chat Search">
+            <IconButton aria-label="chatSearchIcon">
+              <Search color="action" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="More Info">
+            <IconButton aria-label="chatInfoIcon">
+              <MoreVert color="action" />
+            </IconButton>
+          </Tooltip>
+        </div>
       </header>
       {/* Header with avatar & name */}
       <div className="chat__ground">
@@ -112,7 +121,7 @@ function Chat(props) {
       <div className="footer">
         <footer>
           <form className="chat__footer" onSubmit={(e) => postMessage(e)}>
-            <AttachFileTwoToneIcon
+            <AttachFileTwoTone
               className="chat__footer__fileupload"
               fontSize="medium"
             />
@@ -126,7 +135,7 @@ function Chat(props) {
               }}
             />
             {message && (
-              <SendIcon
+              <Send
                 fontSize="medium"
                 type="submit"
                 className="chat__footer__messageSend"

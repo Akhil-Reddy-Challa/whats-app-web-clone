@@ -16,6 +16,12 @@
 .chat__header__avatar {
   margin: 10px;
 }
+.chat__header__chatInfo {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: 10px;
+}
 .chat__ground {
   flex: 1; /* Gives max space for this block */
   overflow: scroll;
