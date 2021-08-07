@@ -142,6 +142,7 @@ function Chat(props) {
             <Tooltip title="Emoji Icon Picker">
               <IconButton
                 aria-label="emojiPicker"
+                color={emojiBoard ? "secondary" : "default"}
                 onClick={() => setEmojiBoard(!emojiBoard)}
               >
                 <EmojiEmotionsOutlined />
