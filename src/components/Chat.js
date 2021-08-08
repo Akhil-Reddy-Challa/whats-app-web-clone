@@ -31,13 +31,20 @@ function Chat(props) {
       senderID: currentUserID,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     };
-    const msgRef = db
-      .collection("usersChatInfo")
+    // Post msg on current user db
+    db.collection("usersChatInfo")
       .doc(currentUserID)
       .collection("chats")
       .doc(friendUID)
-      .collection("messages");
-    msgRef.add(messageObj);
+      .collection("messages")
+      .add(messageObj);
+    // Post msg on the person's db
+    db.collection("usersChatInfo")
+      .doc(friendUID)
+      .collection("chats")
+      .doc(currentUserID)
+      .collection("messages")
+      .add(messageObj);
     setMessage("");
   };
   useEffect(() => {

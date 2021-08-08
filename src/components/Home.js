@@ -32,9 +32,10 @@ function Home() {
             id: doc.id,
             name: doc.data().name,
           };
+          console.log(data);
           return data;
         });
-        console.log(personsList);
+        // console.log(personsList);
         setFriendsList(personsList);
       });
     }
