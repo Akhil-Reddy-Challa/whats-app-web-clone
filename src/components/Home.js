@@ -21,62 +21,57 @@ function Home() {
   const [newChatRequested, setNewChat] = useState(false);
   useEffect(() => {
     // Fetch data from db
-    // async function fetchContacts() {
-    //   let chatsRef = db.collection("").doc(userID).collection("chats");
-    //   let allChats = await chatsRef.get();
-    //   // console.log("User:", userID);
-    //   // console.log("Chats with the following people:");
-    //   const personsList = [];
-    //   allChats.forEach((doc) => {
-    //     // console.log(doc, doc.data());
-    //     personsList.push({
-    //       personID: doc.id,
-    //       personName: doc.data().personName,
-    //     });
-    //   });
-    //   console.log(personsList);
-    //   setPeople(personsList);
-    // }
-    // fetchContacts();
-    setFriendsList([
-      { UID: "dAmZ6pW8CXPy4Dff2zJDxUqMy973", name: "TestUser-2" },
-      { UID: "nIV0431w2ZUcFLH8Qt12dfQz6eB2", name: "TestUser-3" },
-    ]);
+    async function fetchContacts() {
+      const chatsRef = db
+        .collection("usersChatInfo")
+        .doc(currentUserID)
+        .collection("chats");
+      chatsRef.onSnapshot((snapshot) => {
+        const personsList = snapshot.docs.map((doc) => {
+          const data = {
+            personID: doc.id,
+            personName: doc.data().personName,
+          };
+          return data;
+        });
+        console.log(personsList);
+        setFriendsList(personsList);
+      });
+    }
+    fetchContacts();
   }, []);
   const getChatHistory = (friend) => {
     // console.log("Fetching chat history of", friend);
     const data = { friendName: friend.name, friendUID: friend.UID };
     setChatHistory(data);
   };
-  const handleNewChat = () => {
-    console.log("New chat req rec");
+  const toggleNewChat = () => {
     setNewChat(!newChatRequested);
   };
-  const findAboutNewChat = async (email) => {
+  const createNewChatRoom = async (email) => {
     try {
-      const user = await db.collection("usersInfo").doc(email).get();
-      if (user.exists) {
-        const data = {
-          UID: user.data().UID,
-          name: user.data().name,
-        };
-        console.log(data);
-      } else {
+      const newPersonObj = await db.collection("usersInfo").doc(email).get();
+      if (!newPersonObj.exists) {
         alert("No such user exists!");
+        return;
       }
+      // const { UID, name } = newPersonObj.data();
+      // // 1) Add the personID to currentUser chat profile
+      // const chatRef = db.collection("usersChatInfo");
+      // // chatRef.doc(currentUserID)
+      // // Create user ref in userChats collection
+      // chatRef = db
+      //   .collection("usersChatInfo")
+      //   .doc(currentUserID)
+      //   .collection("chats")
+      //   .doc(person.UID);
+      // chatRef.set({ personName: person.name });
+      // // chatRef.collection("messages").add();
+      // getChatHistory(person);
+      // toggleNewChat();
     } catch (err) {
       alert("Encountered an issue! Try again");
     }
-
-    // auth
-    //   .fetchSignInMethodsForEmail(email)
-    //   .then((msg) => {
-    //     if (msg.length === 0) alert("No such account exist");
-    //     console.log(msg);
-    //   })
-    //   .catch((err) => {
-    //     alert(err);
-    //   });
   };
   return (
     <div className="home">
@@ -97,7 +92,7 @@ function Home() {
             </div>
             <div className="newChatIcon">
               <Tooltip title="Add New Chat">
-                <IconButton aria-label="newChatIcon" onClick={handleNewChat}>
+                <IconButton aria-label="newChatIcon" onClick={toggleNewChat}>
                   <Add color="action" className="newChatIcon" />
                 </IconButton>
               </Tooltip>
@@ -122,7 +117,10 @@ function Home() {
         </div>
       </div>
       {newChatRequested && (
-        <NewChat onClick={(e) => findAboutNewChat(e)} onClose={handleNewChat} />
+        <NewChat
+          onClick={(e) => createNewChatRoom(e)}
+          onClose={toggleNewChat}
+        />
       )}
       <div className="home__right">
         {chatHistory ? (

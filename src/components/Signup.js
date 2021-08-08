@@ -24,19 +24,23 @@ export default function Signup() {
     event.preventDefault();
     // console.log("Checking", email, password);
     // console.log("Sign up module");
-    console.log(username, email, password);
+    // console.log(username, email, password);
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
         authUser.user.updateProfile({
           displayName: username,
         });
+        // 1) Store data in session
         setAuthToken(authUser);
-        // Push data to usersInfo Collection
+        // 2) Push data to usersInfo Collection
+        const UID = authUser.user.uid;
         db.collection("usersInfo").doc(email).set({
-          UID: authUser.user.uid,
+          UID,
           name: username,
         });
+        // 3) Push UID to chatInfo Collection
+        db.collection("usersChatInfo").doc(UID).set({ isOnline: true });
         history.push("/home");
       })
       .catch((err) => alert(err.message));
