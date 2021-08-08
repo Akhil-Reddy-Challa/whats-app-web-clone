@@ -5,6 +5,8 @@ import Chat from "./Chat";
 import BasePage from "./BasePage";
 import { Avatar, IconButton, Tooltip } from "@material-ui/core";
 import { DonutLarge, MoreVert, Add } from "@material-ui/icons";
+import NewChat from "./NewChat";
+import { auth, db } from "../services/firebase";
 
 const getUserDetails = () => {
   // Get data from session variable
@@ -16,10 +18,11 @@ function Home() {
   // console.log("userId from top", userId);
   const [friendsList, setFriendsList] = useState([]);
   const [chatHistory, setChatHistory] = useState(null);
+  const [newChatRequested, setNewChat] = useState(false);
   useEffect(() => {
     // Fetch data from db
     // async function fetchContacts() {
-    //   let chatsRef = db.collection("users").doc(userID).collection("chats");
+    //   let chatsRef = db.collection("").doc(userID).collection("chats");
     //   let allChats = await chatsRef.get();
     //   // console.log("User:", userID);
     //   // console.log("Chats with the following people:");
@@ -45,9 +48,36 @@ function Home() {
     const data = { friendName: friend.name, friendUID: friend.UID };
     setChatHistory(data);
   };
-  // const handleNewChat = () => {
-  //   console.log("Creating");
-  // };
+  const handleNewChat = () => {
+    console.log("New chat req rec");
+    setNewChat(!newChatRequested);
+  };
+  const findAboutNewChat = async (email) => {
+    try {
+      const user = await db.collection("usersInfo").doc(email).get();
+      if (user.exists) {
+        const data = {
+          UID: user.data().UID,
+          name: user.data().name,
+        };
+        console.log(data);
+      } else {
+        alert("No such user exists!");
+      }
+    } catch (err) {
+      alert("Encountered an issue! Try again");
+    }
+
+    // auth
+    //   .fetchSignInMethodsForEmail(email)
+    //   .then((msg) => {
+    //     if (msg.length === 0) alert("No such account exist");
+    //     console.log(msg);
+    //   })
+    //   .catch((err) => {
+    //     alert(err);
+    //   });
+  };
   return (
     <div className="home">
       <div className="home__left">
@@ -67,7 +97,7 @@ function Home() {
             </div>
             <div className="newChatIcon">
               <Tooltip title="Add New Chat">
-                <IconButton aria-label="newChatIcon">
+                <IconButton aria-label="newChatIcon" onClick={handleNewChat}>
                   <Add color="action" className="newChatIcon" />
                 </IconButton>
               </Tooltip>
@@ -91,6 +121,9 @@ function Home() {
           ))}
         </div>
       </div>
+      {newChatRequested && (
+        <NewChat onClick={(e) => findAboutNewChat(e)} onClose={handleNewChat} />
+      )}
       <div className="home__right">
         {chatHistory ? (
           <Chat friendInfo={chatHistory} currentUserID={currentUserID} />

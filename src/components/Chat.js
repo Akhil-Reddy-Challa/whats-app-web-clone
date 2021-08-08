@@ -32,7 +32,7 @@ function Chat(props) {
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     };
     const msgRef = db
-      .collection("users")
+      .collection("usersChatInfo")
       .doc(currentUserID)
       .collection("chats")
       .doc(friendUID)
@@ -64,7 +64,7 @@ function Chat(props) {
         return time;
       }
       let msgsRef = db
-        .collection("users")
+        .collection("usersChatInfo")
         .doc(currentUserID)
         .collection("chats")
         .doc(friendUID)
