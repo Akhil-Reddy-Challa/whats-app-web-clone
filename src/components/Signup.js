@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Signup.css";
-import { auth } from "../services/firebase";
+import { auth, db } from "../services/firebase";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +32,11 @@ export default function Signup() {
           displayName: username,
         });
         setAuthToken(authUser);
+        // Push data to usersInfo Collection
+        db.collection("usersInfo").doc(email).set({
+          UID: authUser.user.uid,
+          name: username,
+        });
         history.push("/home");
       })
       .catch((err) => alert(err.message));
