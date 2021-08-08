@@ -29,8 +29,8 @@ function Home() {
       chatsRef.onSnapshot((snapshot) => {
         const personsList = snapshot.docs.map((doc) => {
           const data = {
-            personID: doc.id,
-            personName: doc.data().personName,
+            id: doc.id,
+            name: doc.data().name,
           };
           return data;
         });
@@ -42,7 +42,7 @@ function Home() {
   }, []);
   const getChatHistory = (friend) => {
     // console.log("Fetching chat history of", friend);
-    const data = { friendName: friend.name, friendUID: friend.UID };
+    const data = { friendName: friend.name, friendUID: friend.id };
     setChatHistory(data);
   };
   const toggleNewChat = () => {
@@ -55,21 +55,18 @@ function Home() {
         alert("No such user exists!");
         return;
       }
-      // const { UID, name } = newPersonObj.data();
-      // // 1) Add the personID to currentUser chat profile
-      // const chatRef = db.collection("usersChatInfo");
-      // // chatRef.doc(currentUserID)
-      // // Create user ref in userChats collection
-      // chatRef = db
-      //   .collection("usersChatInfo")
-      //   .doc(currentUserID)
-      //   .collection("chats")
-      //   .doc(person.UID);
-      // chatRef.set({ personName: person.name });
-      // // chatRef.collection("messages").add();
-      // getChatHistory(person);
-      // toggleNewChat();
+      const { UID, name } = newPersonObj.data();
+      //
+      console.log(currentUserID);
+      db.collection("usersChatInfo")
+        .doc(currentUserID)
+        .collection("chats")
+        .doc(UID)
+        .set({ name });
+      getChatHistory({ UID, name });
+      toggleNewChat();
     } catch (err) {
+      console.log(err);
       alert("Encountered an issue! Try again");
     }
   };
@@ -109,7 +106,7 @@ function Home() {
         <div className="home__left__chats">
           {friendsList.map((friend) => (
             <Contact
-              key={friend.UID}
+              key={friend.id}
               username={friend.name}
               onClick={() => getChatHistory(friend)}
             />
