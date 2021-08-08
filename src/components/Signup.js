@@ -1,20 +1,9 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import "./Signup.css";
 import { auth, db } from "../services/firebase";
 import { useHistory } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: 500,
-    },
-  },
-}));
 export default function Signup() {
-  const classes = useStyles();
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -54,42 +43,39 @@ export default function Signup() {
     sessionStorage.setItem("email", email);
   };
   return (
-    <form className={classes.root}>
-      <div>
-        <TextField
-          label="Username"
-          variant="filled"
-          color="primary"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <TextField
-          label="Email"
-          variant="filled"
-          color="primary"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div>
-        <TextField
-          label="Password"
-          variant="filled"
-          color="primary"
-          value={password}
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
+    <form>
+      <TextField
+        label="Username"
+        variant="filled"
+        color="primary"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        fullWidth
+      />
+      <TextField
+        label="Email"
+        variant="filled"
+        color="primary"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        fullWidth
+      />
+      <TextField
+        label="Password"
+        variant="filled"
+        color="primary"
+        value={password}
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+        fullWidth
+      />
       <Button
         onClick={(e) => handleSignup(e)}
-        variant="contained"
-        className="signup__submit__button"
-        color="primary"
+        variant="outlined"
         type="submit"
         disabled={!email || !password || !username}
+        style={{ marginTop: "10px", color: "#01bfa5" }}
+        fullWidth
       >
         Sign Up
       </Button>
