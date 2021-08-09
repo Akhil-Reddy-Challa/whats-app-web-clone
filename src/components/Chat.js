@@ -13,13 +13,14 @@ import firebase from "firebase";
 import Picker from "emoji-picker-react";
 
 function Chat(props) {
-  console.log(props);
+  // console.log(props);
   const { email } = props;
   const {
     name: friendName,
     email: friendEmail,
     chatRoomID,
     avatar,
+    lastSeen,
   } = props.friendInfo;
   // console.log(friendName, friendEmail);
   const messagesEndRef = useRef(null);
@@ -99,9 +100,11 @@ function Chat(props) {
           alt={friendName}
           src={avatar}
         />
-        <div className="chat__text">
-          <span className="friendName">{friendName}</span>
-          <span className="chat__header__lastSeen">Last Seen: 2nd Aug</span>
+        <div className="chat__header__text">
+          <span className="chat__header__friendname">{friendName}</span>
+          <span className="chat__header__lastSeen">
+            {"Last seen: " + lastSeen}
+          </span>
         </div>
         <div className="chat__header__chatInfo">
           <Tooltip title="Chat Search">

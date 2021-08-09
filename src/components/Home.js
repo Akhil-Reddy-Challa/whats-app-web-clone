@@ -13,6 +13,19 @@ const getUserDetails = () => {
   // console.log("Fetching from session");
   return [sessionStorage.getItem("username"), sessionStorage.getItem("email")];
 };
+const getMiniTime = (time) => {
+  console.log(time);
+  if (time) {
+    const minifiedTime = time.toDate().toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const minifiedDate = time.toDate().toLocaleDateString();
+    const final = minifiedTime.concat(" ").concat(minifiedDate);
+    return final;
+  }
+  return time;
+};
 function Home() {
   const [currentUsername, currentUserEmail] = getUserDetails();
   const [userAvatar, setUserAvatar] = useState("");
@@ -36,13 +49,13 @@ function Home() {
           snap.forEach((chat) => {
             const { users } = chat.data();
             const data = {};
-            data["chatRoomID"] = chat.id;
-            const otherPersonEmail =
+            const friendEmail =
               users[0] === currentUserEmail ? users[1] : users[0];
-            data["email"] = otherPersonEmail;
-            data["name"] = usersData[otherPersonEmail].name;
-            data["avatar"] = usersData[otherPersonEmail].avatar;
-            data["lastSeen"] = usersData[otherPersonEmail].lastSeen;
+            data["chatRoomID"] = chat.id;
+            data["email"] = friendEmail;
+            data["name"] = usersData[friendEmail].name;
+            data["avatar"] = usersData[friendEmail].avatar;
+            data["lastSeen"] = getMiniTime(usersData[friendEmail].lastSeen);
             contacts.push(data);
           });
           // Set user avatar
