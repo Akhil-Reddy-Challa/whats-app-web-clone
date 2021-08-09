@@ -21,6 +21,7 @@ function BasePage(props) {
           Project available on{" "}
           <a
             target="_blank"
+            rel="noopener noreferrer"
             href="https://github.com/AkhilReddy1998/whats-app-web-clone"
           >
             GitHub
