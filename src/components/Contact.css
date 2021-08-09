@@ -8,11 +8,19 @@
   margin-bottom: 1px;
   /* font-size: large; */
 }
-
 .contact:hover,
 .contact:focus {
   background-color: lightgray;
   /* opacity: 50%; */
+}
+.contact__name {
+  font-size: 16px;
+}
+.contact__lastSeen {
+  margin-left: auto;
+  font-size: 12px;
+  margin-top: auto;
+  color: rgba(0, 0, 0, 0.45);
 }
 .contact__avatar {
   margin-right: 10px;

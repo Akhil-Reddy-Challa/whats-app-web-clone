@@ -42,6 +42,7 @@ function Home() {
             data["email"] = otherPersonEmail;
             data["name"] = usersData[otherPersonEmail].name;
             data["avatar"] = usersData[otherPersonEmail].avatar;
+            data["lastSeen"] = usersData[otherPersonEmail].lastSeen;
             contacts.push(data);
           });
           // Set user avatar
@@ -117,6 +118,7 @@ function Home() {
               key={friend.email}
               username={friend.name}
               avatar={friend.avatar}
+              lastSeen={friend.lastSeen}
               onClick={() => getChatHistory(friend)}
             />
           ))}
