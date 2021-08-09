@@ -3,7 +3,7 @@ import "./ChatPlayGround.css";
 
 function ChatPlayGround(props) {
   const { chatHistory } = props;
-  console.log(chatHistory);
+  // console.log(chatHistory);
 
   return (
     <div className="chatground">
