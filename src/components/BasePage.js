@@ -18,7 +18,7 @@ function BasePage(props) {
       <div className="line__seperator"></div>
       <div className="project__details">
         <p>
-          Project hosted on{" "}
+          Project available on{" "}
           <a
             target="_blank"
             href="https://github.com/AkhilReddy1998/whats-app-web-clone"

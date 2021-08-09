@@ -6,8 +6,8 @@
   align-items: center;
 }
 .basepage__introImg {
-  width: 250px;
-  height: 250px;
+  min-width: 250px;
+  min-height: 250px;
   margin-top: 150px;
   background-image: url("https://firebasestorage.googleapis.com/v0/b/whatsapp-clone-85060.appspot.com/o/IntroImage.jpeg?alt=media&token=52ee65e4-c8c6-456f-a9a2-f7b32b602165");
   background-size: cover;

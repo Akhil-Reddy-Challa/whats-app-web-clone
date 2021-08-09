@@ -14,7 +14,7 @@ const getUserDetails = () => {
   return [sessionStorage.getItem("username"), sessionStorage.getItem("email")];
 };
 const getMiniTime = (time) => {
-  console.log(time);
+  // console.log(time);
   if (time) {
     const minifiedTime = time.toDate().toLocaleTimeString("en-US", {
       hour: "2-digit",
@@ -41,7 +41,7 @@ function Home() {
       userInfo.forEach((doc) => {
         usersData[doc.id] = doc.data();
       });
-      console.log(usersData);
+      // console.log(usersData);
       chatRef
         .where("users", "array-contains", currentUserEmail)
         .onSnapshot((snap) => {
