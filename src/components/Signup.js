@@ -19,25 +19,46 @@ export default function Signup() {
           displayName: username,
         });
         // 1) Store data in session
-        setAuthToken(authUser);
-        // 2) Push data to usersInfo Collection
-        const UID = authUser.user.uid;
+        setAuthToken();
+        // 2) Create an avatar & push data to users Collection
         db.collection("users").doc(email).set({
           name: username,
           lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
-          avatar: "",
+          avatar: getRandomAvatar(),
         });
-        // 3) Push UID to chatInfo Collection
-        db.collection("usersChatInfo").doc(UID).set({ isOnline: true });
         history.push("/home");
       })
       .catch((err) => alert(err.message));
   };
-  const setAuthToken = (dataToken) => {
-    // console.log("creating token: ", data);
-    const userId = dataToken.user.uid;
+  const getRandomAvatar = () => {
+    const colors = [
+      "amber",
+      "blue",
+      "blueGrey",
+      "brown",
+      "cyan",
+      "deepOrange",
+      "deepPurple",
+      "green",
+      "grey",
+      "indigo",
+      "lightBlue",
+      "lightGreen",
+      "lime",
+      "orange",
+      "pink",
+      "purple",
+      "red",
+      "teal",
+      "yellow",
+    ];
+    const randColor = colors[Math.floor(Math.random() * (colors.length + 1))];
+    const randColorLevel = Math.floor(1 + Math.random() * 10) * 100;
+    const url = `https://avatars.dicebear.com/api/initials/${username}.svg?backgroundColors[]=${randColor}&bold=1&backgroundColorLevel=${randColorLevel}`;
+    return url;
+  };
+  const setAuthToken = () => {
     sessionStorage.setItem("user_token_created_on", new Date());
-    sessionStorage.setItem("userId", userId);
     sessionStorage.setItem("username", username);
     sessionStorage.setItem("email", email);
   };
