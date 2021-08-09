@@ -31,6 +31,7 @@ function Chat(props) {
       senderID: currentUserID,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     };
+    // Check if this is a new conversation
     // Post msg on current user db
     db.collection("usersChatInfo")
       .doc(currentUserID)

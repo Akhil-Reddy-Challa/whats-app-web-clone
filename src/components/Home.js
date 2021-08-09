@@ -6,7 +6,7 @@ import BasePage from "./BasePage";
 import { Avatar, IconButton, Tooltip } from "@material-ui/core";
 import { DonutLarge, MoreVert, Add } from "@material-ui/icons";
 import NewChat from "./NewChat";
-import { auth, db } from "../services/firebase";
+import { db } from "../services/firebase";
 
 const getUserDetails = () => {
   // Get data from session variable
@@ -23,7 +23,7 @@ function Home() {
     // Fetch data from db
     async function fetchContacts() {
       const chatsRef = db
-        .collection("usersChatInfo")
+        .collection("usersChat")
         .doc(currentUserID)
         .collection("chats");
       chatsRef.onSnapshot((snapshot) => {

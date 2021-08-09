@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { auth, db } from "../services/firebase";
 import { useHistory } from "react-router-dom";
+import firebase from "firebase";
 
 export default function Signup() {
   const history = useHistory();
@@ -11,9 +12,6 @@ export default function Signup() {
 
   const handleSignup = (event) => {
     event.preventDefault();
-    // console.log("Checking", email, password);
-    // console.log("Sign up module");
-    // console.log(username, email, password);
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
@@ -24,9 +22,10 @@ export default function Signup() {
         setAuthToken(authUser);
         // 2) Push data to usersInfo Collection
         const UID = authUser.user.uid;
-        db.collection("usersInfo").doc(email).set({
-          UID,
+        db.collection("users").doc(email).set({
           name: username,
+          lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
+          avatar: "",
         });
         // 3) Push UID to chatInfo Collection
         db.collection("usersChatInfo").doc(UID).set({ isOnline: true });
