@@ -11,11 +11,14 @@ import { db } from "../services/firebase";
 const getUserDetails = () => {
   // Get data from session variable
   // console.log("Fetching from session");
-  return [sessionStorage.getItem("username"), sessionStorage.getItem("userId")];
+  return [
+    sessionStorage.getItem("username"),
+    sessionStorage.getItem("userId"),
+    sessionStorage.getItem("email"),
+  ];
 };
 function Home() {
-  const [currentUsername, currentUserID] = getUserDetails();
-  // console.log("userId from top", userId);
+  const [currentUsername, currentUserID, currentUserEmail] = getUserDetails();
   const [friendsList, setFriendsList] = useState([]);
   const [chatHistory, setChatHistory] = useState(null);
   const [newChatRequested, setNewChat] = useState(false);
@@ -39,7 +42,7 @@ function Home() {
         setFriendsList(personsList);
       });
     }
-    fetchContacts();
+    // fetchContacts();
   }, []);
   const getChatHistory = (friend) => {
     // console.log("Fetching chat history of", friend);
@@ -50,21 +53,24 @@ function Home() {
     setNewChat(!newChatRequested);
   };
   const createNewChatRoom = async (email) => {
+    if (email === currentUserEmail) {
+      alert("You entered your own email!");
+      return;
+    }
     try {
-      const newPersonObj = await db.collection("usersInfo").doc(email).get();
+      const newPersonObj = await db.collection("users").doc(email).get();
       if (!newPersonObj.exists) {
         alert("No such user exists!");
         return;
       }
-      const { UID, name } = newPersonObj.data();
-      //
-      console.log(currentUserID);
-      db.collection("usersChatInfo")
-        .doc(currentUserID)
-        .collection("chats")
-        .doc(UID)
-        .set({ name });
-      getChatHistory({ UID, name });
+      const { name, lastSeen } = newPersonObj.data();
+      db.collection("chats").add({ name });
+      // db.collection("chats")
+      //   .doc(currentUserID)
+      //   .collection("chats")
+      //   .doc(UID)
+      //   .set({ name });
+      // getChatHistory({ UID, name });
       toggleNewChat();
     } catch (err) {
       console.log(err);
