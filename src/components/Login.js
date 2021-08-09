@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { auth } from "../services/firebase";
+import { auth, db } from "../services/firebase";
+import firebase from "firebase";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,15 +15,14 @@ function Login() {
       .signInWithEmailAndPassword(email, password)
       .then((msg) => {
         const { displayName, uid } = msg.user;
-        // Set Auth token
+        // 1) Set Auth token
         setAuthToken({ displayName, uid });
+        // 2) Update lastSeen in db
+        db.collection("users").doc(email).update({
+          lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+        // 3) Navigate to home page
         history.push("/home");
-        // history.push({
-        //   pathname: "/home",
-        //   email: email,
-        //   username: username,
-        //   userId: userId,
-        // });
       })
       .catch((err) => alert(err.message));
   };
