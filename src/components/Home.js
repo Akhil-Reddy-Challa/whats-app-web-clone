@@ -11,43 +11,45 @@ import { db } from "../services/firebase";
 const getUserDetails = () => {
   // Get data from session variable
   // console.log("Fetching from session");
-  return [
-    sessionStorage.getItem("username"),
-    sessionStorage.getItem("userId"),
-    sessionStorage.getItem("email"),
-  ];
+  return [sessionStorage.getItem("username"), sessionStorage.getItem("email")];
 };
 function Home() {
-  const [currentUsername, currentUserID, currentUserEmail] = getUserDetails();
+  const [currentUsername, currentUserEmail] = getUserDetails();
   const [friendsList, setFriendsList] = useState([]);
   const [chatHistory, setChatHistory] = useState(null);
   const [newChatRequested, setNewChat] = useState(false);
   useEffect(() => {
-    // Fetch data from db
     async function fetchContacts() {
-      const chatsRef = db
-        .collection("usersChat")
-        .doc(currentUserID)
-        .collection("chats");
-      chatsRef.onSnapshot((snapshot) => {
-        const personsList = snapshot.docs.map((doc) => {
-          const data = {
-            id: doc.id,
-            name: doc.data().name,
-          };
-          console.log(data);
-          return data;
-        });
-        // console.log(personsList);
-        setFriendsList(personsList);
+      const chatRef = db.collection("chats");
+      const usersRef = db.collection("users");
+      const usersData = {};
+      const userInfo = await usersRef.get();
+      userInfo.forEach((doc) => {
+        usersData[doc.id] = doc.data();
       });
+      // console.log(usersData);
+      chatRef
+        .where("users", "array-contains", currentUserEmail)
+        .onSnapshot((snap) => {
+          const contacts = [];
+          snap.forEach((chat) => {
+            const { users } = chat.data();
+            const data = {};
+            data["chatRoomID"] = chat.id;
+            const otherPersonEmail =
+              users[0] === currentUserEmail ? users[1] : users[0];
+            data["email"] = otherPersonEmail;
+            data["name"] = usersData[otherPersonEmail].name;
+            contacts.push(data);
+          });
+          setFriendsList(contacts);
+        });
     }
-    // fetchContacts();
-  }, []);
+    fetchContacts();
+  }, [currentUserEmail]);
   const getChatHistory = (friend) => {
     // console.log("Fetching chat history of", friend);
-    const data = { friendName: friend.name, friendUID: friend.id };
-    setChatHistory(data);
+    setChatHistory(friend);
   };
   const toggleNewChat = () => {
     setNewChat(!newChatRequested);
@@ -63,13 +65,10 @@ function Home() {
         alert("No such user exists!");
         return;
       }
-      const { name, lastSeen } = newPersonObj.data();
-      db.collection("chats").add({ name });
-      // db.collection("chats")
-      //   .doc(currentUserID)
-      //   .collection("chats")
-      //   .doc(UID)
-      //   .set({ name });
+      const chatsRef = db.collection("chats");
+      await chatsRef.add({
+        users: [currentUserEmail, email],
+      });
       // getChatHistory({ UID, name });
       toggleNewChat();
     } catch (err) {
@@ -113,7 +112,7 @@ function Home() {
         <div className="home__left__chats">
           {friendsList.map((friend) => (
             <Contact
-              key={friend.id}
+              key={friend.email}
               username={friend.name}
               onClick={() => getChatHistory(friend)}
             />
@@ -128,7 +127,7 @@ function Home() {
       )}
       <div className="home__right">
         {chatHistory ? (
-          <Chat friendInfo={chatHistory} currentUserID={currentUserID} />
+          <Chat friendInfo={chatHistory} email={currentUserEmail} />
         ) : (
           <BasePage username={currentUsername} />
         )}

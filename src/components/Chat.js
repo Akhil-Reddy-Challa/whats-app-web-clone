@@ -13,8 +13,10 @@ import firebase from "firebase";
 import Picker from "emoji-picker-react";
 
 function Chat(props) {
-  const { currentUserID } = props;
-  const { friendName, friendUID } = props.friendInfo;
+  // console.log(props);
+  const { email } = props;
+  const { name: friendName, email: friendEmail, chatRoomID } = props.friendInfo;
+  // console.log(friendName, friendEmail);
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -28,22 +30,13 @@ function Chat(props) {
     // console.log("Postinggg...", message);
     const messageObj = {
       content: message,
-      senderID: currentUserID,
+      senderID: email,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     };
     // Check if this is a new conversation
     // Post msg on current user db
-    db.collection("usersChatInfo")
-      .doc(currentUserID)
-      .collection("chats")
-      .doc(friendUID)
-      .collection("messages")
-      .add(messageObj);
-    // Post msg on the person's db
-    db.collection("usersChatInfo")
-      .doc(friendUID)
-      .collection("chats")
-      .doc(currentUserID)
+    db.collection("chats")
+      .doc(chatRoomID)
       .collection("messages")
       .add(messageObj);
     setMessage("");
@@ -72,14 +65,12 @@ function Chat(props) {
         return time;
       }
       let msgsRef = db
-        .collection("usersChatInfo")
-        .doc(currentUserID)
         .collection("chats")
-        .doc(friendUID)
+        .doc(chatRoomID)
         .collection("messages")
         .orderBy("timestamp", "asc");
-      msgsRef.onSnapshot((snapshot) => {
-        const messages = snapshot.docs.map((doc) => {
+      msgsRef.onSnapshot((snap) => {
+        const messages = snap.docs.map((doc) => {
           const data = {
             msgID: doc.id,
             content: doc.data().content,
@@ -88,11 +79,12 @@ function Chat(props) {
           };
           return data;
         });
+        // console.log(messages);
         setMessages(messages);
       });
     }
     fetchRecords();
-  }, [friendUID, currentUserID]);
+  }, [friendEmail, chatRoomID]);
 
   return (
     <div className="chat">
@@ -122,9 +114,9 @@ function Chat(props) {
           <div key={message.msgID} className="chat__message__body">
             <p
               className={
-                message.senderID === currentUserID
-                  ? "chat__message chat__sender "
-                  : "chat__message chat__reciever"
+                message.senderID === friendEmail
+                  ? "chat__message chat__reciever"
+                  : "chat__message chat__sender"
               }
             >
               {message.content}

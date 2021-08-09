@@ -25,7 +25,6 @@ export default function Signup() {
         db.collection("users").doc(email).set({
           name: username,
           lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
-          email,
           avatar: "",
         });
         // 3) Push UID to chatInfo Collection

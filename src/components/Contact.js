@@ -1,7 +1,9 @@
 import React from "react";
 import "./Contact.css";
 import { Avatar } from "@material-ui/core";
-
+// const userInfo = await usersRef.doc(data.email).get();
+// data["name"] = userInfo?.data().name;
+// console.log(data);
 function Contact(props) {
   const getRandomSeed = () => {
     const max = 100;
