@@ -27,7 +27,7 @@ function Home() {
       userInfo.forEach((doc) => {
         usersData[doc.id] = doc.data();
       });
-      // console.log(usersData);
+      console.log(usersData);
       chatRef
         .where("users", "array-contains", currentUserEmail)
         .onSnapshot((snap) => {
@@ -40,6 +40,7 @@ function Home() {
               users[0] === currentUserEmail ? users[1] : users[0];
             data["email"] = otherPersonEmail;
             data["name"] = usersData[otherPersonEmail].name;
+            data["avatar"] = usersData[otherPersonEmail].avatar;
             contacts.push(data);
           });
           setFriendsList(contacts);
@@ -114,6 +115,7 @@ function Home() {
             <Contact
               key={friend.email}
               username={friend.name}
+              avatar={friend.avatar}
               onClick={() => getChatHistory(friend)}
             />
           ))}
