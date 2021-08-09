@@ -14,9 +14,9 @@ function Login() {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((msg) => {
-        const { displayName, uid } = msg.user;
+        const { displayName } = msg.user;
         // 1) Set Auth token
-        setAuthToken({ displayName, uid });
+        setAuthToken(displayName);
         // 2) Update lastSeen in db
         db.collection("users").doc(email).update({
           lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
@@ -26,11 +26,10 @@ function Login() {
       })
       .catch((err) => alert(err.message));
   };
-  const setAuthToken = (data) => {
+  const setAuthToken = (name) => {
     // console.log("creating token: ", data);
     sessionStorage.setItem("user_token_created_on", new Date());
-    sessionStorage.setItem("userId", data.uid);
-    sessionStorage.setItem("username", data.displayName);
+    sessionStorage.setItem("username", name);
     sessionStorage.setItem("email", email);
   };
   return (
