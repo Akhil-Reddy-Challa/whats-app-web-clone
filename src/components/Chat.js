@@ -13,9 +13,14 @@ import firebase from "firebase";
 import Picker from "emoji-picker-react";
 
 function Chat(props) {
-  // console.log(props);
+  console.log(props);
   const { email } = props;
-  const { name: friendName, email: friendEmail, chatRoomID } = props.friendInfo;
+  const {
+    name: friendName,
+    email: friendEmail,
+    chatRoomID,
+    avatar,
+  } = props.friendInfo;
   // console.log(friendName, friendEmail);
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState("");
@@ -92,7 +97,7 @@ function Chat(props) {
         <Avatar
           className="chat__header__avatar"
           alt={friendName}
-          src={`https://avatars.dicebear.com/api/initials/${friendName}.svg?background=%230000ff`}
+          src={avatar}
         />
         <h5>{friendName}</h5>
         <div className="chat__header__chatInfo">
