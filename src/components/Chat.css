@@ -16,6 +16,19 @@
 .chat__header__avatar {
   margin: 10px;
 }
+.chat__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.friendName {
+  font-weight: bolder;
+  margin-right: auto;
+}
+.chat__header__lastSeen {
+  font-size: x-small;
+  margin-left: 5px;
+}
 .chat__header__chatInfo {
   display: flex;
   flex-direction: row;

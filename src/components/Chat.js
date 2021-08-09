@@ -99,7 +99,10 @@ function Chat(props) {
           alt={friendName}
           src={avatar}
         />
-        <h5>{friendName}</h5>
+        <div className="chat__text">
+          <span className="friendName">{friendName}</span>
+          <span className="chat__header__lastSeen">Last Seen: 2nd Aug</span>
+        </div>
         <div className="chat__header__chatInfo">
           <Tooltip title="Chat Search">
             <IconButton aria-label="chatSearchIcon">
