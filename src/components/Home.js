@@ -15,6 +15,7 @@ const getUserDetails = () => {
 };
 function Home() {
   const [currentUsername, currentUserEmail] = getUserDetails();
+  const [userAvatar, setUserAvatar] = useState("");
   const [friendsList, setFriendsList] = useState([]);
   const [chatHistory, setChatHistory] = useState(null);
   const [newChatRequested, setNewChat] = useState(false);
@@ -43,6 +44,9 @@ function Home() {
             data["avatar"] = usersData[otherPersonEmail].avatar;
             contacts.push(data);
           });
+          // Set user avatar
+          setUserAvatar(usersData[currentUserEmail].avatar);
+          // Render list of contacts on the sidebar
           setFriendsList(contacts);
         });
     }
@@ -81,10 +85,7 @@ function Home() {
     <div className="home">
       <div className="home__left">
         <div className="home__left__userbio">
-          <Avatar
-            className="home__left__avatar"
-            src={`https://avatars.dicebear.com/api/initials/${currentUsername}.svg?background=%230000ff`}
-          />
+          <Avatar className="home__left__avatar" src={userAvatar} />
           <p className="home__left__avatar__username">{currentUsername}</p>
           <div className="home__left__userbio__shortCuts">
             <div className="storyIcon">
