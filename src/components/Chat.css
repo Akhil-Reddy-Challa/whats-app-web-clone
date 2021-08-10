@@ -53,6 +53,7 @@
 }
 .chat__message {
   width: fit-content;
+  max-width: 50%; /* Used to wrap the message if the content is too long*/
   padding: 10px;
   border-radius: 10px;
   font-size: 14.5px;
@@ -74,7 +75,6 @@
   margin: 10px 0 -10px 7px;
 }
 .emojiBoard {
-  /* display: none; */
   width: fit-content;
 }
 .chat__footer {
@@ -85,15 +85,10 @@
   cursor: pointer;
   padding: 10px;
   align-items: center;
-  /* margin-top: 10px; */
 }
 .chat__footer__fileupload {
-  /* font-size: 2.5rem; */
-  /* padding: 10px; */
   transition: transform 1s ease-in-out;
   transform: rotate(50deg);
-  /* margin-top: 18px;
-  margin-left: 10px; */
 }
 .chat__footer__messageInput {
   flex: 1;
@@ -102,14 +97,6 @@
   padding: 10px;
   border: 1px solid lightgray;
   font-size: 15px;
-  /* margin: 10px; */
-}
-.chat__footer__messageSend {
-  /* font-size: x-large !important; */
-  /* margin: 8px; */
-  /* padding: 10px; */
-  /* margin-top: 18px;
-  margin-right: 10px; */
 }
 input:focus {
   outline: none;
