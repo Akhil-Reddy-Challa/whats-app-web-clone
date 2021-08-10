@@ -77,6 +77,12 @@ function Home() {
     if (email === currentUserEmail) {
       alert("You entered your own email!");
       return;
+    } // Check if email exists in our chat already
+    const isFriend = friendsList.filter((friend) => friend.email === email);
+    if (isFriend.length === 1) {
+      toggleNewChat();
+      getChatHistory(isFriend[0]);
+      return;
     }
     try {
       const newPersonObj = await db.collection("users").doc(email).get();
