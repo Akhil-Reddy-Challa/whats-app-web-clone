@@ -33,19 +33,19 @@ function Chat(props) {
   };
   const postMessage = (event) => {
     event.preventDefault();
+    // Prevent if message is blank
     if (message.trim().length === 0) return;
-    // console.log("Postinggg...", message);
+
     const messageObj = {
       content: message,
       senderID: email,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     };
-    // Check if this is a new conversation
-    // Post msg on current user db
-    db.collection("chats")
-      .doc(chatRoomID)
-      .collection("messages")
-      .add(messageObj);
+    const chatsRef = db.collection("chats");
+    // Post the new message
+    chatsRef.doc(chatRoomID).collection("messages").add(messageObj);
+    // Update the recent message
+    chatsRef.doc(chatRoomID).update({ recentMessage: message });
     setMessage("");
   };
   useEffect(() => {

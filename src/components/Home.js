@@ -31,33 +31,36 @@ function Home() {
   const [newChatRequested, setNewChat] = useState(false);
   useEffect(() => {
     async function fetchContacts() {
-      const chatRef = db.collection("chats");
+      const chatsRef = db.collection("chats");
       const usersRef = db.collection("users");
       const usersData = {};
-      const userInfo = await usersRef.get();
-      userInfo.forEach((doc) => {
-        usersData[doc.id] = doc.data();
-      });
-      // console.log(usersData);
-      chatRef
+      // Fetch all users
+      const allUsers = await usersRef.get();
+      allUsers.forEach((user) => (usersData[user.id] = user.data()));
+      // Fetch all the chats
+      chatsRef
         .where("users", "array-contains", currentUserEmail)
         .onSnapshot((snap) => {
           const contacts = [];
-          snap.forEach((chat) => {
-            const { users } = chat.data();
-            const data = {};
-            const friendEmail =
-              users[0] === currentUserEmail ? users[1] : users[0];
-            data["chatRoomID"] = chat.id;
-            data["email"] = friendEmail;
-            data["name"] = usersData[friendEmail].name;
-            data["avatar"] = usersData[friendEmail].avatar;
-            data["lastSeen"] = getMiniTime(usersData[friendEmail].lastSeen);
-            contacts.push(data);
+          snap.forEach((conversation) => {
+            const { users: usersInvolved, recentMessage } = conversation.data();
+            const otherPerson =
+              usersInvolved[0] === currentUserEmail
+                ? usersInvolved[1]
+                : usersInvolved[0];
+            const contact = {};
+            contact["name"] = usersData[otherPerson].name;
+            contact["chatRoomID"] = conversation.id;
+            contact["email"] = otherPerson;
+            contact["avatar"] = usersData[otherPerson].avatar;
+            contact["lastSeen"] = getMiniTime(usersData[otherPerson].lastSeen);
+            contact["recentMessage"] = recentMessage;
+            contacts.push(contact);
           });
           // Set user avatar
           setUserAvatar(usersData[currentUserEmail].avatar);
           // Render list of contacts on the sidebar
+          console.log(contacts);
           setFriendsList(contacts);
         });
     }
