@@ -1,6 +1,6 @@
 .contact {
   cursor: pointer;
-  display: flex; /* Throws every html element in a row */
+  display: flex;
   flex-direction: row;
   align-items: center;
   /* border-right: 1px solid lightgray; */
