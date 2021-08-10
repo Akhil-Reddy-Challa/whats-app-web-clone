@@ -1,10 +1,8 @@
 .contact {
-  width: 100%;
   cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* border-right: 1px solid lightgray; */
   margin-bottom: 1px;
 }
 .contact:hover,
@@ -16,6 +14,7 @@
   margin-right: 10px;
 }
 .contact__info {
+  flex: 1;
   border-bottom: 1px solid lightgray;
   display: flex;
   flex-direction: column;
@@ -25,13 +24,12 @@
 .topLayer {
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
 }
 .name {
   font-size: 18px;
 }
 .lastSeen {
-  /* margin-right: 200px; */
+  margin-right: 10px;
   margin-left: auto;
   font-size: 12px;
   color: rgba(0, 0, 0, 0.45);
@@ -39,8 +37,6 @@
 .recentMessageBox {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.6);
-
-  width: 80%;
 }
 .recentMessage {
   overflow: hidden;
