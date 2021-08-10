@@ -1,6 +1,7 @@
 .sidebar {
   /* flex: 0; */
   width: 30%;
+  min-width: 25%;
   height: 100%;
   /* Makes the section fixed (disables scroll)*/
   position: fixed;

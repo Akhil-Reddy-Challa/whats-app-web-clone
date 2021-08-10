@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
-import Chat from "./Chat";
-import BasePage from "./BasePage";
 import NewChat from "./NewChat";
 import { db } from "../services/firebase";
 import SideBar from "./SideBar";
+import ChatArea from "./ChatArea";
 
 const getUserDetails = () => {
   // Get data from session variable
@@ -114,13 +113,11 @@ function Home() {
           onClose={toggleNewChat}
         />
       )}
-      <div className="home__right">
-        {chatHistory ? (
-          <Chat friendInfo={chatHistory} email={currentUserEmail} />
-        ) : (
-          <BasePage username={currentUsername} />
-        )}
-      </div>
+      <ChatArea
+        currentUserEmail={currentUserEmail}
+        currentUsername={currentUsername}
+        chatHistory={chatHistory}
+      />
     </div>
   );
 }

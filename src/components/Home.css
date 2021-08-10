@@ -4,11 +4,3 @@
   width: 100%;
   height: 100%;
 }
-.home__right {
-  width: 70%;
-  height: 100%;
-  /* Below is to fix the position and make to unscrollable  */
-  position: fixed;
-  right: 0;
-  overflow: hidden;
-}
