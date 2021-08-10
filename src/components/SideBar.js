@@ -4,6 +4,7 @@ import Contact from "./Contact";
 import "./Sidebar.css";
 
 function SideBar(props) {
+  // console.log(props);
   const {
     userAvatar,
     currentUsername,
@@ -47,6 +48,7 @@ function SideBar(props) {
             username={friend.name}
             avatar={friend.avatar}
             lastSeen={friend.lastSeen}
+            recentMessage={friend.recentMessage}
             onClick={() => showChathistory(friend)}
           />
         ))}

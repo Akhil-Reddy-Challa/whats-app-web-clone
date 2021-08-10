@@ -3,12 +3,20 @@ import "./Contact.css";
 import { Avatar } from "@material-ui/core";
 
 function Contact(props) {
-  const { username, onClick, avatar, lastSeen } = props;
+  // console.log(props);
+  const { username, onClick, avatar, lastSeen, recentMessage } = props;
   return (
     <div className="contact" onClick={onClick} tabIndex="1">
       <Avatar className="contact__avatar" src={avatar} />
-      <p className="contact__name">{username}</p>
-      <p className="contact__lastSeen">{lastSeen}</p>
+      <div className="contact__info">
+        <div className="topLayer">
+          <div className="name">{username}</div>
+          <div className="lastSeen">{lastSeen}</div>
+        </div>
+        <div className="lastMessage">
+          <p>{recentMessage}</p>
+        </div>
+      </div>
     </div>
   );
 }
