@@ -1,0 +1,38 @@
+.sidebar {
+  /* flex: 0; */
+  width: 30%;
+  height: 100%;
+  /* Makes the section fixed (disables scroll)*/
+  position: fixed;
+  left: 0;
+}
+.sidebar__userbio {
+  height: 10%;
+  background-color: #ededed;
+  display: flex;
+  flex-direction: row;
+  border-right: 1px solid lightgray;
+  /* padding: 0px; */
+  align-items: center;
+  min-height: 70px; /* Fallback height when the screensize is reduced */
+}
+.sidebar__userbio__shortCuts {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+}
+.storyIcon {
+  transition: transform 1s ease-in-out;
+  transform: rotate(-90deg);
+}
+.sidebar__chats {
+  height: 90%;
+  /* Makes only this section scrollable */
+  overflow: scroll;
+}
+.sidebar__avatar__username {
+  margin-top: 20px;
+}
+.sidebar__avatar {
+  margin: 10px;
+}

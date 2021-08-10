@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
-import Contact from "./Contact";
 import Chat from "./Chat";
 import BasePage from "./BasePage";
-import { Avatar, IconButton, Tooltip } from "@material-ui/core";
-import { DonutLarge, MoreVert, Add } from "@material-ui/icons";
 import NewChat from "./NewChat";
 import { db } from "../services/firebase";
+import SideBar from "./SideBar";
 
 const getUserDetails = () => {
   // Get data from session variable
@@ -103,46 +101,13 @@ function Home() {
   };
   return (
     <div className="home">
-      <div className="home__left">
-        <div className="home__left__userbio">
-          <Avatar className="home__left__avatar" src={userAvatar} />
-          <p className="home__left__avatar__username">{currentUsername}</p>
-          <div className="home__left__userbio__shortCuts">
-            <div className="storyIcon">
-              <Tooltip title="Displays Status">
-                <IconButton aria-label="storyIcon">
-                  <DonutLarge color="action" />
-                </IconButton>
-              </Tooltip>
-            </div>
-            <div className="newChatIcon">
-              <Tooltip title="Add New Chat">
-                <IconButton aria-label="newChatIcon" onClick={toggleNewChat}>
-                  <Add color="action" className="newChatIcon" />
-                </IconButton>
-              </Tooltip>
-            </div>
-            <div className="userInfoIcon">
-              <Tooltip title="Get Your Info">
-                <IconButton aria-label="userInfoIcon">
-                  <MoreVert color="action" className="userInfoIcon" />
-                </IconButton>
-              </Tooltip>
-            </div>
-          </div>
-        </div>
-        <div className="home__left__chats">
-          {friendsList.map((friend) => (
-            <Contact
-              key={friend.email}
-              username={friend.name}
-              avatar={friend.avatar}
-              lastSeen={friend.lastSeen}
-              onClick={() => getChatHistory(friend)}
-            />
-          ))}
-        </div>
-      </div>
+      <SideBar
+        userAvatar={userAvatar}
+        currentUsername={currentUsername}
+        createNewChat={toggleNewChat}
+        showChathistory={getChatHistory}
+        friendsList={friendsList}
+      />
       {newChatRequested && (
         <NewChat
           onClick={(e) => createNewChatRoom(e)}
