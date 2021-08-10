@@ -33,6 +33,7 @@ function Chat(props) {
   };
   const postMessage = (event) => {
     event.preventDefault();
+    if (message.trim().length === 0) return;
     // console.log("Postinggg...", message);
     const messageObj = {
       content: message,
