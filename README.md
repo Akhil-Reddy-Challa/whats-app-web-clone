@@ -6,7 +6,7 @@ Intentions behind this project are educational and to level-up my frontend skill
 
 Website URL: https://my-web-whatsapp.netlify.app/
 
-## Tech Stack:
+### Tech Stack:
 ReactJS (Front-end)  
 Material UI (React UI framework)  
 Firebase (Authentication & Server)  
