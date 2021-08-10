@@ -13,8 +13,8 @@ function Contact(props) {
           <div className="name">{username}</div>
           <div className="lastSeen">{lastSeen}</div>
         </div>
-        <div className="recentMessage">
-          <p>{recentMessage}</p>
+        <div className="recentMessageBox">
+          <p className="recentMessage">{recentMessage}</p>
         </div>
       </div>
     </div>
