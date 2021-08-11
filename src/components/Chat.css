@@ -46,6 +46,16 @@
   flex-direction: column;
   padding: 20px;
 }
+.chat__ground__loadingScreen {
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: white; */
+  font-size: small;
+}
+.progressbar__color {
+  color: #7acba5 !important;
+}
 .chat__message__body {
   display: flex;
   flex-direction: column;

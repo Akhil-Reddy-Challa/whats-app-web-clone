@@ -11,6 +11,7 @@ import {
 import { db } from "../services/firebase";
 import firebase from "firebase";
 import Picker from "emoji-picker-react";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 function Chat(props) {
   // console.log(props);
@@ -27,6 +28,7 @@ function Chat(props) {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [emojiBoard, setEmojiBoard] = useState(false);
+  const [loadingAnim, setLoadingAnim] = useState(false);
 
   const onEmojiClick = (event, emojiObject) => {
     setMessage(message.concat(emojiObject.emoji));
@@ -57,6 +59,11 @@ function Chat(props) {
   }, [messages]);
 
   useEffect(() => {
+    setLoadingAnim(true);
+    setMessages([]);
+    setTimeout(() => {
+      fetchRecords();
+    }, 1000);
     // Fetch chat history
     async function fetchRecords() {
       function getMiniTime(time) {
@@ -76,6 +83,7 @@ function Chat(props) {
         .doc(chatRoomID)
         .collection("messages")
         .orderBy("timestamp", "asc");
+
       msgsRef.onSnapshot((snap) => {
         const messages = snap.docs.map((doc) => {
           const data = {
@@ -88,9 +96,9 @@ function Chat(props) {
         });
         // console.log(messages);
         setMessages(messages);
+        setLoadingAnim(false);
       });
     }
-    fetchRecords();
   }, [friendEmail, chatRoomID]);
 
   return (
@@ -122,6 +130,11 @@ function Chat(props) {
       </header>
       {/* Header with avatar & name */}
       <div className="chat__ground">
+        {loadingAnim && (
+          <div className="chat__ground__loadingScreen">
+            <CircularProgress className="progressbar__color" />
+          </div>
+        )}
         {messages.map((message) => (
           <div key={message.msgID} className="chat__message__body">
             <p
