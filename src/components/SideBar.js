@@ -8,13 +8,23 @@ import { useHistory } from "react-router-dom";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import Backdrop from "@material-ui/core/Backdrop";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
+}));
 
 const handleLogout = (history) => {
-  console.log("Loggin out");
   sessionStorage.clear();
   history.push("/");
 };
 function SideBar(props) {
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
   const {
@@ -70,7 +80,7 @@ function SideBar(props) {
           >
             <List component="nav" aria-label="secondary mailbox folders">
               <ListItem button>
-                <ListItemText primary="Profile" />
+                <ListItemText primary="Profile" onClick={() => setOpen(true)} />
               </ListItem>
               <ListItem
                 button
@@ -81,6 +91,14 @@ function SideBar(props) {
               </ListItem>
             </List>
           </Popover>
+          <Backdrop
+            className={classes.backdrop}
+            open={open}
+            onClick={() => setOpen(false)}
+          >
+            <Avatar src={userAvatar} />
+            <p>{currentUsername}</p>
+          </Backdrop>
         </div>
       </div>
       <div className="sidebar__chats">
