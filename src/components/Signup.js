@@ -52,7 +52,7 @@ export default function Signup() {
       "teal",
       "yellow",
     ];
-    const randColor = colors[Math.floor(Math.random() * (colors.length + 1))];
+    const randColor = colors[Math.floor(Math.random() * colors.length)];
     const randColorLevel = Math.floor(1 + Math.random() * 9) * 100;
     const url = `https://avatars.dicebear.com/api/initials/${username}.svg?backgroundColors[]=${randColor}&bold=1&backgroundColorLevel=${randColorLevel}`;
     return url;
