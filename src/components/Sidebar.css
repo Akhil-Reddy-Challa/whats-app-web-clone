@@ -40,3 +40,43 @@
 .listExpander {
   margin-right: 100px !important;
 }
+
+.userInfo {
+  background-color: white;
+  margin-right: auto;
+  margin-bottom: auto;
+  width: 30% !important;
+  height: 100%;
+}
+.userInfo__header {
+  background-color: #01bfa5;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+}
+.userInfo__prevBtn {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.userInfo__text {
+  font-size: 19px;
+  color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.userInfo__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userInfo__avatar {
+  margin-top: 30px;
+  width: 100px;
+  height: 100px;
+}
+.userInfo__image {
+  border-radius: 50%;
+}
+.userInfo__username {
+  font-size: large;
+}

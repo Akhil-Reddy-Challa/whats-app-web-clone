@@ -10,11 +10,11 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Backdrop from "@material-ui/core/Backdrop";
 import { makeStyles } from "@material-ui/core/styles";
+import { ArrowBack } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: "#fff",
   },
 }));
 
@@ -24,8 +24,8 @@ const handleLogout = (history) => {
 };
 function SideBar(props) {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [userInfoPopup, setUserInfoPopup] = useState(false);
+  const [showShortcuts, setShowShortcuts] = useState(null);
   const history = useHistory();
   const {
     userAvatar,
@@ -58,17 +58,17 @@ function SideBar(props) {
             <Tooltip title="Get Your Info">
               <IconButton
                 aria-label="userInfoIcon"
-                onClick={(e) => setAnchorEl(e.currentTarget)}
+                onClick={(e) => setShowShortcuts(e.currentTarget)}
               >
                 <MoreVert color="action" className="userInfoIcon" />
               </IconButton>
             </Tooltip>
           </div>
           <Popover
-            open={Boolean(anchorEl)}
-            id={Boolean(anchorEl) ? "simple-popover" : undefined}
-            anchorEl={anchorEl}
-            onClose={() => setAnchorEl(null)}
+            open={Boolean(showShortcuts)}
+            id={Boolean(showShortcuts) ? "simple-popover" : undefined}
+            anchorEl={showShortcuts}
+            onClose={() => setShowShortcuts(null)}
             anchorOrigin={{
               vertical: "bottom",
               horizontal: "center",
@@ -80,7 +80,13 @@ function SideBar(props) {
           >
             <List component="nav" aria-label="secondary mailbox folders">
               <ListItem button>
-                <ListItemText primary="Profile" onClick={() => setOpen(true)} />
+                <ListItemText
+                  primary="Profile"
+                  onClick={() => {
+                    setUserInfoPopup(true);
+                    setShowShortcuts(null);
+                  }}
+                />
               </ListItem>
               <ListItem
                 button
@@ -91,13 +97,27 @@ function SideBar(props) {
               </ListItem>
             </List>
           </Popover>
-          <Backdrop
-            className={classes.backdrop}
-            open={open}
-            onClick={() => setOpen(false)}
-          >
-            <Avatar src={userAvatar} />
-            <p>{currentUsername}</p>
+          <Backdrop className={classes.backdrop} open={userInfoPopup}>
+            <div className="userInfo">
+              <div className="userInfo__header">
+                <div className="userInfo__prevBtn">
+                  <IconButton
+                    onClick={() => setUserInfoPopup(false)}
+                    aria-label="prevButton"
+                  >
+                    <ArrowBack style={{ color: "white" }} />
+                  </IconButton>
+                </div>
+                <div className="userInfo__text">Profile</div>
+              </div>
+              <div className="userInfo__body">
+                <div className="userInfo__avatar">
+                  <img className="userInfo__image" src={userAvatar} />
+                </div>
+                <p className="userInfo__username">Name: {currentUsername}</p>
+                <p className="totalChats">Total Chats: {friendsList?.length}</p>
+              </div>
+            </div>
           </Backdrop>
         </div>
       </div>
