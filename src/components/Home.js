@@ -30,14 +30,9 @@ function Home() {
   const [chatHistory, setChatHistory] = useState(null);
   const [newChatRequested, setNewChat] = useState(false);
   useEffect(() => {
-    async function fetchContacts() {
+    const usersData = {};
+    async function fetchChatProfiles() {
       const chatsRef = db.collection("chats");
-      const usersRef = db.collection("users");
-      const usersData = {};
-      // Fetch all users
-      const allUsers = await usersRef.get();
-      allUsers.forEach((user) => (usersData[user.id] = user.data()));
-      // Fetch all the chats
       chatsRef
         .where("users", "array-contains", currentUserEmail)
         .onSnapshot((snap) => {
@@ -60,9 +55,20 @@ function Home() {
           // Set user avatar
           setUserAvatar(usersData[currentUserEmail].avatar);
           // Render list of contacts on the sidebar
-          console.log(contacts);
+          // console.log(contacts);
           setFriendsList(contacts);
         });
+    }
+    async function fetchContacts() {
+      const usersRef = db.collection("users");
+
+      // Fetch all users
+      usersRef.onSnapshot((snap) => {
+        snap.forEach((user) => (usersData[user.id] = user.data()));
+        // console.log(usersData);
+        // Fetch all the chats
+        fetchChatProfiles();
+      });
     }
     fetchContacts();
   }, [currentUserEmail]);
