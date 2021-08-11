@@ -37,3 +37,6 @@
 .sidebar__avatar {
   margin: 10px;
 }
+.listExpander {
+  margin-right: 100px !important;
+}

@@ -1,10 +1,22 @@
+import React, { useState } from "react";
 import { Avatar, IconButton, Tooltip } from "@material-ui/core";
 import { DonutLarge, MoreVert, Add } from "@material-ui/icons";
+import Popover from "@material-ui/core/Popover";
 import Contact from "./Contact";
 import "./Sidebar.css";
+import { useHistory } from "react-router-dom";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
+const handleLogout = (history) => {
+  console.log("Loggin out");
+  sessionStorage.clear();
+  history.push("/");
+};
 function SideBar(props) {
-  // console.log(props);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const history = useHistory();
   const {
     userAvatar,
     currentUsername,
@@ -34,11 +46,41 @@ function SideBar(props) {
           </div>
           <div className="userInfoIcon">
             <Tooltip title="Get Your Info">
-              <IconButton aria-label="userInfoIcon">
+              <IconButton
+                aria-label="userInfoIcon"
+                onClick={(e) => setAnchorEl(e.currentTarget)}
+              >
                 <MoreVert color="action" className="userInfoIcon" />
               </IconButton>
             </Tooltip>
           </div>
+          <Popover
+            open={Boolean(anchorEl)}
+            id={Boolean(anchorEl) ? "simple-popover" : undefined}
+            anchorEl={anchorEl}
+            onClose={() => setAnchorEl(null)}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            <List component="nav" aria-label="secondary mailbox folders">
+              <ListItem button>
+                <ListItemText primary="Profile" />
+              </ListItem>
+              <ListItem
+                button
+                className="listExpander"
+                onClick={() => handleLogout(history)}
+              >
+                <ListItemText primary="Log Out" />
+              </ListItem>
+            </List>
+          </Popover>
         </div>
       </div>
       <div className="sidebar__chats">
