@@ -62,10 +62,10 @@ function Chat(props) {
     setLoadingAnim(true);
     setMessages([]);
     setTimeout(() => {
-      fetchRecords();
+      fetchMessages();
     }, 1000);
     // Fetch chat history
-    async function fetchRecords() {
+    async function fetchMessages() {
       function getMiniTime(time) {
         if (time) {
           const minifiedTime = time.toDate().toLocaleTimeString("en-US", {
@@ -189,7 +189,11 @@ function Chat(props) {
             />
             {message && (
               <IconButton aria-label="storyIcon">
-                <Send type="submit" className="chat__footer__messageSend" />
+                <Send
+                  type="submit"
+                  className="chat__footer__messageSend"
+                  onClick={postMessage}
+                />
               </IconButton>
             )}
           </form>
