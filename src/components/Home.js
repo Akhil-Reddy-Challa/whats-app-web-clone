@@ -7,21 +7,33 @@ import ChatArea from "./ChatArea";
 
 const getUserDetails = () => {
   // Get data from session variable
-  // console.log("Fetching from session");
   return [sessionStorage.getItem("username"), sessionStorage.getItem("email")];
 };
-const getMiniTime = (time) => {
-  // console.log(time);
-  if (time) {
-    const minifiedTime = time.toDate().toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const minifiedDate = time.toDate().toLocaleDateString();
-    const final = minifiedTime.concat(" ").concat(minifiedDate);
-    return final;
+const getRelativeTime = (timestamp) => {
+  const msPerMinute = 60 * 1000;
+  const msPerHour = msPerMinute * 60;
+  const msPerDay = msPerHour * 24;
+  const msPerMonth = msPerDay * 30;
+
+  let elapsed = Date.now() - timestamp.toMillis();
+
+  if (elapsed < msPerMinute) return Math.round(elapsed / 1000) + " seconds ago";
+  else if (elapsed < msPerHour)
+    return Math.round(elapsed / msPerMinute) + " minutes ago";
+  else if (elapsed < msPerDay)
+    return Math.round(elapsed / msPerHour) + " hours ago";
+  else if (elapsed < msPerMonth) {
+    const days = Math.round(elapsed / msPerDay);
+    if (days == 1) return "1 day ago";
+    else if (days < 7) return days + " days ago";
   }
-  return time;
+  const date = new Date(timestamp.toMillis());
+  const result = date.toLocaleDateString("en", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+  return result;
 };
 function Home() {
   const [currentUsername, currentUserEmail] = getUserDetails();
@@ -29,6 +41,7 @@ function Home() {
   const [friendsList, setFriendsList] = useState([]);
   const [chatHistory, setChatHistory] = useState(null);
   const [newChatRequested, setNewChat] = useState(false);
+
   useEffect(() => {
     const usersData = {};
     async function fetchChatProfiles() {
@@ -48,7 +61,9 @@ function Home() {
             contact["chatRoomID"] = conversation.id;
             contact["email"] = otherPerson;
             contact["avatar"] = usersData[otherPerson].avatar;
-            contact["lastSeen"] = getMiniTime(usersData[otherPerson].lastSeen);
+            contact["lastSeen"] = getRelativeTime(
+              usersData[otherPerson].lastSeen
+            );
             contact["recentMessage"] = recentMessage;
             contacts.push(contact);
           });
