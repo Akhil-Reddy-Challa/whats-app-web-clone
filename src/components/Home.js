@@ -24,7 +24,7 @@ const getRelativeTime = (timestamp) => {
     return Math.round(elapsed / msPerHour) + " hours ago";
   else if (elapsed < msPerMonth) {
     const days = Math.round(elapsed / msPerDay);
-    if (days == 1) return "1 day ago";
+    if (days === 1) return "1 day ago";
     else if (days < 7) return days + " days ago";
   }
   const date = new Date(timestamp.toMillis());

@@ -112,7 +112,11 @@ function SideBar(props) {
               </div>
               <div className="userInfo__body">
                 <div className="userInfo__avatar">
-                  <img className="userInfo__image" src={userAvatar} />
+                  <img
+                    className="userInfo__image"
+                    src={userAvatar}
+                    alt="User"
+                  />
                 </div>
                 <p className="userInfo__username">Name: {currentUsername}</p>
                 <p className="totalChats">Total Chats: {friendsList?.length}</p>
