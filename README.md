@@ -1,6 +1,6 @@
 # React WhatApp Web clone
 
-This project is a emulation of the website(https://web.whatsapp.com/)
+This project is an emulation of the website(https://web.whatsapp.com/)
 
 Intentions behind this project are educational and to level-up my frontend skills.
 
