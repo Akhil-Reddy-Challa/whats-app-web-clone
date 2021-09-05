@@ -43,11 +43,15 @@ function Chat(props) {
       senderID: email,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     };
-    const chatsRef = db.collection("chats");
+    const chatsRef = db.collection("chats").doc(chatRoomID);
     // Post the new message
-    chatsRef.doc(chatRoomID).collection("messages").add(messageObj);
+    chatsRef.collection("messages").add(messageObj);
     // Update the recent message
-    chatsRef.doc(chatRoomID).update({ recentMessage: message });
+    chatsRef.update({ recentMessage: message });
+    // Increment unread messages count
+    chatsRef.update({
+      unReadMessages: firebase.firestore.FieldValue.increment(1),
+    });
     setMessage("");
   };
   useEffect(() => {

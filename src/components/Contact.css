@@ -9,6 +9,9 @@
 .contact:focus {
   background-color: lightgray;
 }
+.unReadMessages {
+  font-weight: 600;
+}
 .contact__avatar {
   margin-left: 10px;
   margin-right: 10px;
@@ -35,11 +38,27 @@
   color: rgba(0, 0, 0, 0.45);
 }
 .recentMessageBox {
+  display: flex;
   font-size: 12px;
+  align-items: center;
   color: rgba(0, 0, 0, 0.6);
 }
 .recentMessage {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.unReadMessagesCount {
+  margin-left: auto;
+  margin-right: 10px;
+  background-color: rgb(6, 215, 85);
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+.unReadMessagesCount > p {
+  color: white;
+  margin-top: 5px;
+  font-weight: bold !important;
 }

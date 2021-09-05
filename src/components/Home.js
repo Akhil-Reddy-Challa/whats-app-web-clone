@@ -51,7 +51,11 @@ function Home() {
         .onSnapshot((snap) => {
           const contacts = [];
           snap.forEach((conversation) => {
-            const { users: usersInvolved, recentMessage } = conversation.data();
+            const {
+              users: usersInvolved,
+              recentMessage,
+              unReadMessages,
+            } = conversation.data();
             const otherPerson =
               usersInvolved[0] === currentUserEmail
                 ? usersInvolved[1]
@@ -65,6 +69,7 @@ function Home() {
               usersData[otherPerson].lastSeen
             );
             contact["recentMessage"] = recentMessage;
+            contact["unReadMessages"] = unReadMessages;
             contacts.push(contact);
           });
           // Set user avatar

@@ -133,6 +133,7 @@ function SideBar(props) {
             avatar={friend.avatar}
             lastSeen={friend.lastSeen}
             recentMessage={friend.recentMessage}
+            unReadMessagesCount={friend.unReadMessages}
             onClick={() => showChathistory(friend)}
           />
         ))}
