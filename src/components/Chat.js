@@ -66,10 +66,17 @@ function Chat(props) {
     setLoadingAnim(true);
     setMessages([]);
     setTimeout(() => {
+      clearUnReadMessagesCount();
       fetchMessages();
     }, 1000);
-    // Fetch chat history
-    async function fetchMessages() {
+    function clearUnReadMessagesCount() {
+      const chatsRef = db.collection("chats").doc(chatRoomID);
+      // Increment unread messages count
+      chatsRef.update({
+        unReadMessages: 0,
+      });
+    }
+    function fetchMessages() {
       function getMiniTime(time) {
         if (time) {
           const minifiedTime = time.toDate().toLocaleTimeString("en-US", {

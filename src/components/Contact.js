@@ -10,9 +10,10 @@ function Contact({
   recentMessage,
   unReadMessagesCount,
 }) {
+  const unReadMessagesExist = unReadMessagesCount > 0;
   return (
     <div
-      className={"contact ".concat(unReadMessagesCount ? "unReadMessages" : "")}
+      className={"contact ".concat(unReadMessagesExist ? "unReadMessages" : "")}
       onClick={onClick}
       tabIndex="1"
     >
@@ -24,7 +25,7 @@ function Contact({
         </div>
         <div className="recentMessageBox">
           <p className="recentMessage">{recentMessage}</p>
-          {unReadMessagesCount && (
+          {unReadMessagesExist && (
             <div className="unReadMessagesCount">
               <p>{unReadMessagesCount}</p>
             </div>
