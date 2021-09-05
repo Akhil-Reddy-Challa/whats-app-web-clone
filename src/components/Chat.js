@@ -207,12 +207,8 @@ function Chat(props) {
               }}
             />
             {message && (
-              <IconButton aria-label="storyIcon">
-                <Send
-                  type="submit"
-                  className="chat__footer__messageSend"
-                  onClick={postMessage}
-                />
+              <IconButton aria-label="storyIcon" onClick={postMessage}>
+                <Send type="submit" className="chat__footer__messageSend" />
               </IconButton>
             )}
           </form>
