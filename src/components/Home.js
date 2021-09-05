@@ -55,6 +55,7 @@ function Home() {
               users: usersInvolved,
               recentMessage,
               unReadMessages,
+              recentMessageSender,
             } = conversation.data();
             const otherPerson =
               usersInvolved[0] === currentUserEmail
@@ -70,6 +71,9 @@ function Home() {
             );
             contact["recentMessage"] = recentMessage;
             contact["unReadMessages"] = unReadMessages;
+            contact["recentMessageSender"] = !(
+              recentMessageSender === currentUserEmail
+            );
             contacts.push(contact);
           });
           // Set user avatar

@@ -8,9 +8,11 @@ function Contact({
   avatar,
   lastSeen,
   recentMessage,
+  isRecentMessageSender,
   unReadMessagesCount,
 }) {
-  const unReadMessagesExist = unReadMessagesCount > 0;
+  const unReadMessagesExist = isRecentMessageSender && unReadMessagesCount > 0;
+  //console.log("isRecentMessageSender", isRecentMessageSender);
   return (
     <div
       className={"contact ".concat(unReadMessagesExist ? "unReadMessages" : "")}

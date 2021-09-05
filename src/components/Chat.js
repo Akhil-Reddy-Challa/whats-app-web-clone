@@ -52,30 +52,38 @@ function Chat(props) {
     chatsRef.update({
       unReadMessages: firebase.firestore.FieldValue.increment(1),
     });
+    // Set Recent message sender
+    chatsRef.update({
+      recentMessageSender: email,
+    });
     setMessage("");
+  };
+  const clearUnReadMessagesCount = () => {
+    const chatsRef = db.collection("chats").doc(chatRoomID);
+    // Increment unread messages count
+    chatsRef.update({
+      unReadMessages: 0,
+    });
   };
   useEffect(() => {
     const scrollToBottom = () => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
     scrollToBottom();
-    // setMessages(messages);
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage?.senderID === friendEmail) {
+      clearUnReadMessagesCount();
+    }
   }, [messages]);
 
   useEffect(() => {
     setLoadingAnim(true);
+    // Reset messages queue
     setMessages([]);
     setTimeout(() => {
       clearUnReadMessagesCount();
       fetchMessages();
     }, 1000);
-    function clearUnReadMessagesCount() {
-      const chatsRef = db.collection("chats").doc(chatRoomID);
-      // Increment unread messages count
-      chatsRef.update({
-        unReadMessages: 0,
-      });
-    }
     function fetchMessages() {
       function getMiniTime(time) {
         if (time) {
