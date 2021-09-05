@@ -7,7 +7,7 @@
 }
 .contact:hover,
 .contact:focus {
-  background-color: lightgray;
+  background-color: #eeecec;
 }
 .unReadMessages {
   font-weight: 600;
@@ -18,7 +18,7 @@
 }
 .contact__info {
   flex: 1;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid #eeecec;
   display: flex;
   flex-direction: column;
   max-width: 100%;
