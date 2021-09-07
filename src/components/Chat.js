@@ -12,7 +12,7 @@ import { db } from "../services/firebase";
 import firebase from "firebase";
 import Picker from "emoji-picker-react";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
+import { useCallback } from "react";
 function Chat(props) {
   const { email } = props;
   const {
@@ -56,13 +56,13 @@ function Chat(props) {
     });
     setMessage("");
   };
-  const clearUnReadMessagesCount = () => {
+  const clearUnReadMessagesCount = useCallback(() => {
     const chatsRef = db.collection("chats").doc(chatRoomID);
-    // Increment unread messages count
+    // Reset unread messages count
     chatsRef.update({
       unReadMessages: 0,
     });
-  };
+  }, [chatRoomID]);
   useEffect(() => {
     const scrollToBottom = () => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -72,7 +72,7 @@ function Chat(props) {
     if (lastMessage?.senderID === friendEmail) {
       clearUnReadMessagesCount();
     }
-  }, [messages]);
+  }, [clearUnReadMessagesCount, messages, friendEmail]);
 
   useEffect(() => {
     setLoadingAnim(true);
@@ -116,7 +116,7 @@ function Chat(props) {
         setLoadingAnim(false);
       });
     }
-  }, [friendEmail, chatRoomID]);
+  }, [friendEmail, chatRoomID, clearUnReadMessagesCount]);
 
   return (
     <div className="chat">

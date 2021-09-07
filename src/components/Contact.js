@@ -37,11 +37,7 @@ function Contact({
       onClick={onClick}
       tabIndex="1"
     >
-      <Avatar
-        className="contact__avatar"
-        src={avatar}
-        className={classes.large}
-      />
+      <Avatar src={avatar} className={classes.large} />
       <table className="contact__information">
         <tbody>
           <tr>
