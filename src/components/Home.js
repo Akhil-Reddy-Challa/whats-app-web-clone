@@ -97,7 +97,6 @@ function Home() {
     fetchContacts();
   }, [currentUserEmail]);
   const getChatHistory = (friend) => {
-    // console.log("Fetching chat history of", friend);
     setChatHistory(friend);
   };
   const toggleNewChat = () => {

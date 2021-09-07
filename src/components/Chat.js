@@ -14,7 +14,6 @@ import Picker from "emoji-picker-react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 function Chat(props) {
-  // console.log(props);
   const { email } = props;
   const {
     name: friendName,
@@ -23,7 +22,6 @@ function Chat(props) {
     avatar,
     lastSeen,
   } = props.friendInfo;
-  // console.log(friendName, friendEmail);
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);

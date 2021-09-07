@@ -9,7 +9,6 @@ function Login() {
   const [password, setPassword] = useState("");
   const history = useHistory();
   const handleLogin = (event) => {
-    // console.log("Checking", email, password);
     event.preventDefault();
     auth
       .signInWithEmailAndPassword(email, password)
@@ -27,7 +26,6 @@ function Login() {
       .catch((err) => alert(err.message));
   };
   const setAuthToken = (name) => {
-    // console.log("creating token: ", data);
     sessionStorage.setItem("user_token_created_on", new Date());
     sessionStorage.setItem("username", name);
     sessionStorage.setItem("email", email);

@@ -28,7 +28,6 @@ function Contact({
   unReadMessagesCount,
 }) {
   const unReadMessagesExist = isRecentMessageSender && unReadMessagesCount > 0;
-  //console.log("isRecentMessageSender", isRecentMessageSender);
   const classes = useStyles();
   return (
     <div

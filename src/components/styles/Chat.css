@@ -1,14 +1,11 @@
 .chat {
   display: flex;
   flex-direction: column;
-  /* width: 100%; */
   height: 100%;
 }
 .chat__header {
   background-color: #ededed;
-  /* height: 12.8%; */
   height: 10%;
-  /* border-left: 1px solid lightgray; */
   display: flex; /* Throws every html element in a row */
   align-items: center;
   min-height: 70px; /* Fallback height when the screensize is reduced */
@@ -39,8 +36,6 @@
 .chat__ground {
   flex: 1; /* Gives max space for this block */
   overflow: scroll;
-  /* background-color: rgb(174, 216, 199); */
-  /* background-color: rgb(122, 203, 165); */
   background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
   display: flex;
   flex-direction: column;
@@ -50,7 +45,6 @@
   margin-top: auto;
   margin-left: auto;
   margin-right: auto;
-  /* background-color: white; */
   font-size: small;
 }
 .progressbar__color {
@@ -102,7 +96,6 @@
 }
 .chat__footer__messageInput {
   flex: 1;
-  /* border: none; */
   border-radius: 50px;
   padding: 10px;
   border: 1px solid lightgray;
