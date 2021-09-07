@@ -125,6 +125,7 @@ function SideBar(props) {
           </Backdrop>
         </div>
       </div>
+
       <div className="sidebar__chats">
         {friendsList.map((friend) => (
           <Contact
