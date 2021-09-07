@@ -3,7 +3,7 @@ import { Avatar, IconButton, Tooltip } from "@material-ui/core";
 import { DonutLarge, MoreVert, Add } from "@material-ui/icons";
 import Popover from "@material-ui/core/Popover";
 import Contact from "./Contact";
-import "./Sidebar.css";
+import "./styles/Sidebar.css";
 import { useHistory } from "react-router-dom";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";

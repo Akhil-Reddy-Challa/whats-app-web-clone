@@ -1,5 +1,5 @@
 import React from "react";
-import "./ChatPlayGround.css";
+import "./styles/ChatPlayGround.css";
 
 function ChatPlayGround(props) {
   const { chatHistory } = props;

@@ -1,5 +1,5 @@
 import React from "react";
-import "./BasePage.css";
+import "./styles/BasePage.css";
 
 function BasePage(props) {
   const { username } = props;

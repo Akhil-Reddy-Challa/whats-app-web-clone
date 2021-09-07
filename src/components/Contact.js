@@ -1,5 +1,5 @@
 import React from "react";
-import "./Contact.css";
+import "./styles/Contact.css";
 import { Avatar } from "@material-ui/core";
 
 function Contact({
