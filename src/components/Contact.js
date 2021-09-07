@@ -2,17 +2,22 @@ import React from "react";
 import "./styles/Contact.css";
 import { Avatar } from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   badge: {
     backgroundColor: "rgb(6, 215, 85)",
-    marginRight: "20px",
+    marginRight: "10px",
     fontWeight: "bold",
     color: "white",
+    marginTop: "-7px",
+  },
+  large: {
+    margin: "10px 15px 0px 13px",
+    width: theme.spacing(6),
+    height: theme.spacing(6),
   },
 }));
-
 function Contact({
   username,
   onClick,
@@ -27,25 +32,47 @@ function Contact({
   const classes = useStyles();
   return (
     <div
-      className={"contact ".concat(unReadMessagesExist ? "unReadMessages" : "")}
+      className={"contact ".concat(
+        unReadMessagesExist ? "contact__when__unReadMessagesExist" : ""
+      )}
       onClick={onClick}
       tabIndex="1"
     >
-      <Avatar className="contact__avatar" src={avatar} />
+      <Avatar
+        className="contact__avatar"
+        src={avatar}
+        className={classes.large}
+      />
       <table className="contact__information">
         <tbody>
           <tr>
             <td colSpan="2" className="contact__name textWrap">
               {username}
             </td>
-            <td className="contact__lastSeen">{lastSeen}</td>
+            <td
+              className={"contact__lastSeen textWrap ".concat(
+                unReadMessagesExist
+                  ? "contact__lastSeen__when__unreadMessage"
+                  : ""
+              )}
+            >
+              {lastSeen}
+            </td>
           </tr>
+
           <tr className="secondRow">
-            <td colSpan="2" className="recentMessage textWrap">
+            <td
+              colSpan="2"
+              className={"contact__recentMessage textWrap ".concat(
+                unReadMessagesExist
+                  ? "contact__recentMessage__when__unreadMessage"
+                  : ""
+              )}
+            >
               {recentMessage}
             </td>
             {unReadMessagesExist && (
-              <td className="unReadMessagesCount">
+              <td className="contact__unReadMessagesCount">
                 <Badge
                   classes={{ badge: classes.badge }}
                   badgeContent={unReadMessagesCount}

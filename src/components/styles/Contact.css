@@ -1,26 +1,18 @@
 .contact {
   cursor: pointer;
   display: flex;
-  align-items: center;
   margin-bottom: 1px;
 }
 .contact:hover,
 .contact:focus {
   background-color: #eeecec;
 }
-.unReadMessages {
-  font-weight: 600;
+
+.contact__when__unReadMessagesExist {
+  font-weight: 500;
 }
-.contact__avatar {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-/* table,
-td {
-  border: 1px solid rgb(20, 218, 80);
-} */
 .contact__information {
-  padding: 7px 10px 7px 0;
+  padding: 9px 10px 7px 0;
   border-bottom: 1px solid #eeecec;
   width: 100%;
   /* Prevents table from overflowing when text is long */
@@ -34,15 +26,22 @@ td {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.45);
 }
-.secondRow {
-  height: 29px;
+.contact__lastSeen__when__unreadMessage {
+  color: rgba(0, 0, 0, 0.8);
 }
-.recentMessage {
+.contact__recentMessage {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.6);
 }
-.unReadMessagesCount {
+.contact__recentMessage__when__unreadMessage {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+}
+.contact__unReadMessagesCount {
   text-align: right;
+}
+.secondRow {
+  height: 29px;
 }
 .textWrap {
   overflow: hidden;
