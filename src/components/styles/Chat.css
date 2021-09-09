@@ -53,7 +53,7 @@
 .chat__message__body {
   display: flex;
   flex-direction: column;
-  margin-bottom: -20px; /* For decreasing margin between two message boxes */
+  margin-bottom: 5px;
 }
 .chat__message {
   width: fit-content;
@@ -63,11 +63,11 @@
   font-size: 14.5px;
   font-weight: 420;
 }
-.chat__sender {
+.sender__message {
   margin-left: auto;
   background-color: #dbf8c6;
 }
-.chat__reciever {
+.currentuser__message {
   background-color: white;
 }
 .chat__message__timestamp {

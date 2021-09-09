@@ -14,7 +14,7 @@ import Picker from "emoji-picker-react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useCallback } from "react";
 function Chat(props) {
-  const { email } = props;
+  const { email: currentUserEmail } = props;
   const {
     name: friendName,
     email: friendEmail,
@@ -38,7 +38,7 @@ function Chat(props) {
 
     const messageObj = {
       content: message,
-      senderID: email,
+      senderID: currentUserEmail,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     };
     const chatsRef = db.collection("chats").doc(chatRoomID);
@@ -52,7 +52,7 @@ function Chat(props) {
     });
     // Set Recent message sender
     chatsRef.update({
-      recentMessageSender: email,
+      recentMessageSender: currentUserEmail,
     });
     setMessage("");
   };
@@ -111,7 +111,6 @@ function Chat(props) {
           };
           return data;
         });
-        // console.log(messages);
         setMessages(messages);
         setLoadingAnim(false);
       });
@@ -154,18 +153,18 @@ function Chat(props) {
         )}
         {messages.map((message) => (
           <div key={message.msgID} className="chat__message__body">
-            <p
-              className={
-                message.senderID === friendEmail
-                  ? "chat__message chat__reciever"
-                  : "chat__message chat__sender"
-              }
+            <div
+              className={"chat__message ".concat(
+                message.senderID === currentUserEmail
+                  ? "sender__message"
+                  : "currentuser__message"
+              )}
             >
               {message.content}
               <span className="chat__message__timestamp">
                 {message.timestamp}
               </span>
-            </p>
+            </div>
           </div>
         ))}
         {emojiBoard && (
