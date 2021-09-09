@@ -122,9 +122,8 @@ function Home() {
       const chatsRef = db.collection("chats");
       await chatsRef.add({
         users: [currentUserEmail, email],
-        recentMessage: "Recent most message would pop-up here!",
+        recentMessage: "",
       });
-      // getChatHistory({ UID, name });
       toggleNewChat();
     } catch (err) {
       console.log(err);
