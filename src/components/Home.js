@@ -44,42 +44,43 @@ function Home() {
 
   useEffect(() => {
     const usersData = {};
+    function extractUserData(chat) {
+      const contact = {};
+      const {
+        users: usersInvolved,
+        recentMessage,
+        unReadMessages,
+        recentMessageSender,
+      } = chat.data();
+      const otherPerson =
+        usersInvolved[0] === currentUserEmail
+          ? usersInvolved[1]
+          : usersInvolved[0];
+      contact["name"] = usersData[otherPerson].name;
+      contact["chatRoomID"] = chat.id;
+      contact["email"] = otherPerson;
+      contact["avatar"] = usersData[otherPerson].avatar;
+      contact["lastSeen"] = getRelativeTime(
+        usersData[otherPerson].lastSeen.toMillis()
+      );
+      contact["recentMessage"] = recentMessage;
+      contact["unReadMessages"] = unReadMessages;
+      contact["recentMessageSender"] = !(
+        recentMessageSender === currentUserEmail
+      );
+      return contact;
+    }
     async function fetchChatProfiles() {
       const chatsRef = db.collection("chats");
       chatsRef
         .where("users", "array-contains", currentUserEmail)
-        .onSnapshot((snap) => {
+        .onSnapshot((chats) => {
           const contacts = [];
-          snap.forEach((conversation) => {
-            const {
-              users: usersInvolved,
-              recentMessage,
-              unReadMessages,
-              recentMessageSender,
-            } = conversation.data();
-            const otherPerson =
-              usersInvolved[0] === currentUserEmail
-                ? usersInvolved[1]
-                : usersInvolved[0];
-            const contact = {};
-            contact["name"] = usersData[otherPerson].name;
-            contact["chatRoomID"] = conversation.id;
-            contact["email"] = otherPerson;
-            contact["avatar"] = usersData[otherPerson].avatar;
-            contact["lastSeen"] = getRelativeTime(
-              usersData[otherPerson].lastSeen.toMillis()
-            );
-            contact["recentMessage"] = recentMessage;
-            contact["unReadMessages"] = unReadMessages;
-            contact["recentMessageSender"] = !(
-              recentMessageSender === currentUserEmail
-            );
+          chats.forEach((chat) => {
+            const contact = extractUserData(chat);
             contacts.push(contact);
           });
-          // Set user avatar
           setUserAvatar(usersData[currentUserEmail].avatar);
-          // Render list of contacts on the sidebar
-          // console.log(contacts);
           setFriendsList(contacts);
         });
     }
