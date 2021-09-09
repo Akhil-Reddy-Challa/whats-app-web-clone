@@ -209,9 +209,7 @@ function Chat(props) {
       </div>
 
       {emojiBoard && (
-        <div className="emojiBoard">
-          <Picker pickerStyle={{ width: "100%" }} onEmojiClick={onEmojiClick} />
-        </div>
+        <Picker pickerStyle={{ width: "100%" }} onEmojiClick={onEmojiClick} />
       )}
 
       <div className="footer">
