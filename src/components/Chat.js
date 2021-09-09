@@ -119,6 +119,7 @@ function Chat(props) {
 
   return (
     <div className="chat">
+      <div className="chat__background__image"></div>
       <header className="chat__header">
         <Avatar
           className="chat__header__avatar"
@@ -148,7 +149,11 @@ function Chat(props) {
       <div className="chat__ground">
         {loadingAnim && (
           <div className="chat__ground__loadingScreen">
-            <CircularProgress className="progressbar__color" />
+            <CircularProgress
+              size="20px"
+              thickness="5.6"
+              className="progressbar__color"
+            />
           </div>
         )}
         {messages.map((message) => (

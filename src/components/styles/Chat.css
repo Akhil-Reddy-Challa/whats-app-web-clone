@@ -4,9 +4,10 @@
   height: 100%;
 }
 .chat__header {
+  position: relative; /* This sticks out the header upon bg-image usage in chat__background__image */
   background-color: #ededed;
   height: 10%;
-  display: flex; /* Throws every html element in a row */
+  display: flex;
   align-items: center;
   min-height: 70px; /* Fallback height when the screensize is reduced */
 }
@@ -35,22 +36,36 @@
 }
 .chat__ground {
   flex: 1; /* Gives max space for this block */
+  background-color: #7acba5;
   overflow: scroll;
-  background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
   display: flex;
   flex-direction: column;
   padding: 15px 10% 15px 10%; /* Gives whatsapp like feel */
 }
+.chat__background__image {
+  position: absolute;
+  background-size: 412.5px 749.25px;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/whatsapp-web-8a56f.appspot.com/o/whatsapp_doddles.png?alt=media&token=3f50f857-1a49-4bde-b2c7-1deba9fd251f");
+  background-repeat: repeat;
+  opacity: 0.46;
+}
 .chat__ground__loadingScreen {
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: small;
+  width: fit-content;
+  height: fit-content;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 50%;
+  margin: auto auto 0 auto;
 }
 .progressbar__color {
   color: #7acba5 !important;
 }
 .chat__message__body {
+  position: relative; /* This sticks out the header upon bg-image usage in chat__background__image */
   display: flex;
   margin-bottom: 4px;
 }
@@ -90,6 +105,7 @@
   margin: 10px 0 -10px 7px;
 }
 .chat__footer {
+  position: relative; /* This sticks out the header upon bg-image usage in chat__background__image */
   background-color: #f0f0f0;
   height: 10%;
   display: flex;
