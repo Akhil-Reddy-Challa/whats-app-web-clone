@@ -18,6 +18,32 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(6),
   },
 }));
+const getRelativeTime = (timestamp) => {
+  const msPerMinute = 60 * 1000;
+  const msPerHour = msPerMinute * 60;
+  const msPerDay = msPerHour * 24;
+  const msPerMonth = msPerDay * 30;
+
+  let elapsed = Date.now() - timestamp;
+
+  if (elapsed < msPerMinute) return Math.round(elapsed / 1000) + " seconds ago";
+  else if (elapsed < msPerHour)
+    return Math.round(elapsed / msPerMinute) + " minutes ago";
+  else if (elapsed < msPerDay)
+    return Math.round(elapsed / msPerHour) + " hours ago";
+  else if (elapsed < msPerMonth) {
+    const days = Math.round(elapsed / msPerDay);
+    if (days === 1) return "1 day ago";
+    else if (days < 7) return days + " days ago";
+  }
+  const date = new Date(timestamp);
+  const result = date.toLocaleDateString("en", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+  return result;
+};
 function Contact({
   username,
   onClick,
@@ -28,6 +54,7 @@ function Contact({
   unReadMessagesCount,
 }) {
   const unReadMessagesExist = isRecentMessageSender && unReadMessagesCount > 0;
+  lastSeen = getRelativeTime(lastSeen);
   const classes = useStyles();
   return (
     <div

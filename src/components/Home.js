@@ -9,32 +9,6 @@ const getUserDetails = () => {
   // Get data from session variable
   return [sessionStorage.getItem("username"), sessionStorage.getItem("email")];
 };
-const getRelativeTime = (timestamp) => {
-  const msPerMinute = 60 * 1000;
-  const msPerHour = msPerMinute * 60;
-  const msPerDay = msPerHour * 24;
-  const msPerMonth = msPerDay * 30;
-
-  let elapsed = Date.now() - timestamp.toMillis();
-
-  if (elapsed < msPerMinute) return Math.round(elapsed / 1000) + " seconds ago";
-  else if (elapsed < msPerHour)
-    return Math.round(elapsed / msPerMinute) + " minutes ago";
-  else if (elapsed < msPerDay)
-    return Math.round(elapsed / msPerHour) + " hours ago";
-  else if (elapsed < msPerMonth) {
-    const days = Math.round(elapsed / msPerDay);
-    if (days === 1) return "1 day ago";
-    else if (days < 7) return days + " days ago";
-  }
-  const date = new Date(timestamp.toMillis());
-  const result = date.toLocaleDateString("en", {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-  });
-  return result;
-};
 function Home() {
   const [currentUsername, currentUserEmail] = getUserDetails();
   const [userAvatar, setUserAvatar] = useState("");
@@ -66,9 +40,7 @@ function Home() {
             contact["chatRoomID"] = conversation.id;
             contact["email"] = otherPerson;
             contact["avatar"] = usersData[otherPerson].avatar;
-            contact["lastSeen"] = getRelativeTime(
-              usersData[otherPerson].lastSeen
-            );
+            contact["lastSeen"] = usersData[otherPerson].lastSeen.toMillis();
             contact["recentMessage"] = recentMessage;
             contact["unReadMessages"] = unReadMessages;
             contact["recentMessageSender"] = !(
