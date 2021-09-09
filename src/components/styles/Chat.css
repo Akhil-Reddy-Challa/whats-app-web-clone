@@ -39,7 +39,7 @@
   background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 15px 10% 15px 10%; /* Gives whatsapp like feel */
 }
 .chat__ground__loadingScreen {
   margin-top: auto;
@@ -88,9 +88,6 @@
   color: gray;
   float: right; /* Makes the time stamp respond to margin */
   margin: 10px 0 -10px 7px;
-}
-.emojiBoard {
-  width: fit-content;
 }
 .chat__footer {
   background-color: #f0f0f0;

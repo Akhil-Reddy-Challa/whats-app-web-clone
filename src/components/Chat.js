@@ -144,7 +144,7 @@ function Chat(props) {
           </Tooltip>
         </div>
       </header>
-      {/* Header with avatar & name */}
+
       <div className="chat__ground">
         {loadingAnim && (
           <div className="chat__ground__loadingScreen">
@@ -204,15 +204,15 @@ function Chat(props) {
             )}
           </div>
         ))}
-        {emojiBoard && (
-          <div className="emojiBoard">
-            <Picker onEmojiClick={onEmojiClick} />
-          </div>
-        )}
         {/* Responsible for showing the recent most message */}
         <div ref={messagesEndRef} />
       </div>
-      {/* Chat history block */}
+
+      {emojiBoard && (
+        <div className="emojiBoard">
+          <Picker pickerStyle={{ width: "100%" }} onEmojiClick={onEmojiClick} />
+        </div>
+      )}
 
       <div className="footer">
         <footer>
@@ -248,7 +248,6 @@ function Chat(props) {
           </form>
         </footer>
       </div>
-      {/* Footer with text box & send btn */}
     </div>
   );
 }
