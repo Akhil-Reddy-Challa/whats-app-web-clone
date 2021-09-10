@@ -1,0 +1,40 @@
+.message__box {
+  position: relative; /* This sticks out the header upon bg-image usage in chat__background__image */
+  display: flex;
+  margin-bottom: 4px;
+}
+.message {
+  width: fit-content;
+  max-width: 50%; /* Used to wrap the message if the content is too long*/
+  padding: 10px;
+  font-size: 14.2px;
+  font-weight: 400;
+  font-family: "SF Pro Text", "SF Pro Icons", system, -apple-system, system-ui,
+    system-ui, "Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+    "Kohinoor Devanagari", sans-serif !important;
+}
+.incoming__message {
+  background-color: white;
+  border-radius: 0 7.5px 7.5px 7.5px;
+}
+.incoming__message__tail {
+  margin-top: -2px;
+  color: white;
+}
+.outgoing__message {
+  margin-left: auto;
+  background-color: #dbf8c6;
+  border-radius: 7.5px 0 7.5px 7.5px;
+}
+.outgoing__message__tail {
+  color: #dbf8c6;
+  margin-top: -2px;
+}
+.message__timestamp {
+  /* background-color: yellow; */
+  font-size: x-small;
+  font-weight: 50;
+  color: gray;
+  float: right; /* Makes the time stamp respond to margin */
+  margin: 10px 0 -10px 7px;
+}

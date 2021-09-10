@@ -3,6 +3,15 @@
   flex-direction: column;
   height: 100%;
 }
+.chat__background__image {
+  position: absolute;
+  background-size: 412.5px 749.25px;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/whatsapp-web-8a56f.appspot.com/o/whatsapp_doddles.png?alt=media&token=3f50f857-1a49-4bde-b2c7-1deba9fd251f");
+  background-repeat: repeat;
+  opacity: 0.46;
+}
 .chat__header {
   position: relative; /* This sticks out the header upon bg-image usage in chat__background__image */
   background-color: #ededed;
@@ -42,15 +51,7 @@
   flex-direction: column;
   padding: 15px 10% 15px 10%; /* Gives whatsapp like feel */
 }
-.chat__background__image {
-  position: absolute;
-  background-size: 412.5px 749.25px;
-  width: 100%;
-  height: 100%;
-  background-image: url("https://firebasestorage.googleapis.com/v0/b/whatsapp-web-8a56f.appspot.com/o/whatsapp_doddles.png?alt=media&token=3f50f857-1a49-4bde-b2c7-1deba9fd251f");
-  background-repeat: repeat;
-  opacity: 0.46;
-}
+
 .chat__ground__loadingScreen {
   width: fit-content;
   height: fit-content;
@@ -63,46 +64,6 @@
 }
 .progressbar__color {
   color: #7acba5 !important;
-}
-.chat__message__body {
-  position: relative; /* This sticks out the header upon bg-image usage in chat__background__image */
-  display: flex;
-  margin-bottom: 4px;
-}
-.chat__message {
-  width: fit-content;
-  max-width: 50%; /* Used to wrap the message if the content is too long*/
-  padding: 10px;
-  font-size: 14.2px;
-  font-weight: 400;
-  font-family: "SF Pro Text", "SF Pro Icons", system, -apple-system, system-ui,
-    system-ui, "Helvetica Neue", Helvetica, Arial, "Lucida Grande",
-    "Kohinoor Devanagari", sans-serif !important;
-}
-.sender__message {
-  background-color: white;
-  border-radius: 0 7.5px 7.5px 7.5px;
-}
-.sender__message__tail {
-  margin-top: -2px;
-  color: white;
-}
-.currentuser__message {
-  margin-left: auto;
-  background-color: #dbf8c6;
-  border-radius: 7.5px 0 7.5px 7.5px;
-}
-.currentuser__message__tail {
-  color: #dbf8c6;
-  margin-top: -2px;
-}
-.chat__message__timestamp {
-  /* background-color: yellow; */
-  font-size: x-small;
-  font-weight: 50;
-  color: gray;
-  float: right; /* Makes the time stamp respond to margin */
-  margin: 10px 0 -10px 7px;
 }
 .chat__footer {
   position: relative; /* This sticks out the header upon bg-image usage in chat__background__image */
