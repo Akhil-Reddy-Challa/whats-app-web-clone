@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Contact from "./Contact";
+import GlobalState from "../contexts/GlobalState";
 import "./styles/Sidebar.css";
 import {
   List,
@@ -39,7 +40,8 @@ function SideBar({
   const [userInfoPopup, setUserInfoPopup] = React.useState(false);
   const [showShortcuts, setShowShortcuts] = React.useState(null);
   const [userSearchText, setUserSearchText] = React.useState("");
-  const [isNightThemeToggled, setIsNightThemeToggled] = React.useState(false);
+  const [isNightThemeToggled, setNightThemeToggle] =
+    React.useState(GlobalState);
   const history = useHistory();
   return (
     <div className="sidebar">
@@ -50,7 +52,7 @@ function SideBar({
           <div className="dayAndNightModeToggler">
             <Tooltip title="Toggle Day/Night Mode">
               <IconButton
-                onClick={() => setIsNightThemeToggled(!isNightThemeToggled)}
+                onClick={() => setNightThemeToggle(!isNightThemeToggled)}
               >
                 {isNightThemeToggled ? (
                   <BrightnessHighIcon style={{ color: "rgb(177, 179, 181)" }} />

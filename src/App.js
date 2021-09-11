@@ -8,19 +8,23 @@ import {
 
 import Landing from "./components/Landing";
 import Home from "./components/Home";
+import GlobalState from "./contexts/GlobalState";
 
 const App = () => {
   const checkForAuthToken = () => {
     const tokenExists = sessionStorage.getItem("user_token_created_on");
     return tokenExists ? <Home /> : <Redirect to="/login" />;
   };
+  const [isNightThemeToggled, setNightThemeToggle] = React.useState(false);
   return (
-    <Router>
-      <Switch>
-        <Route path="/home" component={() => checkForAuthToken()}></Route>
-        <Route path="/" render={Landing}></Route>
-      </Switch>
-    </Router>
+    <GlobalState.Provider value={[isNightThemeToggled, setNightThemeToggle]}>
+      <Router>
+        <Switch>
+          <Route path="/home" component={() => checkForAuthToken()}></Route>
+          <Route path="/" render={Landing}></Route>
+        </Switch>
+      </Router>
+    </GlobalState.Provider>
   );
 };
 export default App;
