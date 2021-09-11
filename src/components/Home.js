@@ -4,6 +4,7 @@ import NewChat from "./NewChat";
 import { db } from "../services/firebase";
 import SideBar from "./SideBar";
 import ChatArea from "./ChatArea";
+import "animate.css";
 
 const getUserDetails = () => {
   // Get data from session variable

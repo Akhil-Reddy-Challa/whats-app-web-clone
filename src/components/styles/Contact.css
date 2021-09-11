@@ -2,12 +2,13 @@
   cursor: pointer;
   display: flex;
   margin-bottom: 1px;
+  animation: lightSpeedInLeft;
+  animation-duration: 0.5s;
 }
 .contact:hover,
 .contact:focus {
   background-color: #eeecec;
 }
-
 .contact__when__unReadMessagesExist {
   font-weight: 500;
 }

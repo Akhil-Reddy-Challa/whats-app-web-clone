@@ -12,7 +12,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import { makeStyles } from "@material-ui/core/styles";
 import { ArrowBack } from "@material-ui/icons";
 import SearchIcon from "@material-ui/icons/Search";
-import "animate.css";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -142,7 +141,6 @@ function SideBar({
               fontSize="small"
             />
           )}
-
           <input
             type="search"
             name="searchBox"
