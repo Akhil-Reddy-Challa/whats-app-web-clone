@@ -11,6 +11,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Backdrop from "@material-ui/core/Backdrop";
 import { makeStyles } from "@material-ui/core/styles";
 import { ArrowBack } from "@material-ui/icons";
+import SearchIcon from "@material-ui/icons/Search";
+import "animate.css";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -22,18 +24,18 @@ const handleLogout = (history) => {
   sessionStorage.clear();
   history.push("/");
 };
-function SideBar(props) {
+function SideBar({
+  userAvatar,
+  currentUsername,
+  friendsList,
+  createNewChat,
+  showChathistory,
+}) {
   const classes = useStyles();
   const [userInfoPopup, setUserInfoPopup] = useState(false);
   const [showShortcuts, setShowShortcuts] = useState(null);
+  const [userSearchText, setUserSearchText] = useState("");
   const history = useHistory();
-  const {
-    userAvatar,
-    currentUsername,
-    friendsList,
-    createNewChat,
-    showChathistory,
-  } = props;
   return (
     <div className="sidebar">
       <div className="sidebar__userbio">
@@ -123,6 +125,32 @@ function SideBar(props) {
               </div>
             </div>
           </Backdrop>
+        </div>
+      </div>
+
+      <div className="sidebar__searchArea">
+        <div className="searchBox__wrapper">
+          {userSearchText.length === 0 ? (
+            <SearchIcon
+              className="searchIcon animate__animated animate__backInLeft"
+              fontSize="small"
+            />
+          ) : (
+            <ArrowBack
+              onClick={() => setUserSearchText("")}
+              className="arrowBack animate__animated animate__backInLeft"
+              fontSize="small"
+            />
+          )}
+
+          <input
+            type="search"
+            name="searchBox"
+            className="searchBox"
+            value={userSearchText}
+            onChange={(e) => setUserSearchText(e.target.value)}
+            placeholder="Search or start new chat"
+          />
         </div>
       </div>
 
