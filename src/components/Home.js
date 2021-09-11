@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./styles/Home.css";
 import NewChat from "./NewChat";
 import { db } from "../services/firebase";
@@ -38,12 +38,12 @@ const getRelativeTime = (timestamp) => {
 };
 function Home() {
   const [currentUsername, currentUserEmail] = getUserDetails();
-  const [userAvatar, setUserAvatar] = useState("");
-  const [friendsList, setFriendsList] = useState([]);
-  const [chatHistory, setChatHistory] = useState(null);
-  const [newChatRequested, setNewChat] = useState(false);
-
-  useEffect(() => {
+  const [userAvatar, setUserAvatar] = React.useState("");
+  const [friendsList, setFriendsList] = React.useState([]);
+  const [chatHistory, setChatHistory] = React.useState(null);
+  const [newChatRequested, setNewChat] = React.useState(false);
+  const [isNightThemeToggled, setIsNightThemeToggled] = React.useState(false);
+  React.useEffect(() => {
     const usersData = {};
     function extractUserData(chat) {
       const contact = {};

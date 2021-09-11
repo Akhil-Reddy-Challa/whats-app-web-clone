@@ -18,10 +18,21 @@
   margin-left: auto;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 .storyIcon {
   transition: transform 1s ease-in-out;
   transform: rotate(-90deg);
+  color: rgb(81, 88, 92);
+}
+.newChatIcon {
+  color: rgb(81, 88, 92);
+}
+.userInfoIcon {
+  color: rgb(81, 88, 92);
+}
+.nightModeIcon {
+  color: rgb(177, 179, 181);
 }
 .sidebar__chats {
   /* Makes only this section scrollable */

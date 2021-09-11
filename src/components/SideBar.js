@@ -1,17 +1,22 @@
-import React, { useState } from "react";
-import { Avatar, IconButton, Tooltip } from "@material-ui/core";
-import { DonutLarge, MoreVert, Add } from "@material-ui/icons";
-import Popover from "@material-ui/core/Popover";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import Contact from "./Contact";
 import "./styles/Sidebar.css";
-import { useHistory } from "react-router-dom";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Backdrop from "@material-ui/core/Backdrop";
-import { makeStyles } from "@material-ui/core/styles";
-import { ArrowBack } from "@material-ui/icons";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Backdrop,
+  Popover,
+  Avatar,
+  IconButton,
+  Tooltip,
+} from "@material-ui/core";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
+import { DonutLarge, MoreVert, Add, ArrowBack } from "@material-ui/icons";
 import SearchIcon from "@material-ui/icons/Search";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -31,40 +36,60 @@ function SideBar({
   showChathistory,
 }) {
   const classes = useStyles();
-  const [userInfoPopup, setUserInfoPopup] = useState(false);
-  const [showShortcuts, setShowShortcuts] = useState(null);
-  const [userSearchText, setUserSearchText] = useState("");
+  const [userInfoPopup, setUserInfoPopup] = React.useState(false);
+  const [showShortcuts, setShowShortcuts] = React.useState(null);
+  const [userSearchText, setUserSearchText] = React.useState("");
+  const [isNightThemeToggled, setIsNightThemeToggled] = React.useState(false);
   const history = useHistory();
   return (
     <div className="sidebar">
       <div className="sidebar__userbio">
         <Avatar className="sidebar__avatar" src={userAvatar} />
-        <p className="sidebar__avatar__username">{currentUsername}</p>
+        <h3 className="sidebar__avatar__username">{currentUsername}</h3>
         <div className="sidebar__userbio__shortCuts">
-          <div className="storyIcon">
-            <Tooltip title="Displays Status">
-              <IconButton aria-label="storyIcon">
-                <DonutLarge color="action" />
-              </IconButton>
-            </Tooltip>
-          </div>
-          <div className="newChatIcon">
-            <Tooltip title="Add New Chat">
-              <IconButton aria-label="newChatIcon" onClick={createNewChat}>
-                <Add color="action" className="newChatIcon" />
-              </IconButton>
-            </Tooltip>
-          </div>
-          <div className="userInfoIcon">
-            <Tooltip title="Get Your Info">
+          <div className="dayAndNightModeToggler">
+            <Tooltip title="Toggle Day/Night Mode">
               <IconButton
-                aria-label="userInfoIcon"
-                onClick={(e) => setShowShortcuts(e.currentTarget)}
+                onClick={() => setIsNightThemeToggled(!isNightThemeToggled)}
               >
-                <MoreVert color="action" className="userInfoIcon" />
+                {isNightThemeToggled ? (
+                  <BrightnessHighIcon style={{ color: "rgb(177, 179, 181)" }} />
+                ) : (
+                  <Brightness4Icon style={{ color: "rgb(81, 88, 92)" }} />
+                )}
               </IconButton>
             </Tooltip>
           </div>
+          <Tooltip title="Displays Status">
+            <IconButton aria-label="storyIcon">
+              <DonutLarge
+                className={"storyIcon ".concat(
+                  isNightThemeToggled ? "nightModeIcon" : ""
+                )}
+              />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Add New Chat">
+            <IconButton aria-label="newChatIcon" onClick={createNewChat}>
+              <Add
+                className={"newChatIcon ".concat(
+                  isNightThemeToggled ? "nightModeIcon" : ""
+                )}
+              />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Get Your Info">
+            <IconButton
+              aria-label="userInfoIcon"
+              onClick={(e) => setShowShortcuts(e.currentTarget)}
+            >
+              <MoreVert
+                className={"userInfoIcon ".concat(
+                  isNightThemeToggled ? "nightModeIcon" : ""
+                )}
+              />
+            </IconButton>
+          </Tooltip>
           <Popover
             open={Boolean(showShortcuts)}
             id={Boolean(showShortcuts) ? "simple-popover" : undefined}
