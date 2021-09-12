@@ -41,11 +41,15 @@ function SideBar({
   const [showShortcuts, setShowShortcuts] = React.useState(null);
   const [userSearchText, setUserSearchText] = React.useState("");
   const [isNightThemeToggled, setNightThemeToggle] =
-    React.useState(GlobalState);
+    React.useContext(GlobalState);
   const history = useHistory();
   return (
     <div className="sidebar">
-      <div className="sidebar__userbio">
+      <div
+        className={"sidebar__userbio ".concat(
+          isNightThemeToggled ? "sidebar__userbio__nightTheme" : ""
+        )}
+      >
         <Avatar className="sidebar__avatar" src={userAvatar} />
         <h3 className="sidebar__avatar__username">{currentUsername}</h3>
         <div className="sidebar__userbio__shortCuts">
@@ -154,8 +158,16 @@ function SideBar({
         </div>
       </div>
 
-      <div className="sidebar__searchArea">
-        <div className="searchBox__wrapper">
+      <div
+        className={"sidebar__searchArea ".concat(
+          isNightThemeToggled ? "sidebar__searchArea__nightTheme" : ""
+        )}
+      >
+        <div
+          className={"searchBox__wrapper ".concat(
+            isNightThemeToggled ? "searchBox__wrapper__nightTheme" : ""
+          )}
+        >
           {userSearchText.length === 0 ? (
             <SearchIcon
               className="searchIcon animate__animated animate__backInLeft"
@@ -171,7 +183,9 @@ function SideBar({
           <input
             type="search"
             name="searchBox"
-            className="searchBox"
+            className={"searchBox ".concat(
+              isNightThemeToggled ? "searchBox__nightTheme" : ""
+            )}
             value={userSearchText}
             onChange={(e) => setUserSearchText(e.target.value)}
             placeholder="Search or start new chat"
@@ -179,7 +193,11 @@ function SideBar({
         </div>
       </div>
 
-      <div className="sidebar__chats">
+      <div
+        className={"sidebar__chats ".concat(
+          isNightThemeToggled ? "sidebar__chats__nightTheme" : ""
+        )}
+      >
         {friendsList.map((friend) => (
           <Contact
             key={friend.email}

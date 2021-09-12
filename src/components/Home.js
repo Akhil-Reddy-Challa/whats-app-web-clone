@@ -42,7 +42,6 @@ function Home() {
   const [friendsList, setFriendsList] = React.useState([]);
   const [chatHistory, setChatHistory] = React.useState(null);
   const [newChatRequested, setNewChat] = React.useState(false);
-  const [isNightThemeToggled, setIsNightThemeToggled] = React.useState(false);
   React.useEffect(() => {
     const usersData = {};
     function extractUserData(chat) {

@@ -9,10 +9,13 @@
   height: 10%;
   background-color: rgb(237, 237, 237);
   display: flex;
-  flex-direction: row;
-  border-right: 1px solid lightgray;
   align-items: center;
   min-height: 70px; /* Fallback height when the screensize is reduced */
+}
+.sidebar__userbio__nightTheme {
+  background-color: rgb(42, 47, 50);
+  color: rgb(177, 179, 181);
+  border-right: 1px solid rgb(36, 45, 50);
 }
 .sidebar__userbio__shortCuts {
   margin-left: auto;
@@ -35,8 +38,12 @@
   color: rgb(177, 179, 181);
 }
 .sidebar__chats {
+  height: 90%;
   /* Makes only this section scrollable */
   overflow: scroll;
+}
+.sidebar__chats__nightTheme {
+  background-color: rgb(19, 28, 33);
 }
 .sidebar__avatar__username {
   margin-top: 20px;
@@ -90,12 +97,20 @@
   background-color: #f6f6f6;
   padding: 5px 10px 5px 10px;
 }
+.sidebar__searchArea__nightTheme {
+  background-color: rgb(19, 28, 33);
+  border-bottom: 1px solid rgb(36, 45, 50);
+}
 .searchBox__wrapper {
   display: flex;
   align-items: center;
   background-color: white;
   border-radius: 25px;
   padding: 5px 10px 5px 12px;
+}
+.searchBox__wrapper__nightTheme {
+  background-color: rgb(50, 55, 57);
+  color: rgba(241, 241, 242, 0.43);
 }
 .searchBox {
   flex: 1;
@@ -104,8 +119,8 @@
   border-color: transparent;
   background-color: inherit;
 }
-.searchBox::placeholder {
-  color: rgba(0, 0, 0, 0.45);
+.searchBox__nightTheme {
+  color: white;
 }
 .arrowBack {
   color: rgb(51, 183, 246);

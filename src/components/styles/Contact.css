@@ -2,12 +2,16 @@
   cursor: pointer;
   display: flex;
   margin-bottom: 1px;
-  animation: lightSpeedInLeft;
-  animation-duration: 0.5s;
+  /* animation: lightSpeedInLeft;
+  animation-duration: 0.5s; */
 }
 .contact:hover,
 .contact:focus {
   background-color: #eeecec;
+}
+.contact__nightTheme:hover,
+.contact__nightTheme:focus {
+  background-color: rgb(45, 49, 52);
 }
 .contact__when__unReadMessagesExist {
   font-weight: 500;
@@ -19,6 +23,10 @@
   /* Prevents table from overflowing when text is long */
   table-layout: fixed;
 }
+.contact__information__nightTheme {
+  color: white;
+  border-bottom: 1px solid rgb(36, 45, 50);
+}
 .contact__name {
   font-size: 18px;
 }
@@ -27,8 +35,15 @@
   font-size: 12px;
   color: rgba(0, 0, 0, 0.45);
 }
+.contact__lastSeen__nightTheme {
+  color: rgba(241, 241, 242, 0.63);
+  font-weight: 500;
+}
 .contact__lastSeen__when__unreadMessage {
   color: rgba(0, 0, 0, 0.8);
+}
+.contact__lastSeen__when__unreadMessage__nightTheme {
+  color: rgb(0, 175, 156);
 }
 .contact__recentMessage {
   font-size: 12px;
@@ -38,8 +53,30 @@
   font-weight: bold;
   color: rgba(0, 0, 0, 0.8);
 }
+.contact__recentMessage__nightTheme {
+  color: rgba(241, 241, 242, 0.63);
+  font-weight: 500;
+  font-size: 14px;
+}
+.contact__recentMessage__when__unreadMessage__nightTheme {
+  font-weight: bold;
+  color: rgb(212, 213, 215);
+}
 .contact__unReadMessagesCount {
   text-align: right;
+}
+.contact__unReadMessagesCount__badge {
+  margin-right: 10px;
+  font-weight: bold;
+  margin-top: -7px;
+  color: white;
+}
+.contact__unReadMessagesCount__badge > * {
+  background-color: rgb(6, 215, 85);
+}
+.contact__unReadMessagesCount__badge__nightTheme > * {
+  background-color: rgb(0, 175, 156);
+  color: black;
 }
 .secondRow {
   height: 29px;
