@@ -178,13 +178,17 @@ function Chat(props) {
           <div className="chat__ground__loadingScreen">
             <CircularProgress
               size="20px"
-              thickness="5.6"
+              thickness={5.6}
               className="progressbar__color"
             />
           </div>
         )}
         {messages.map((message) => (
-          <Message message={message} currentUserEmail={currentUserEmail} />
+          <Message
+            key={message.msgID}
+            message={message}
+            currentUserEmail={currentUserEmail}
+          />
         ))}
         {/* Responsible for showing the recent most message */}
         <div ref={messagesEndRef} />
