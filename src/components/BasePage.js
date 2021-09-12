@@ -1,11 +1,20 @@
 import React from "react";
 import "./styles/BasePage.css";
+import GlobalState from "../contexts/GlobalState";
 
-function BasePage(props) {
-  const { username } = props;
+function BasePage({ username }) {
+  const [isNightThemeToggled] = React.useContext(GlobalState);
   return (
-    <div className="basepage">
-      <div className="basepage__introImg"></div>
+    <div
+      className={"basepage ".concat(
+        isNightThemeToggled ? "basepage__nightTheme" : ""
+      )}
+    >
+      <div
+        className={"basepage__introImg ".concat(
+          isNightThemeToggled ? "basepage__introImg__nightTheme" : ""
+        )}
+      ></div>
       <div className="basepage__text">
         <h1>Hello {username}</h1>
       </div>
@@ -21,6 +30,9 @@ function BasePage(props) {
           Project available on{" "}
           <a
             target="_blank"
+            className={"github__url ".concat(
+              isNightThemeToggled ? "github__url__nightTheme" : ""
+            )}
             rel="noopener noreferrer"
             href="https://github.com/AkhilReddy1998/whats-app-web-clone"
           >
@@ -28,9 +40,12 @@ function BasePage(props) {
           </a>
         </p>
       </div>
-      <div className="bottomLine"></div>
+      <div
+        className={"bottomLine ".concat(
+          isNightThemeToggled ? "bottomLine__nightTheme" : ""
+        )}
+      ></div>
     </div>
   );
 }
-
 export default BasePage;
