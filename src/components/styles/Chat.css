@@ -12,6 +12,9 @@
   background-repeat: repeat;
   opacity: 0.46;
 }
+.chat__background__image__nightTheme {
+  opacity: 0.05;
+}
 .chat__header {
   position: relative; /* This sticks out the header upon bg-image usage in chat__background__image */
   background-color: rgb(240, 240, 240);
@@ -19,6 +22,10 @@
   display: flex;
   align-items: center;
   min-height: 70px; /* Fallback height when the screensize is reduced */
+}
+.chat__header__nightTheme {
+  background-color: rgb(42, 47, 50);
+  color: rgba(241, 241, 242, 0.92);
 }
 .chat__header__avatar {
   margin: 10px;
@@ -37,11 +44,24 @@
   font-size: x-small;
   color: rgba(0, 0, 0, 0.45);
 }
+.chat__header__lastSeen__nightTheme {
+  font-size: x-small;
+  color: rgba(241, 241, 242, 0.63);
+}
 .chat__header__chatInfo {
   display: flex;
   flex-direction: row;
   margin-left: auto;
   margin-right: 10px;
+}
+.chatSearchIcon {
+  color: rgb(81, 88, 92);
+}
+.chatInfoIcon {
+  color: rgb(81, 88, 92);
+}
+.nightModeIcon {
+  color: rgb(177, 179, 181);
 }
 .chat__ground {
   flex: 1; /* Gives max space for this block */
@@ -50,6 +70,9 @@
   display: flex;
   flex-direction: column;
   padding: 15px 10% 15px 10%; /* Gives whatsapp like feel */
+}
+.chat__ground__nightTheme {
+  background-color: #10241b;
 }
 
 .chat__ground__loadingScreen {
@@ -75,6 +98,9 @@
   align-items: center;
   background-color: rgb(240, 240, 240);
 }
+.chat__footer__nightTheme {
+  background-color: rgb(30, 36, 40);
+}
 .chat__footer__fileupload {
   transition: transform 1s ease-in-out;
   transform: rotate(50deg);
@@ -90,6 +116,11 @@
   font-size: 15px;
   font-weight: 400;
   color: rgb(74, 74, 74);
+}
+.chat__footer__messageInput__nightTheme {
+  background-color: rgb(50, 55, 57);
+  color: white;
+  border-color: transparent;
 }
 input:focus {
   outline: none;

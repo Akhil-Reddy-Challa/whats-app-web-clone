@@ -14,6 +14,8 @@ import Picker from "emoji-picker-react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useCallback } from "react";
 import Message from "./Message";
+import GlobalState from "../contexts/GlobalState";
+
 function Chat(props) {
   const { email: currentUserEmail } = props;
   const {
@@ -28,6 +30,7 @@ function Chat(props) {
   const [messages, setMessages] = useState([]);
   const [emojiBoard, setEmojiBoard] = useState(false);
   const [loadingAnim, setLoadingAnim] = useState(false);
+  const [isNightThemeToggled] = React.useContext(GlobalState);
 
   const onEmojiClick = (event, emojiObject) => {
     setMessage(message.concat(emojiObject.emoji));
@@ -120,8 +123,16 @@ function Chat(props) {
 
   return (
     <div className="chat">
-      <div className="chat__background__image"></div>
-      <header className="chat__header">
+      <div
+        className={"chat__background__image ".concat(
+          isNightThemeToggled ? "chat__background__image__nightTheme" : ""
+        )}
+      ></div>
+      <header
+        className={"chat__header ".concat(
+          isNightThemeToggled ? "chat__header__nightTheme" : ""
+        )}
+      >
         <Avatar
           className="chat__header__avatar"
           alt={friendName}
@@ -129,25 +140,40 @@ function Chat(props) {
         />
         <div className="chat__header__text">
           <span className="chat__header__friendname">{friendName}</span>
-          <span className="chat__header__lastSeen">
+          <span
+            className={"chat__header__lastSeen ".concat(
+              isNightThemeToggled ? "chat__header__lastSeen__nightTheme" : ""
+            )}
+          >
             {"Last seen: " + lastSeen}
           </span>
         </div>
         <div className="chat__header__chatInfo">
           <Tooltip title="Chat Search">
             <IconButton aria-label="chatSearchIcon">
-              <Search color="action" />
+              <Search
+                className={"chatSearchIcon ".concat(
+                  isNightThemeToggled ? "nightModeIcon" : ""
+                )}
+              />
             </IconButton>
           </Tooltip>
           <Tooltip title="More Info">
             <IconButton aria-label="chatInfoIcon">
-              <MoreVert color="action" />
+              <MoreVert
+                className={"chatInfoIcon ".concat(
+                  isNightThemeToggled ? "nightModeIcon" : ""
+                )}
+              />
             </IconButton>
           </Tooltip>
         </div>
       </header>
-
-      <div className="chat__ground">
+      <div
+        className={"chat__ground ".concat(
+          isNightThemeToggled ? "chat__ground__nightTheme" : ""
+        )}
+      >
         {loadingAnim && (
           <div className="chat__ground__loadingScreen">
             <CircularProgress
@@ -163,31 +189,44 @@ function Chat(props) {
         {/* Responsible for showing the recent most message */}
         <div ref={messagesEndRef} />
       </div>
-
       {emojiBoard && (
         <Picker pickerStyle={{ width: "100%" }} onEmojiClick={onEmojiClick} />
       )}
-
       <div className="footer">
         <footer>
-          <form className="chat__footer" onSubmit={(e) => postMessage(e)}>
+          <form
+            className={"chat__footer ".concat(
+              isNightThemeToggled ? "chat__footer__nightTheme" : ""
+            )}
+            onSubmit={(e) => postMessage(e)}
+          >
             <Tooltip title="Emoji Icon Picker">
               <IconButton
                 aria-label="emojiPicker"
                 color={emojiBoard ? "secondary" : "default"}
                 onClick={() => setEmojiBoard(!emojiBoard)}
               >
-                <EmojiEmotionsOutlined />
+                <EmojiEmotionsOutlined
+                  className={isNightThemeToggled ? "nightModeIcon" : ""}
+                />
               </IconButton>
             </Tooltip>
             <Tooltip title="File Picker">
               <IconButton aria-label="filePicker">
-                <AttachFileTwoTone className="chat__footer__fileupload" />
+                <AttachFileTwoTone
+                  className={"chat__footer__fileupload ".concat(
+                    isNightThemeToggled ? "nightModeIcon" : ""
+                  )}
+                />
               </IconButton>
             </Tooltip>
             <input
               type="text"
-              className="chat__footer__messageInput"
+              className={"chat__footer__messageInput ".concat(
+                isNightThemeToggled
+                  ? "chat__footer__messageInput__nightTheme"
+                  : ""
+              )}
               placeholder="Type your message here..."
               value={message}
               onChange={(e) => {
@@ -196,7 +235,10 @@ function Chat(props) {
             />
             {message && (
               <IconButton aria-label="storyIcon" onClick={postMessage}>
-                <Send type="submit" className="chat__footer__messageSend" />
+                <Send
+                  type="submit"
+                  className={isNightThemeToggled ? "nightModeIcon" : ""}
+                />
               </IconButton>
             )}
           </form>
