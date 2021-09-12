@@ -16,8 +16,8 @@ const App = () => {
     const tokenExists = sessionStorage.getItem("user_token_created_on");
     return tokenExists ? <Home /> : <Redirect to="/login" />;
   };
-  const isNightThemeToggled = ThemeDetector();
-  const [, setNightThemeToggle] = React.useState(isNightThemeToggled);
+  // const isNightTheme = ThemeDetector();
+  const [isNightThemeToggled, setNightThemeToggle] = ThemeDetector();
   return (
     <GlobalState.Provider value={[isNightThemeToggled, setNightThemeToggle]}>
       <Router>

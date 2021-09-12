@@ -14,7 +14,7 @@ function ThemeDetector() {
 
     return () => darkThemeMq.removeEventListener("change", mqListener);
   }, []);
-  return isDarkTheme;
+  return [isDarkTheme, setIsDarkTheme];
 }
 
 export default ThemeDetector;
