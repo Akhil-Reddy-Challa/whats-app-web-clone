@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
   },
+  medium: {
+    margin: "0 17px 0 17px",
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+  },
 }));
 
 const handleLogout = (history) => {
@@ -50,7 +55,7 @@ function SideBar({
           isNightThemeToggled ? "sidebar__userbio__nightTheme" : ""
         )}
       >
-        <Avatar className="sidebar__avatar" src={userAvatar} />
+        <Avatar src={userAvatar} className={classes.medium} />
         <h3 className="sidebar__avatar__username">{currentUsername}</h3>
         <div className="sidebar__userbio__shortCuts">
           <div className="dayAndNightModeToggler">

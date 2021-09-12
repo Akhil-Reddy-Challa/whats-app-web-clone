@@ -45,12 +45,6 @@
 .sidebar__chats__nightTheme {
   background-color: rgb(19, 28, 33);
 }
-.sidebar__avatar__username {
-  margin-top: 20px;
-}
-.sidebar__avatar {
-  margin: 10px;
-}
 .listExpander {
   margin-right: 100px !important;
 }
