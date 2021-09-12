@@ -1,12 +1,13 @@
+import React from "react";
 import "./styles/Message.css";
+import GlobalState from "../contexts/GlobalState";
 
-const TailOutSVG = () => {
+const TailOutSVG = ({ isNightTheme }) => {
+  const _class = "outgoing__message__tail ".concat(
+    isNightTheme ? "outgoing__message__tail__nightTheme" : ""
+  );
   return (
-    <span
-      data-testid="tail-out"
-      data-icon="tail-out"
-      className="outgoing__message__tail"
-    >
+    <span data-testid="tail-out" data-icon="tail-out" className={_class}>
       <svg viewBox="0 0 8 13" width="8" height="13">
         <path
           opacity=".13"
@@ -20,13 +21,12 @@ const TailOutSVG = () => {
     </span>
   );
 };
-const TailInSVG = () => {
+const TailInSVG = ({ isNightTheme }) => {
+  const _class = "incoming__message__tail ".concat(
+    isNightTheme ? "incoming__message__tail__nightTheme" : ""
+  );
   return (
-    <span
-      className="incoming__message__tail"
-      data-testid="tail-in"
-      data-icon="tail-in"
-    >
+    <span className={_class} data-testid="tail-in" data-icon="tail-in">
       <svg viewBox="0 0 8 13" width="8" height="13">
         <path
           opacity=".13"
@@ -43,17 +43,31 @@ const TailInSVG = () => {
 };
 function Message({ message, currentUserEmail }) {
   const isOutMsg = message.senderID === currentUserEmail;
+  const [isNightThemeToggled] = React.useContext(GlobalState);
   const _class = "message ".concat(
-    isOutMsg ? "outgoing__message" : "incoming__message"
+    isOutMsg
+      ? "outgoing__message ".concat(
+          isNightThemeToggled ? "outgoing__message__nightTheme" : ""
+        )
+      : "incoming__message ".concat(
+          isNightThemeToggled ? "incoming__message__nightTheme" : ""
+        )
   );
+
   return (
     <div key={message.msgID} className="message__box">
-      {!isOutMsg && <TailInSVG />}
+      {!isOutMsg && <TailInSVG isNightTheme={isNightThemeToggled} />}
       <div className={_class}>
         {message.content}
-        <span className="message__timestamp">{message.timestamp}</span>
+        <span
+          className={"message__timestamp ".concat(
+            isNightThemeToggled ? "message__timestamp__nightTheme" : ""
+          )}
+        >
+          {message.timestamp}
+        </span>
       </div>
-      {isOutMsg && <TailOutSVG />}
+      {isOutMsg && <TailOutSVG isNightTheme={isNightThemeToggled} />}
     </div>
   );
 }
