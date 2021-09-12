@@ -53,7 +53,6 @@ function Message({ message, currentUserEmail }) {
           isNightThemeToggled ? "incoming__message__nightTheme" : ""
         )
   );
-  console.log(message.timestamp);
   return (
     <div key={message.msgID} className="message__box">
       {!isOutMsg && <TailInSVG isNightTheme={isNightThemeToggled} />}

@@ -127,7 +127,6 @@ function Home() {
       });
       toggleNewChat();
     } catch (err) {
-      console.log(err);
       alert("Encountered an issue! Try again");
     }
   };
