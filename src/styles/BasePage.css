@@ -1,9 +1,15 @@
 .basepage {
   background-color: #f8f9fa;
-  height: 100%;
+  height: inherit;
+  max-width: inherit; /* From ChatArea.css */
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+@media screen and (min-height: 300px) {
+  .basepage {
+    overflow-y: scroll;
+  }
 }
 .basepage__nightTheme {
   background-color: rgb(38, 45, 49);

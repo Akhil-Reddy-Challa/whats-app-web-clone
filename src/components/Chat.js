@@ -127,7 +127,7 @@ function Chat(props) {
         className={"chat__background__image ".concat(
           isNightThemeToggled ? "chat__background__image__nightTheme" : ""
         )}
-      ></div>
+      />
       <header
         className={"chat__header ".concat(
           isNightThemeToggled ? "chat__header__nightTheme" : ""

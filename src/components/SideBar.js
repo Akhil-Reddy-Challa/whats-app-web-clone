@@ -50,7 +50,7 @@ function SideBar({
   const history = useHistory();
   return (
     <div className="sidebar">
-      <div
+      <header
         className={"sidebar__userbio ".concat(
           isNightThemeToggled ? "sidebar__userbio__nightTheme" : ""
         )}
@@ -161,7 +161,7 @@ function SideBar({
             </div>
           </Backdrop>
         </div>
-      </div>
+      </header>
 
       <div
         className={"sidebar__searchArea ".concat(

@@ -1,16 +1,23 @@
 .sidebar {
-  width: 30%;
-  height: 100%;
-  /* Makes the section fixed (disables scroll)*/
-  position: fixed;
-  left: 0;
+  flex: 30%;
+  max-width: 418.8px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+@media screen and (min-height: 300px) {
+  .sidebar {
+    overflow-y: scroll;
+  }
 }
 .sidebar__userbio {
-  height: 10%;
+  height: 70px;
   background-color: rgb(237, 237, 237);
   display: flex;
   align-items: center;
-  min-height: 70px; /* Fallback height when the screensize is reduced */
+  /* Make section sticky */
+  position: sticky;
+  top: 0px;
 }
 .sidebar__userbio__nightTheme {
   background-color: rgb(42, 47, 50);
@@ -38,9 +45,10 @@
   color: rgb(177, 179, 181);
 }
 .sidebar__chats {
-  height: 90%;
+  height: calc(100% - 70px - 45px);
   /* Makes only this section scrollable */
   overflow: scroll;
+  overflow-x: hidden; /* If not hidden will create of padding-bottom */
 }
 .sidebar__chats__nightTheme {
   background-color: rgb(19, 28, 33);
@@ -90,6 +98,9 @@
 .sidebar__searchArea {
   background-color: #f6f6f6;
   padding: 5px 10px 5px 10px;
+  box-sizing: border-box;
+  min-height: 45px;
+  height: 45px;
 }
 .sidebar__searchArea__nightTheme {
   background-color: rgb(19, 28, 33);

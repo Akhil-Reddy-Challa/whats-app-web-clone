@@ -1,9 +1,5 @@
 .chatarea {
-  width: 70%;
-  min-width: 60%;
+  flex: 70%;
   height: 100%;
-  /* Below is to fix the position and make to unscrollable  */
-  position: fixed;
-  right: 0;
-  overflow: hidden;
+  width: auto;
 }

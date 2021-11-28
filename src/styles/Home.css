@@ -1,6 +1,14 @@
 .home {
   display: flex;
-  flex-direction: row;
-  width: 100%;
   height: 100%;
+  width: 100%;
+  position: relative;
+}
+@media screen and (min-width: 1441px) {
+  .home {
+    margin: 0 auto;
+    width: 1396px;
+    height: calc(100% - 38px);
+    top: 19px;
+  }
 }
