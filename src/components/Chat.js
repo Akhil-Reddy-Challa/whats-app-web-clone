@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./styles/Chat.css";
+import "../styles/Chat.css";
 import { Avatar, IconButton, Tooltip } from "@material-ui/core";
 import {
   Send,

@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Contact from "./Contact";
 import GlobalState from "../contexts/GlobalState";
-import "./styles/Sidebar.css";
+import "../styles/Sidebar.css";
 import {
   List,
   ListItem,

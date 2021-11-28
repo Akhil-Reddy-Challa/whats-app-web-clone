@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/Contact.css";
+import "../styles/Contact.css";
 import { Avatar } from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
 import { makeStyles } from "@material-ui/core";

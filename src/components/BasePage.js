@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/BasePage.css";
+import "../styles/BasePage.css";
 import GlobalState from "../contexts/GlobalState";
 
 function BasePage({ username }) {

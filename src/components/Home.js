@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/Home.css";
+import "../styles/Home.css";
 import NewChat from "./NewChat";
 import { db } from "../services/firebase";
 import SideBar from "./SideBar";

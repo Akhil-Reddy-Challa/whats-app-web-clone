@@ -1,4 +1,4 @@
-import "./styles/Landing.css";
+import "../styles/Landing.css";
 import Login from "./Login";
 import Signup from "./Signup";
 

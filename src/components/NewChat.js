@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IconButton, TextField, Button } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
-import "./styles/NewChat.css";
+import "../styles/NewChat.css";
 
 function NewChat({ onClick, onClose }) {
   const [personEmail, setPersonEmail] = useState("");

@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/Message.css";
+import "../styles/Message.css";
 import GlobalState from "../contexts/GlobalState";
 
 const TailOutSVG = ({ isNightTheme }) => {

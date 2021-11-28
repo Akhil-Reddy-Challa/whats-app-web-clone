@@ -1,6 +1,6 @@
 import Chat from "./Chat";
 import BasePage from "./BasePage";
-import "./styles/ChatArea.css";
+import "../styles/ChatArea.css";
 
 function ChatArea(props) {
   const { chatHistory, currentUserEmail, currentUsername } = props;
