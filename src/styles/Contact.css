@@ -8,6 +8,7 @@
 .contact:hover,
 .contact:focus {
   background-color: #eeecec;
+  outline: none !important;
 }
 .contact__nightTheme:hover,
 .contact__nightTheme:focus {
