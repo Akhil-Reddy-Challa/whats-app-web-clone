@@ -43,8 +43,7 @@ function Home() {
   const [friendsList, setFriendsList] = React.useState([]);
   const [chatHistory, setChatHistory] = React.useState(null);
   const [newChatRequested, setNewChat] = React.useState(false);
-  const [isNightThemeToggled, setNightThemeToggle] =
-    React.useContext(GlobalState);
+  const [isNightThemeToggled] = React.useContext(GlobalState);
   React.useEffect(() => {
     const usersData = {};
     function extractUserData(chat) {
@@ -107,6 +106,7 @@ function Home() {
     setNewChat(!newChatRequested);
   };
   const createNewChatRoom = async (email) => {
+    if (email.trim().length === 0) return;
     if (email === currentUserEmail) {
       alert("You entered your own email!");
       return;
