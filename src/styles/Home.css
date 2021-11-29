@@ -1,9 +1,18 @@
-.home {
-  display: flex;
+.home__container /* To fit in background color */ {
+  background-color: #dbdbd5;
   height: 100%;
   width: 100%;
+}
+.home__container__nightTheme {
+  background-color: #090e11;
+}
+.home {
+  display: flex;
+  height: inherit;
+  width: inherit;
   position: relative;
 }
+/* When viewport is >1440px align app to the center instead of flexing */
 @media screen and (min-width: 1441px) {
   .home {
     margin: 0 auto;

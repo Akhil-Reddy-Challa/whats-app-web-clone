@@ -4,6 +4,7 @@ import NewChat from "./NewChat";
 import { db } from "../services/firebase";
 import SideBar from "./SideBar";
 import ChatArea from "./ChatArea";
+import GlobalState from "../contexts/GlobalState";
 import "animate.css";
 
 const getUserDetails = () => {
@@ -42,6 +43,8 @@ function Home() {
   const [friendsList, setFriendsList] = React.useState([]);
   const [chatHistory, setChatHistory] = React.useState(null);
   const [newChatRequested, setNewChat] = React.useState(false);
+  const [isNightThemeToggled, setNightThemeToggle] =
+    React.useContext(GlobalState);
   React.useEffect(() => {
     const usersData = {};
     function extractUserData(chat) {
@@ -131,25 +134,31 @@ function Home() {
     }
   };
   return (
-    <div className="home">
-      <SideBar
-        userAvatar={userAvatar}
-        currentUsername={currentUsername}
-        createNewChat={toggleNewChat}
-        showChathistory={getChatHistory}
-        friendsList={friendsList}
-      />
-      {newChatRequested && (
-        <NewChat
-          onClick={(e) => createNewChatRoom(e)}
-          onClose={toggleNewChat}
-        />
+    <div
+      className={"home__container ".concat(
+        isNightThemeToggled ? "home__container__nightTheme" : ""
       )}
-      <ChatArea
-        currentUserEmail={currentUserEmail}
-        currentUsername={currentUsername}
-        chatHistory={chatHistory}
-      />
+    >
+      <div className="home">
+        <SideBar
+          userAvatar={userAvatar}
+          currentUsername={currentUsername}
+          createNewChat={toggleNewChat}
+          showChathistory={getChatHistory}
+          friendsList={friendsList}
+        />
+        {newChatRequested && (
+          <NewChat
+            onClick={(e) => createNewChatRoom(e)}
+            onClose={toggleNewChat}
+          />
+        )}
+        <ChatArea
+          currentUserEmail={currentUserEmail}
+          currentUsername={currentUsername}
+          chatHistory={chatHistory}
+        />
+      </div>
     </div>
   );
 }
