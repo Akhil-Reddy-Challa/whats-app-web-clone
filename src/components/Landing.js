@@ -1,8 +1,12 @@
-import "../styles/Landing.css";
+import React from "react";
 import Login from "./Login";
 import Signup from "./Signup";
+import "../styles/Landing.css";
 
 function Landing() {
+  const isNightThemeToggled = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches;
   return (
     <div className="landing">
       <div className="landing__header">
@@ -23,7 +27,11 @@ function Landing() {
         </svg>
         <p className="landing__header__text">WHATSAPP WEB</p>
       </div>
-      <div className="landing__window">
+      <div
+        className={"landing__window ".concat(
+          isNightThemeToggled ? "landing__window__nightTheme" : ""
+        )}
+      >
         <div className="landing__window__main">
           <p className="landingText">
             To use Whatsapp, login with your credentials
