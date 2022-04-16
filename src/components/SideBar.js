@@ -169,7 +169,7 @@ function SideBar({
         )}
       >
         <div
-          className={"searchBox__wrapper ".concat(
+          className={"searchBox__wrapper textWrap ".concat(
             isNightThemeToggled ? "searchBox__wrapper__nightTheme" : ""
           )}
         >
