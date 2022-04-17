@@ -63,7 +63,7 @@ function Home() {
       contact["email"] = otherPerson;
       contact["avatar"] = usersData[otherPerson].avatar;
       contact["lastSeen"] = getRelativeTime(
-        usersData[otherPerson].lastSeen.toMillis()
+        usersData[otherPerson].lastSeen?.toMillis()
       );
       contact["recentMessage"] = recentMessage;
       contact["unReadMessages"] = unReadMessages;
