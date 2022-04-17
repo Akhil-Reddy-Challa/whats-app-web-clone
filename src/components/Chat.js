@@ -24,6 +24,7 @@ function Chat(props) {
     chatRoomID,
     avatar,
     lastSeen,
+    totalMessages,
   } = props.friendInfo;
   const messagesEndRef = useRef(null);
   const [message, setMessage] = useState("");
@@ -70,6 +71,10 @@ function Chat(props) {
     chatsRef.update({
       unReadMessages: firebase.firestore.FieldValue.increment(1),
     });
+    // Increment total messages count
+    chatsRef.update({
+      totalMessages: firebase.firestore.FieldValue.increment(1),
+    });
     // Set Recent message sender
     chatsRef.update({
       recentMessageSender: currentUserEmail,
@@ -83,6 +88,7 @@ function Chat(props) {
       unReadMessages: 0,
     });
   }, [chatRoomID]);
+
   useEffect(() => {
     const scrollToBottom = () => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -120,8 +126,7 @@ function Chat(props) {
         .collection("chats")
         .doc(chatRoomID)
         .collection("messages")
-        .orderBy("timestamp", "asc")
-        .limitToLast(20);
+        .orderBy("timestamp", "asc");
       unsubscribe = msgsRef.onSnapshot((snap) => {
         const messages = snap.docs.map((doc) => {
           const data = {

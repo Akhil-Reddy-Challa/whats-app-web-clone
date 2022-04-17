@@ -37,6 +37,7 @@ const getRelativeTime = (timestamp) => {
   });
   return result;
 };
+
 function Home() {
   const [currentUsername, currentUserEmail] = getUserDetails();
   const [userAvatar, setUserAvatar] = React.useState("");
@@ -90,11 +91,9 @@ function Home() {
     }
     async function fetchContacts() {
       const usersRef = db.collection("users");
-
       // Fetch all users
       usersRef.onSnapshot((snap) => {
         snap.forEach((user) => (usersData[user.id] = user.data()));
-        // console.log(usersData);
         // Fetch all the chats
         fetchChatProfiles();
       });
