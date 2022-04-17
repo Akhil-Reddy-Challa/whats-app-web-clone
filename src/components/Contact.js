@@ -12,16 +12,16 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(6),
   },
 }));
-function Contact({
-  username,
-  onClick,
-  avatar,
-  lastSeen,
-  recentMessage,
-  isRecentMessageSender,
-  unReadMessagesCount,
-}) {
-  const unReadMessagesExist = isRecentMessageSender && unReadMessagesCount > 0;
+function Contact({ details, onClick }) {
+  const {
+    name: username,
+    avatar,
+    lastSeen,
+    recentMessage,
+    recentMessageSender,
+    unReadMessages,
+  } = details;
+  const unReadMessagesExist = recentMessageSender && unReadMessages > 0;
   const classes = useStyles();
   const [isNightThemeToggled] = React.useContext(GlobalState);
   return (
@@ -89,7 +89,7 @@ function Contact({
             {unReadMessagesExist && (
               <td className="contact__unReadMessagesCount">
                 <Badge
-                  badgeContent={unReadMessagesCount}
+                  badgeContent={unReadMessages}
                   className={"contact__unReadMessagesCount__badge ".concat(
                     isNightThemeToggled
                       ? "contact__unReadMessagesCount__badge__nightTheme"

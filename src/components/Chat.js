@@ -32,6 +32,22 @@ function Chat(props) {
   const [loadingAnim, setLoadingAnim] = useState(false);
   const [isNightThemeToggled] = React.useContext(GlobalState);
 
+  const prevScrollY = useRef(0);
+  const [goingUp, setGoingUp] = useState(false);
+
+  const onScroll = (e) => {
+    const currentScrollY = e.target.scrollTop;
+    if (prevScrollY.current < currentScrollY && goingUp) {
+      setGoingUp(false);
+    }
+    if (prevScrollY.current > currentScrollY && !goingUp) {
+      setGoingUp(true);
+    }
+    prevScrollY.current = currentScrollY;
+    const reachedTop = goingUp && currentScrollY === 0;
+    if (reachedTop) console.log("Fetch more messages");
+  };
+
   const onEmojiClick = (event, emojiObject) => {
     setMessage(message.concat(emojiObject.emoji));
   };
@@ -104,7 +120,8 @@ function Chat(props) {
         .collection("chats")
         .doc(chatRoomID)
         .collection("messages")
-        .orderBy("timestamp", "asc");
+        .orderBy("timestamp", "asc")
+        .limitToLast(20);
       unsubscribe = msgsRef.onSnapshot((snap) => {
         const messages = snap.docs.map((doc) => {
           const data = {
@@ -177,6 +194,7 @@ function Chat(props) {
         className={"chat__ground ".concat(
           isNightThemeToggled ? "chat__ground__nightTheme" : ""
         )}
+        onScroll={onScroll}
       >
         {loadingAnim && (
           <div className="chat__ground__loadingScreen">

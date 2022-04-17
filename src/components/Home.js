@@ -53,6 +53,7 @@ function Home() {
         recentMessage,
         unReadMessages,
         recentMessageSender,
+        totalMessages,
       } = chat.data();
       const otherPerson =
         usersInvolved[0] === currentUserEmail
@@ -70,6 +71,7 @@ function Home() {
       contact["recentMessageSender"] = !(
         recentMessageSender === currentUserEmail
       );
+      contact["totalMessages"] = totalMessages;
       return contact;
     }
     async function fetchChatProfiles() {
