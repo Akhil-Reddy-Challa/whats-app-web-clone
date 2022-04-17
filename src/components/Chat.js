@@ -82,6 +82,7 @@ function Chat(props) {
     setLoadingAnim(true);
     // Reset messages queue
     setMessages([]);
+    let unsubscribe;
     setTimeout(() => {
       clearUnReadMessagesCount();
       fetchMessages();
@@ -104,8 +105,7 @@ function Chat(props) {
         .doc(chatRoomID)
         .collection("messages")
         .orderBy("timestamp", "asc");
-
-      msgsRef.onSnapshot((snap) => {
+      unsubscribe = msgsRef.onSnapshot((snap) => {
         const messages = snap.docs.map((doc) => {
           const data = {
             msgID: doc.id,
@@ -119,6 +119,10 @@ function Chat(props) {
         setLoadingAnim(false);
       });
     }
+    return () => {
+      setMessages([]);
+      unsubscribe();
+    };
   }, [friendEmail, chatRoomID, clearUnReadMessagesCount]);
 
   return (
