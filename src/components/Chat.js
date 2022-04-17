@@ -121,7 +121,7 @@ function Chat(props) {
     }
     return () => {
       setMessages([]);
-      unsubscribe();
+      unsubscribe && unsubscribe();
     };
   }, [friendEmail, chatRoomID, clearUnReadMessagesCount]);
 
