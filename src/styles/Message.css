@@ -30,19 +30,19 @@
 }
 .outgoing__message {
   margin-left: auto;
-  background-color: #dbf8c6;
+  background-color: #d9fdd3;
   border-radius: 7.5px 0 7.5px 7.5px;
 }
 .outgoing__message__tail {
-  color: #dbf8c6;
+  color: #d9fdd3;
   margin-top: -2px;
 }
 .outgoing__message__nightTheme {
-  background-color: rgb(5, 97, 98);
+  background-color: #005c4b;
   color: white;
 }
 .outgoing__message__tail__nightTheme {
-  color: rgb(5, 97, 98);
+  color: #005c4b;
 }
 .message__timestamp {
   font-size: 11px;
