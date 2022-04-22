@@ -53,6 +53,7 @@ function Message({ message, currentUserEmail }) {
           isNightThemeToggled ? "incoming__message__nightTheme" : ""
         )
   );
+  const time = message.timestamp?.substring(0, 8);
   return (
     <div key={message.msgID} className="message__box">
       {!isOutMsg && <TailInSVG isNightTheme={isNightThemeToggled} />}
@@ -63,7 +64,7 @@ function Message({ message, currentUserEmail }) {
             isNightThemeToggled ? "message__timestamp__nightTheme" : ""
           )}
         >
-          {message.timestamp}
+          {time}
         </span>
       </div>
       {isOutMsg && <TailOutSVG isNightTheme={isNightThemeToggled} />}
