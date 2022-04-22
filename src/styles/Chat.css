@@ -36,7 +36,6 @@
 .chat__header__text {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 .chat__header__friendname {
   font-weight: 400;
